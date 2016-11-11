@@ -18,9 +18,9 @@
             @foreach(config('social') as $key => $value)
                 <div class="col-xs-{{ intval(12 / $count) }} border-right center-block">
                     <div class="description-block">
-                        <a href="{{ $value['url'] }}" title="{{ ucfirst($key) }}" class="description-header"><i
-                                    class="{{ $value['fa'].' fa-lg' }}"
-                                    aria-hidden="true"></i></a>
+                        <a href="{{ $value['url'] }}" title="{{ ucfirst($key) }}" class="description-header">
+                            <i class="{{ $value['fa'].' fa-lg' }}" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             @endforeach
