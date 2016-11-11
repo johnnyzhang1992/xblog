@@ -12,7 +12,6 @@
 
 # Xblog
 
-[中文Readme](README_zh.md)|[Project Home Page](https://lufficc.github.io/Xblog/)
 
 This blog is for my own use. I used to use hexo and github pages as my blog, but it's not flexible. Thus I write this
 blog. What I want to say is laravel is the best php framework I've ever seen.
