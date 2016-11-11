@@ -1,0 +1,36 @@
+.links {
+  text-align: left;
+  background: rgba(154, 154, 154, 0.5);
+  *background: #9a9a9a;
+  padding: 10px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  *color: #000;
+}
+
+.links:hover {
+  background: rgba(228, 228, 228, 0.7);
+  *background: #e4e4e4;
+  color: #9c9c9c;
+  *color: #9c9c9c;
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+}
+
+.links a {
+  color: #eee;
+  *font-weight: bold;
+  *color: #000;
+}
+
+.links:hover a {
+  color: #000;
+}
+
+.links a i {
+  font-size: 18px;
+}

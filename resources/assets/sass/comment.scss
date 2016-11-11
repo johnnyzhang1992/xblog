@@ -1,0 +1,27 @@
+@import "common";
+
+.comment {
+  margin: 5px 0 25px 0;
+}
+
+.comment .comment-info {
+  margin-left: 66px;
+
+  .comment-time {
+    font-size: 0.9em;
+    color: #d0d0d0
+  }
+
+  .comment-operation {
+    color: #d0d0d0
+  }
+  .comment-head {
+    font-size: 1.2em
+  }
+}
+
+.comment .markdown-content img {
+  display: block;
+  max-width: 95%;
+  border: solid 1px #EEEEEE;
+}

@@ -1,0 +1,91 @@
+@import "common";
+
+.post {
+  @extend .shadow-block;
+  background: white;
+  margin-bottom: 35px;
+  position: relative;
+  overflow: hidden;
+}
+
+.post .post-header {
+  border-bottom: 1px solid #ebebeb;
+}
+
+.post .post-header .post-title {
+  margin: 0;
+  background: $widgetHeaderBgColor;
+  padding: $postItemPaddingUpDown / 2 $postItemPaddingLeftRight $postItemPaddingUpDown / 2;
+  font-size: 1.6em;
+  font-weight: 500;
+  line-height: 1.75em;
+}
+
+.post .post-header .post-title a {
+  color: #303030;
+  text-decoration: none;
+
+  @extend .transition;
+}
+
+.post .post-header .post-title a:hover {
+  color: $colorAccent;
+}
+
+.post-meta {
+  color: $metaColor;
+  font-size: 0.85em;
+  padding: $postItemPaddingUpDown/2 $postItemPaddingLeftRight $postItemPaddingUpDown / 2;
+  border-top: 1px solid #ebebeb;
+}
+
+.post-description {
+  font-size: 1.25em;
+  line-height: 1.6em;
+  color: #444443;
+  margin: $postItemPaddingUpDown $postItemPaddingLeftRight $postItemPaddingUpDown;
+}
+
+.post .post-permalink {
+  padding: 0 $postItemPaddingLeftRight 0;
+}
+
+.post .post-footer {
+  margin-top: $postItemPaddingUpDown;
+  border-top: 1px solid #ebebeb;
+  padding: $postItemPaddingUpDown * 0.5 $postItemPaddingLeftRight;
+}
+
+.post .post-footer .tag-list {
+  color: #959595;
+}
+
+/* post detail*/
+.post-detail {
+  position: relative;
+  @extend .shadow-block;
+  padding: 35px 25px;
+  margin-bottom: 20px;
+  background: white;
+}
+
+.post-detail-title {
+  font-size: 2rem;
+  font-weight: bolder;
+  padding: 5px;
+
+}
+
+.post-detail-content {
+  @extend .markdown-content;
+}
+
+.post-detail img {
+  box-sizing: border-box;
+  margin: 20px auto 40px auto;
+  border: 1px solid #ddd;
+  display: block;
+  padding: 2px;
+  max-width: 100%;
+  height: auto;
+}

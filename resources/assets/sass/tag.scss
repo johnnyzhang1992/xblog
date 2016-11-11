@@ -1,0 +1,45 @@
+@import "common";
+
+.tag-list a {
+  text-decoration: none;
+}
+
+.tag {
+  text-decoration: none;
+  padding: 3px 10px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 4px 5px ;
+  color: $colorPrimary;
+  border: 1px solid $colorPrimary;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: center;
+
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+}
+.tag-active {
+  color: $colorAccent;
+  text-decoration: none;
+  border: 1px solid $colorAccent;
+
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+}
+.tag-active .badge-active  {
+  background-color: $colorAccent;
+}
+
+
+.tag:hover {
+  color: $colorAccent;
+  border: 1px solid $colorAccent;
+  text-decoration: none;
+}
+
+.tag .badge:hover {
+  background-color: $colorAccent;
+  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+}

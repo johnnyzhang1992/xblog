@@ -1,0 +1,138 @@
+@import "common";
+
+.widget {
+  @extend .shadow-block;
+  background: white;
+  margin-bottom: 35px;
+  width: 100%;
+}
+
+.widget-default {
+
+}
+
+.widget .widget-body {
+  padding: 30px $widgetPaddingLeftRight;
+  overflow-x: auto;
+}
+
+.widget .widget-footer {
+  padding: 0 $widgetPaddingLeftRight 10px $widgetPaddingLeftRight;
+  overflow-x: auto;
+}
+
+.widget .widget-footer .widget-meta {
+  color: #959595;
+  font-size: 12px;
+  margin: 14px 0 5px;
+}
+
+.meta-item {
+  padding: 0 10px;
+  color: $metaColor;
+}
+
+.widget .widget-header {
+  padding: 10px $widgetPaddingLeftRight;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  background-color: $widgetHeaderBgColor;
+}
+
+/*widget-user*/
+
+.description-block {
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.description-block > .description-header {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.widget .border-right {
+  border-right: 1px solid #f4f4f4;
+}
+
+.widget-user-body {
+  @extend .widget-body
+}
+
+.widget-user {
+  position: relative;
+}
+
+.widget-user .widget-user-header {
+  padding: 20px;
+  height: $userProfileHeight;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  color: white;
+}
+
+.widget-user .widget-user-username {
+
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 300;
+  text-shadow: 5px 5px 5px $colorPrimaryDark;
+}
+
+.widget-user .widget-user-desc {
+  margin-top: 0;
+  text-shadow: 5px 5px 5px $colorPrimaryDark;
+}
+
+.widget-user .widget-user-image {
+  position: absolute;
+  top: $userProfileHeight - $userAvatarRadius;
+  left: 50%;
+  margin-left: -45px;
+}
+
+.widget-user .widget-user-image > img {
+  width: $userAvatarRadius * 2;
+  height: $userAvatarRadius * 2;
+  border: 3px solid #fff;
+}
+
+.widget-user .widget-user-footer {
+  padding: $userAvatarRadius 30px 10px 30px;
+}
+
+/***admin**/
+.info-box {
+  @extend .shadow;
+  margin-bottom: 35px;
+  color: $colorPrimary;
+  position: relative;
+  padding: 10px;
+  background-color: $widgetHeaderBgColor;
+  border-radius: 0.25em;
+  text-align: center;
+
+  @extend .transition;
+  .info-icon {
+    font-size: 3em;
+    text-align: center
+  }
+  .info-title {
+    font-weight: bolder;
+    font-size: 2em
+  }
+}
+
+.info-box:hover {
+  box-shadow: 0 26px 40px -24px  $shadowColor;
+  -moz-box-shadow: 0 26px 40px -24px $shadowColor;
+  -webkit-box-shadow: 0 26px 40px -24px $shadowColor;
+ /* color: $colorAccent;*/
+
+}

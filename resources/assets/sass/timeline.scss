@@ -1,0 +1,233 @@
+@import "common";
+
+$icon-width: 10px;
+$icon-top: 24px;
+
+
+.cd-container::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+#cd-timeline {
+  position: relative;
+  padding: 2em 0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+#cd-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: $icon-width / 2;
+  height: 100%;
+  width: 3px;
+  background: $colorPrimaryDarkTransparent;
+}
+
+@media only screen and (min-width: 1170px) {
+  #cd-timeline {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  #cd-timeline::before {
+    left: 50%;
+    margin-left: -2px;
+  }
+}
+
+.cd-timeline-block {
+  position: relative;
+  margin: 1.5em 0;
+}
+
+.cd-timeline-block:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.cd-timeline-block:first-child {
+  margin-top: 0;
+}
+
+.cd-timeline-block:last-child {
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-block {
+    margin: 2em 0;
+  }
+  .cd-timeline-block:first-child {
+    margin-top: 0;
+  }
+  .cd-timeline-block:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.cd-timeline-img {
+  position: absolute;
+  top: $icon-top;
+  background-color: $colorPrimary;
+  left: 2px;
+  width: $icon-width;
+  height: $icon-width;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px white, inset 0 1px 0 rgba(0, 0, 0, 0.08), 0 2px 0 2px rgba(0, 0, 0, 0.05);
+}
+
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-img {
+    width: $icon-width;
+    height: $icon-width;
+    left: 50%;
+    margin-left: -$icon-width / 2;
+    /* Force Hardware Acceleration in WebKit */
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+  .cssanimations .cd-timeline-img.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .cd-timeline-img.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-1 0.6s;
+    -moz-animation: cd-bounce-1 0.6s;
+    animation: cd-bounce-1 0.6s;
+  }
+}
+
+.cd-timeline-content {
+  @extend .shadow;
+  position: relative;
+  margin-left: 25px;
+  background: white;
+  border-radius: 0.25em;
+  padding: 1em;
+}
+
+.cd-timeline-content:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.cd-timeline-content a{
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+
+  text-decoration: none;
+}
+
+.cd-timeline-content a :hover{
+  color: $colorAccent;
+}
+
+.cd-timeline-content .title {
+  color: #303e49;
+  font-size: 1.35em;
+}
+
+.cd-timeline-content .cd-date {
+  font-size: 1em;
+  display: inline-block;
+  float: left;
+  padding: .8em 0;
+  color: #888;
+}
+
+
+.cd-timeline-content::before {
+  content: '';
+  position: absolute;
+  top: $icon-top;
+  right: 100%;
+  height: 0;
+  width: 0;
+  border: 7px solid transparent;
+  border-right: 7px solid white;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-timeline-content .title {
+    font-size: 1.35em;
+  }
+
+  .cd-timeline-content .cd-date {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-content {
+    margin-left: 0;
+    padding: 1.6em;
+    width: 48%;
+  }
+  .cd-timeline-content::before {
+    top: $icon-top;
+    left: 100%;
+    border-color: transparent;
+    border-left-color: white;
+  }
+
+  .cd-timeline-content .cd-date {
+    position: absolute;
+    width: 100%;
+    left: 108%;
+    top: $icon-top - $icon-width - 5px;
+    font-size: 1em;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content {
+    float: right;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+    top: $icon-top;
+    left: auto;
+    right: 100%;
+    border-color: transparent;
+    border-right-color: white;
+  }
+
+  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+    left: auto;
+    right: 108%;
+    text-align: right;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
+    -webkit-animation: cd-bounce-2-inverse 0.6s;
+    -moz-animation: cd-bounce-2-inverse 0.6s;
+    animation: cd-bounce-2-inverse 0.6s;
+  }
+}
+
+.posts-count{
+  font-size: 1.6em;
+  margin: 5px auto;
+  text-align: center;
+}
+.dot{
+  background-color: $colorPrimary;
+  width: $icon-width * 2;
+  height: $icon-width * 2;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 0 2px white, inset 0 1px 0 rgba(0, 0, 0, 0.08), 0 2px 0 2px rgba(0, 0, 0, 0.05);
+}
+
+@media only screen and (max-width: 1170px) {
+  .posts-count{
+    text-align: left;
+  }
+  .dot{
+    margin-left: -3px;
+  }
+}

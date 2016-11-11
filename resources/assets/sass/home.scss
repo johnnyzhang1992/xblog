@@ -1,0 +1,57 @@
+html, body {
+  height: 100%;
+  background: #52768e;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  color: #607D8B;
+  display: table;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content {
+  text-align: center;
+  display: inline-block;
+}
+
+.error {
+  color: #eee;
+}
+
+.error .title {
+  padding: 10px;
+  font-size: 1.8em;
+  background: rgba(154, 154, 154, 0.5);
+  *background: #9a9a9a;
+  border-radius: 8px;
+}
+
+.error .urls a {
+  color: #eee;
+
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+}
+
+.error .urls a:hover {
+  color: #000;
+}
+
+@import "home-link";
+@import "home-box";
