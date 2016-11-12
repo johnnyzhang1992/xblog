@@ -47,6 +47,7 @@
                                     {{--<span class="badge required">{{ @$unreadNotificationsCount }}</span>--}}
                                 {{--@endif--}}
                                 {{ @$user->name }}
+                                {{ @$author }}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
@@ -55,13 +56,12 @@
                                     <li><a href="{{ route('admin.index') }}">后台管理</a></li>
                                 @endif
                                 <li class="divider"></li>
-                                <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                <li>
+                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         退出登录
                                     </a>
                                 </li>
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                      style="display: none;">
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </ul>
@@ -78,9 +78,5 @@
                 @endif
             </div>
         </nav>
-    </div>
-    <div class="container-fluid">
-        {{--<div class="description">{{ @$description or 'description' }}</div>--}}
-        <div class="description">这里是全站描述</div>
     </div>
 </header>

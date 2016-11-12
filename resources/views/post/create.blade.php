@@ -13,6 +13,7 @@
                 </div>
                 <div class="widget-body edit-form">
                     <form role="form" class="form-horizontal" action="{{ route('post.store') }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @include('post.form-content')
                         <button type="submit" class="btn btn-primary">
                             创建
