@@ -13,7 +13,7 @@
     <meta property="og:site_name" content="{{ $site_title or '' }}">
     <meta property="og:description" content="{{ $site_description or '' }}">
     <meta name="theme-color" content="#52768e">
-    <link rel="shortcut icon" href="https://static.lufficc.com/favicon.ico"/>
+    <link rel="shortcut icon" href="http://assets.johnnyzhang.cn/favicon.ico"/>
     <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ elixir('css/home.css') }}" rel="stylesheet">
     @include('widget.google_analytics')
