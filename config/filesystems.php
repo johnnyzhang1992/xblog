@@ -65,7 +65,7 @@ return [
             'driver'  => 'qiniu',
             'domains' => [
                 'default'   => env('QINIU_DEFAULT_DOMAIN'), //你的七牛域名
-                'https'     => env('QINIU_HTTPS_DOMAIN'),         //你的HTTPS域名
+                'http'     => env('QINIU_HTTPS_DOMAIN'),         //你的HTTPS域名
                 'custom'    => env('QINIU_CUSTOM_DOMAIN'),                //你的自定义域名
             ],
             'access_key'=> env('QINIU_AK'),  //AccessKey

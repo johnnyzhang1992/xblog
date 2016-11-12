@@ -35,7 +35,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="widget widget-default">
                     <div class="js-imgLiquid" style="width: 100% ;height: 250px;">
-                        <img src="{{ getImageViewUrl($image->key,null,250) }}">
+                        <img class="img-responsive" src="{{ getImageViewUrl($image->key,null,250) }}">
                     </div>
                     <div class="widget-footer">
                         <div class="widget-meta">
