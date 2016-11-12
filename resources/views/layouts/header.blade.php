@@ -46,8 +46,8 @@
                                 {{--@if($unreadNotificationsCount)--}}
                                     {{--<span class="badge required">{{ @$unreadNotificationsCount }}</span>--}}
                                 {{--@endif--}}
-                                {{ @$user->name }}
-                                {{ @$author }}
+                                {{ auth()->user()->name  }}
+                                {{--{{ @$author }}--}}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
