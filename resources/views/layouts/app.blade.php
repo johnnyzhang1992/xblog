@@ -43,7 +43,7 @@
 @if(isset($site_js) && $site_js)
     <script src="{{ $site_js }}"></script>
 @else
-    <script src="{{ elixir('js/app.min.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 @endif
 @yield('script')
 </body>

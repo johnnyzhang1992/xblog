@@ -50,10 +50,10 @@ gulp.task('min-css', function () {
         .pipe(notify({ message: 'compress home.css task complete' }));
 
 });
-gulp.task('min-js', function () {
-    gulp.src('public/js/app.js') // 要压缩的js文件
-        .pipe(uglify())  //使用uglify进行压缩,更多配置请参考：
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('public/js'))//压缩后的路径
-        .pipe(notify({ message: 'compress app.js task complete' }));
-});
+// gulp.task('min-js', function () {
+//     gulp.src('public/js/app.js') // 要压缩的js文件
+//         .pipe(uglify())  //使用uglify进行压缩,更多配置请参考：
+//         .pipe(rename({suffix: '.min'}))
+//         .pipe(gulp.dest('public/js'))//压缩后的路径
+//         .pipe(notify({ message: 'compress app.js task complete' }));
+// });
