@@ -90,7 +90,7 @@ class UserController extends Controller
         return back()->with('success', '修改失败');
     }
 
-    private function uploadImage(User $user, Request $request, $key, $max = 1024, $fileName = 'image')
+    private function uploadImage(User $user, Request $request, $key, $max = 2048, $fileName = 'image')
     {
         $this->checkPolicy('manager', $user);
         $this->validate($request, [

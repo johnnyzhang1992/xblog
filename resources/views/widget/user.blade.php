@@ -3,7 +3,7 @@
     if (isset($profile_image) && $profile_image)
         $style = "background: url($profile_image) center center;";
     else
-        $style = "background-color: #607D8B;";
+        $style = "background-color: #F5F8FA;";
     ?>
     <div class="widget-user-header" style="{{ $style }}">
         <h3 class="widget-user-username">小小梦工场</h3>

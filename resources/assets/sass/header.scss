@@ -6,7 +6,7 @@
   background-size: 100% auto;
   color: #fff;
   margin-bottom: 20px;
-  padding-top: 30px;
+  padding-top: 10px;
   //padding-bottom: 30px;
 
   box-shadow: 1px 1px $shadowBlur $shadowColor;
@@ -36,6 +36,7 @@ a:active, a:focus, a img {
 }
 
 .site-navbar {
+  margin-bottom: 10px;
   align-items: center;
 }
 
@@ -94,7 +95,7 @@ a:active, a:focus, a img {
 .navbar-header a {
   font-family: 'Pacifico', cursive;
   text-decoration: none;
-  font-size: 1.9em;
+  font-size: 1.7em;
   color: white;
   text-shadow: 5px 5px 5px $colorPrimaryDark;
 

@@ -10,8 +10,8 @@
     </style>
 @endif
 <header class="main-header">
-    <div class="container-fluid" style="margin-top: -15px">
-        <nav class="navbar site-navbar" role="navigation">
+    <div class="container-fluid" style="/*margin-top: -15px*/">
+        <nav class="navbar site-navbar" role="navigation" style="margin-bottom: 10px">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#blog-navbar-collapse">
