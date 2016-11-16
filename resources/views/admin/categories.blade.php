@@ -9,7 +9,7 @@
                 </div>
                 <div class="widget-body">
                     <a class="btn pull-right" role="button" data-toggle="modal" data-target="#add-category-modal">
-                        <i class="fa fa-folder-o"></i>
+                        <i class="fa fa-folder-o"></i> 添加新分类
                     </a>
                     <table class="table table-hover table-bordered table-responsive" style="overflow: auto">
                         <thead>

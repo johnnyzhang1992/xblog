@@ -106,5 +106,6 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
 
 /*
  * must last
+ * use page slug
  */
 Route::get('/{name}', ['uses' => 'PageController@show', 'as' => 'page.show']);

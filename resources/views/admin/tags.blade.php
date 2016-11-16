@@ -9,7 +9,7 @@
                 </div>
                 <div class="widget-body">
                     <a class="btn pull-right" role="button" data-toggle="modal" data-target="#add-tag-modal">
-                        <i class="fa fa-tag"></i>
+                        <i class="fa fa-tag"></i> 添加新标签
                     </a>
                     <table class="table table-hover table-bordered table-responsive" style="overflow: auto">
                         <thead>
