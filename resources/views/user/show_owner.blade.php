@@ -15,7 +15,7 @@
     <form class="mt-30" method="post" action="{{ route('user.upload.profile') }}"
           enctype="multipart/form-data">
         {{ csrf_field() }}
-        <input name="_method" type="hidden" value="patch">
+        {{ method_field('patch') }}
         <div class="form-group">
             <label>修改简介图片：</label>
             <input class="form-control" type="file" name="image" required="">
@@ -34,7 +34,7 @@
     <div class="alone-divider"></div>
     <form class="mt-30" action="{{ route('user.update.info') }}" method="post">
         {{ csrf_field() }}
-        <input name="_method" type="hidden" value="patch">
+        {{ method_field('patch') }}
         <div class="form-group">
             <label>名称：</label>
             <input class="form-control" name="name" type="text" value="{{ $user->name }}" readonly>
