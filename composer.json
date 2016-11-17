@@ -13,7 +13,8 @@
         "erusev/parsedown": "^1.6",
         "qiniu/php-sdk": "^7.0",
         "laravel/socialite": "^2.0",
-        "mews/purifier": "^2.0"
+        "mews/purifier": "^2.0",
+        "jenssegers/agent": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

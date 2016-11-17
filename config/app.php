@@ -188,6 +188,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         App\Providers\CacheServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
         //Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
@@ -236,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'XblogConfig' => App\Facades\XblogConfig::class,
+        'Agent'     => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];

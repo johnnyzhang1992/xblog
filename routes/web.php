@@ -11,45 +11,48 @@
 |
 */
 // User Auth
-Auth::routes();
-Route::get('/auth/github', ['uses' => 'Auth\AuthController@redirectToGithub', 'as' => 'github.login']);
-Route::get('/auth/github/callback', ['uses' => 'Auth\AuthController@handleGithubCallback', 'as' => 'github.callback']);
-Route::get('/github/register',['uses' => 'Auth\AuthController@registerFromGithub', 'as' => 'github.register']);
-Route::post('/github/store',['uses' => 'Auth\AuthController@store', 'as' => 'github.store']);
+Route::group(['middleware' => 'web'], function () {
+    Auth::routes();
+    Route::get('/auth/github', ['uses' => 'Auth\AuthController@redirectToGithub', 'as' => 'github.login']);
+    Route::get('/auth/github/callback', ['uses' => 'Auth\AuthController@handleGithubCallback', 'as' => 'github.callback']);
+    Route::get('/github/register',['uses' => 'Auth\AuthController@registerFromGithub', 'as' => 'github.register']);
+    Route::post('/github/store',['uses' => 'Auth\AuthController@store', 'as' => 'github.store']);
 
 // Site route
-Route::get('/', ['uses' => 'HomeController@index', 'as' => 'index']);
-Route::get('/projects', ['uses' => 'HomeController@projects', 'as' => 'projects']);
-Route::get('/search', ['uses' => 'HomeController@search', 'as' => 'search']);
-Route::get('/achieve', ['uses' => 'HomeController@achieve', 'as' => 'achieve']);
+    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'index']);
+    Route::get('/projects', ['uses' => 'HomeController@projects', 'as' => 'projects']);
+    Route::get('/search', ['uses' => 'HomeController@search', 'as' => 'search']);
+    Route::get('/achieve', ['uses' => 'HomeController@achieve', 'as' => 'achieve']);
 
 // Post
-Route::get('/blog', ['uses' => 'PostController@index', 'as' => 'post.index']);
-Route::get('/blog/{slug}', ['uses' => 'PostController@show', 'as' => 'post.show']);
+    Route::get('/blog', ['uses' => 'PostController@index', 'as' => 'post.index']);
+    Route::get('/blog/{slug}', ['uses' => 'PostController@show', 'as' => 'post.show']);
 
 // Category
-Route::get('/category/{name}', ['uses' => 'CategoryController@show', 'as' => 'category.show']);
-Route::get('/category', ['uses' => 'CategoryController@index', 'as' => 'category.index']);
+    Route::get('/category/{name}', ['uses' => 'CategoryController@show', 'as' => 'category.show']);
+    Route::get('/category', ['uses' => 'CategoryController@index', 'as' => 'category.index']);
 
 // Tag
-Route::get('/tag/{name}', ['uses' => 'TagController@show', 'as' => 'tag.show']);
-Route::get('/tag', ['uses' => 'TagController@index', 'as' => 'tag.index']);
+    Route::get('/tag/{name}', ['uses' => 'TagController@show', 'as' => 'tag.show']);
+    Route::get('/tag', ['uses' => 'TagController@index', 'as' => 'tag.index']);
 
 // User
-Route::get('/user/{name}', ['uses' => 'UserController@show', 'as' => 'user.show']);
-Route::get('/notifications', ['uses' => 'UserController@notifications', 'as' => 'user.notifications']);
-Route::patch('/user/upload/avatar', ['uses' => 'UserController@uploadAvatar', 'as' => 'user.upload.avatar']);
-Route::patch('/user/upload/profile', ['uses' => 'UserController@uploadProfile', 'as' => 'user.upload.profile']);
-Route::patch('/user/upload/info', ['uses' => 'UserController@update', 'as' => 'user.update.info']);
+    Route::get('/user/{name}', ['uses' => 'UserController@show', 'as' => 'user.show']);
+    Route::get('/notifications', ['uses' => 'UserController@notifications', 'as' => 'user.notifications']);
+    Route::patch('/user/upload/avatar', ['uses' => 'UserController@uploadAvatar', 'as' => 'user.upload.avatar']);
+    Route::patch('/user/upload/profile', ['uses' => 'UserController@uploadProfile', 'as' => 'user.upload.profile']);
+    Route::patch('/user/upload/info', ['uses' => 'UserController@update', 'as' => 'user.update.info']);
 
 // Comment
-Route::get('/commentable/{commentable_id}/comments', ['uses' => 'CommentController@show', 'as' => 'comment.show']);
-Route::resource('comment', 'CommentController', ['only' => ['store', 'destroy', 'edit', 'update']]);
+    Route::get('/commentable/{commentable_id}/comments', ['uses' => 'CommentController@show', 'as' => 'comment.show']);
+    Route::resource('comment', 'CommentController', ['only' => ['store', 'destroy', 'edit', 'update']]);
 
 
 // SiteMap
-Route::get('sitemap','SiteMapController@index');
-Route::get('sitemap.xml','SiteMapController@index');
+    Route::get('sitemap','SiteMapController@index');
+    Route::get('sitemap.xml','SiteMapController@index');
+});
+
 
 Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], function () {
 
