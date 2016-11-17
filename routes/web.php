@@ -78,6 +78,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/categories', ['uses' => 'AdminController@categories', 'as' => 'admin.categories']);
     Route::get('/images', ['uses' => 'ImageController@images', 'as' => 'admin.images']);
     Route::get('/files', ['uses' => 'FileController@files', 'as' => 'admin.files']);
+    Route::get('/visitors', ['uses' => 'VisitorController@visitors', 'as' => 'admin.visitors']);
 
     /**
      * comment

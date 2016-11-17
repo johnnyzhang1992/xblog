@@ -54,8 +54,8 @@ class VisitorTracking
         if(DB::table('visitor_tracking')->where('session_id', $_record['session_id'])->first()) {
             // do nothing
         } else {
-//            $_record['geoinfo'] = \json_encode(geoip_record_by_name($_SERVER['REMOTE_ADDR']));
-            $_record['geoinfo'] = '';
+            $_record['geoinfo'] = \json_encode(geoip_record_by_name($_SERVER['REMOTE_ADDR']));
+//            $_record['geoinfo'] = '';
         }
 
         if(Auth::check()) {
@@ -65,10 +65,7 @@ class VisitorTracking
             if(Auth::user()->verified) {
                 // do nothing
             } else {
-//                    \Log::info('用户邮箱未认证,仍然可以登录...');
-//                    Auth::logout();
-//
-//                    return redirect()->to('/login');
+
             }
         } else {
             $_current_path = Route::current()->getPath();
