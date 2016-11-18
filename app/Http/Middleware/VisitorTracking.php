@@ -19,10 +19,6 @@ class VisitorTracking
      * @param  \Closure  $next
      * @return mixed
      */
-//    public function handle($request, Closure $next)
-//    {
-//        return $next($request);
-//    }
     public function handle($request, Closure $next, $guard = null)
     {
         if($request->ajax() || $request->wantsJson()) {
@@ -61,23 +57,9 @@ class VisitorTracking
         if(Auth::check()) {
             $_record['username'] = auth()->user()->name;
             $_record['email'] = auth()->user()->email;
-
-            if(Auth::user()->verified) {
-                // do nothing
-            } else {
-
-            }
         } else {
-            $_current_path = Route::current()->getPath();
-            if('login' != $_current_path
-                && !str_contains($_current_path,'oauth')
-                && !str_contains($_current_path,'login')
-                && !str_contains($_current_path,'logout')
-                && !str_contains($_current_path,'redirector')) {
-                $_fallback_url = Request::fullUrl();
-                $request->session()->set('login_back_fallback', $_fallback_url);
-                \Log::info('add login fallback url = '.$_fallback_url);
-            }
+            $_record['username'] = '游客';
+            $_record['email'] = '';
         }
 
         DB::table('visitor_tracking')
