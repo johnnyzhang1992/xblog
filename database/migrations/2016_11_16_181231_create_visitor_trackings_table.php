@@ -19,11 +19,9 @@ class CreateVisitorTrackingsTable extends Migration
             $table->string('email');
             $table->string('from_url');
             $table->string('to_url');
-            $table->string('to_url');
             $table->integer('session_id')->index()->nullable(true);
             $table->string('ip');
             $table->string('device');
-            $table->string('language');
             $table->string('os');
             $table->string('os_version');
             $table->string('browser');

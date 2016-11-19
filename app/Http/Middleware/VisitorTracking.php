@@ -50,7 +50,7 @@ class VisitorTracking
         if(DB::table('visitor_tracking')->where('session_id', $_record['session_id'])->first()) {
             // do nothing
         } else {
-            $_record['geoinfo'] = \json_encode(geoip_record_by_name($_SERVER['REMOTE_ADDR']));
+//            $_record['geoinfo'] = \json_encode(geoip_record_by_name($_SERVER['REMOTE_ADDR']));
 //            $_record['geoinfo'] = '';
         }
 

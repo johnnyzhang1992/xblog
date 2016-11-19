@@ -32,23 +32,19 @@ class VisitorController extends Controller
     public function visitors()
     {
         $_fields = [
-            DB::raw("distinct on (session_id) session_id"), 'username', 'email', 'geoinfo', 'ip',
-            'device', 'os', 'os_version', 'browser', 'browser_version', 'robot', 'created_at'
+           'username', 'email','ip','device', 'os', 'os_version', 'browser', 'browser_version', 'robot', 'created_at'
         ];
 
         $_visitors = DB::table('visitor_tracking')
+            ->distinct()
             ->select($_fields)
-            ->where('created_at', '>', DB::raw('now()::date'))
-            ->where('created_at', '<', DB::raw("now()::date + interval '1 day'"))
-//            ->groupBy('id', 'session_id')
+            ->where('created_at', '>', DB::raw('CURDATE()'))
+//            ->where('created_at', '<', DB::raw("now()::date + interval '1 day'"))
             ->orderBy('created_at', 'desc')
             ->get();
 
 
-        return view('manage.modules.visitor_tracking.index')
+        return view('admin.visitors')
             ->with(['visitors' => $_visitors]);
-//        $content = '没错这就是浏览统计页面';
-//
-//        return view('admin.visitors',compact('content') );
     }
 }
