@@ -14,6 +14,7 @@ use App\Http\Requests;
 use App\Map;
 use App\Page;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -69,6 +70,7 @@ class AdminController extends Controller
         $info['tag_count'] = $this->tagRepository->count();
         $info['page_count'] = $this->pageRepository->count();
         $info['image_count'] = $this->imageRepository->count();
+        $info['visitors_count'] = DB::table('visitor_tracking')->where('created_at', '>', DB::raw('CURDATE()'))->count(DB::raw('DISTINCT ip'));
 
         return view('admin.index', compact('info'));
     }

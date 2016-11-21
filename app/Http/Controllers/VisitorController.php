@@ -10,8 +10,6 @@ namespace App\Http\Controllers;
 use App\Http\Repositories\UserRepository;
 
 use DB;
-use App\User;
-use Illuminate\Http\Request;
 
 
 class VisitorController extends Controller
@@ -31,20 +29,23 @@ class VisitorController extends Controller
 
     public function visitors()
     {
-        $_fields = [
-           'username', 'email','ip','device', 'os', 'os_version', 'browser', 'browser_version', 'robot', 'created_at'
-        ];
-
+//        $_fields = [
+//          'username', 'email', 'ip', 'device', 'os', 'os_version', 'browser', 'browser_version', 'robot', 'created_at'
+//        ];
         $_visitors = DB::table('visitor_tracking')
-            ->distinct()
-            ->select($_fields)
+//            ->select($_fields)
             ->where('created_at', '>', DB::raw('CURDATE()'))
-//            ->where('created_at', '<', DB::raw("now()::date + interval '1 day'"))
+            ->distinct()
             ->orderBy('created_at', 'desc')
             ->get();
-
+        $_visitors_count = DB::table('visitor_tracking')
+            ->where('created_at', '>', DB::raw('CURDATE()'))
+            ->count(DB::raw('DISTINCT ip'));
 
         return view('admin.visitors')
-            ->with(['visitors' => $_visitors]);
+            ->with([
+                'visitors' => $_visitors,
+                'visitors_count' =>$_visitors_count
+            ]);
     }
 }
