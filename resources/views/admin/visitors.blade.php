@@ -9,7 +9,6 @@
             <div class="widget-body">
                 <table>
                     <tr>
-                        <td>ID</td>
                         <td>name</td>
                         <td>from_url</td>
                         <td>IP</td>
@@ -20,17 +19,17 @@
                     </tr>
 
                 @for($i=0; $i<count($visitors); $i++)
-                    <?php $visitor = $visitors[$i]; ?>
-                    <tr>
-                        <td>{{ $i }}</td>
-                        <td>{!! $visitor->username?$visitor->username:($visitor->robot?'<i class="fa fa-bug"></i>':'游客') !!}</td>
-                        <td style="max-width: 250px;text-overflow: clip">{{ $visitor->from_url}}</td>
-                        <td>{{ $visitor->ip }}</td>
-                        <td>{{ $visitor->os.' '.$visitor->os_version }}</td>
-                        <td>{{ $visitor->browser.' '.$visitor->browser_version }}</td>
-                        <td>{{ $visitor->robot }}</td>
-                        <td>{{ $visitor->created_at }}</td>
-                    </tr>
+                    @if(empty($visitors[$i]->robot))
+                            <tr>
+                                <td>{!! $visitors[$i]->username?$visitors[$i]->username:($visitors[$i]->robot?'<i class="fa fa-bug"></i>':'游客') !!}</td>
+                                <td style="max-width: 250px;text-overflow: clip">{{ $visitors[$i]->from_url}}</td>
+                                <td>{{ $visitors[$i]->ip }}</td>
+                                <td>{{ $visitors[$i]->os.' '.$visitors[$i]->os_version }}</td>
+                                <td>{{ $visitors[$i]->browser.' '.$visitors[$i]->browser_version }}</td>
+                                <td>{{ $visitors[$i]->robot }}</td>
+                                <td>{{ $visitors[$i]->created_at }}</td>
+                            </tr>
+                        @endif
                 @endfor
                 </table>
             </div>
