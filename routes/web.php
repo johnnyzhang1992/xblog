@@ -109,6 +109,13 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
 });
 
 /*
+ * Todo list
+ */
+Route::group(['prefix' => 'list', ['middleware' => ['auth', 'admin']]], function () {
+    Route::get('/', ['uses' => 'ListController@index', 'as' => 'list.index']);
+});
+
+/*
  * must last
  * use page slug
  */
