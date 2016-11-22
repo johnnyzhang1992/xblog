@@ -7,7 +7,6 @@
             this.bootUp();
         },
         bootUp: function () {
-            console.log('bootUp');
             loadComments(false);
             initComment();
             initMarkdownTarget();
