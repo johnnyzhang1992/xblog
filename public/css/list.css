@@ -15,7 +15,18 @@ body{
   margin: 0;
 }
 .item .item-content{
+  height: 9em;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   padding: 10px 20px;
 }
 .item-content .btn{
 }
+.title-btn,.content-btn{
+  display: none;
+}
+/*.title-btn:hover,.content-btn:hover{*/
+  /*display: inline-block ;*/
+/*}*/
