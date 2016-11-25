@@ -36,10 +36,12 @@ class ListController extends Controller
     //store
     public function store(Request $request){
         $user = auth()->user();
+        $list_item = array();
         $_list['user_id'] = $user->id;
         $_list['user_name'] = $user->name;
         $_list['status'] = 'available';
         $_list['title'] = $request['list_title'];
+        $_list['list_item'] = $list_item;
         DB::table('list')->insertGetId($_list);
     }
 
