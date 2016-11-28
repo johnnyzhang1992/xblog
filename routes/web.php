@@ -107,14 +107,6 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::resource('page', 'PageController', ['except' => ['show', 'index']]);
 
 });
-//list
-Route::group(['prefix' => 'list', ['middleware' => ['auth', 'admin']]], function () {
-    Route::get('/', ['uses' => 'ListController@index', 'as' => 'list.index']);
-    Route::post('/store', ['uses' => 'ListController@store', 'as' => 'list.store']);
-    Route::post('/edit/{id}', ['uses' => 'ListController@edit', 'as' => 'list.edit']);
-    Route::post('/delete{id}', ['uses' => 'ListController@restore', 'as' => 'list.delete']);
-});
-
 /*
  * must last
  * use page slug
