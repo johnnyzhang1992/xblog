@@ -9,6 +9,17 @@
         </span>
     @endif
 </div>
+<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+    <label for="type" class="control-label">文章类型*</label>
+    <input id="type" type="text" class="form-control" name="title"
+           value="{{ isset($post) ? $post->type : old('type') }}"
+           autofocus>
+    @if ($errors->has('type'))
+        <span class="help-block">
+            <strong>{{ $errors->first('type') }}</strong>
+        </span>
+    @endif
+</div>
 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="description" class="control-label">文章描述*</label>
 

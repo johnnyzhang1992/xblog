@@ -32,6 +32,7 @@
         $("#post-tags").select2({
             tags: true
         });
+        //编辑器
         $(document).ready(function () {
             var simplemde = new SimpleMDE({
                 autoDownloadFontAwesome: true,
