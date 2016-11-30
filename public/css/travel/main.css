@@ -1,0 +1,707 @@
+html{height:100%}
+body{height:100%;margin:0px;padding:0px}
+i{
+  margin-right: 5px;
+}
+input, button, select, textarea {
+  outline: 0;
+  font-family: inherit;
+}
+.ng-hide{
+  display: none;
+}
+
+.navbar{
+  margin-bottom: 0;
+}
+#map{
+  width:100%!important;
+  height:100%;
+  position: absolute!important;
+  /*margin-bottom: -50px;*/
+  /*margin-top: 50px;*/
+}
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Custom page header */
+.header {
+  z-index: 2;
+  width: 100%;
+  position: fixed;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 0;
+  }
+}
+/*map----main.html*/
+label.BMapLabel{
+  max-width: inherit;
+}
+
+/*圆盘*/
+/*.BMap_stdMpCtrl{*/
+  /*display: none;*/
+/*}*/
+/*searchInforBox*/
+#BMapLib_transBox8 table td:first-child{
+  width: 40px;
+}
+#BMapLib_transBox8 table td:last-child{
+  width: 120px;
+}
+/*searchbox*/
+#searchbox{
+  position: absolute;
+  top:85px;
+  left:50px;
+  border-radius: 2px;
+  width: 425px;
+  z-index: 5;
+}
+#searchbox #searchbox-container {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  width: 368px;
+  float: left;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+  background: #fff;
+}
+#sole-searchbox-content {
+  position: relative;
+}
+.searchbox-content {
+  width: 368px;
+  border-radius: 2px 0 0 2px;
+  background: #fff;
+}
+
+#sole-searchbox-content #sole-input {
+  box-sizing: border-box;
+  border: 0;
+  padding: 9px 0;
+  border-left: 10px solid transparent;
+  border-right: 27px solid transparent;
+  line-height: 20px;
+  font-size: 16px;
+  height: 38px;
+  color: #333;
+  position: relative;
+  border-radius: 2px 0 0 2px;
+  outline: 0;
+}
+.searchbox-content .searchbox-content-common {
+  box-sizing: border-box;
+  float: left;
+  width: 329px;
+  height: 38px;
+}
+#sole-searchbox-content .input-clear {
+  right: 39px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx), (min-resolution: 192dpi){
+  .searchbox-content .input-clear {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -307px -10px #fff;
+    background-size: 428px auto;
+  }
+}
+.searchbox-content .input-clear {
+  cursor: pointer;
+  position: absolute;
+  width: 27px;
+  height: 38px;
+  top: 0;
+  background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/searchbox_f175577.png) no-repeat 0 -114px #fff;
+  display: block;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx), (min-resolution: 192dpi){
+  .searchbox-content .searchbox-content-button.route-button {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -53px -12px;
+    background-size: 428px auto;
+  }
+  .searchbox-content .searchbox-content-button.route-button {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/searchbox_f175577.png) no-repeat 0 0;
+  }
+}
+
+  .searchbox-content .searchbox-content-button {
+    box-sizing: border-box;
+    float: left;
+    height: 38px;
+    width: 39px;
+    cursor: pointer;
+    position: relative;
+  }
+
+.searchbox-content .searchbox-content-button.right-button:before {
+  content: '';
+  position: absolute;
+  width: 38px;
+  left: 0;
+  top: 6px;
+  height: 26px;
+  border-left: 1px solid #eee;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx), (min-resolution: 192dpi){
+  #searchbox #search-button {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -353px -63px #3385ff;
+    background-size: 428px auto;
+  }
+
+  #searchbox #search-button {
+    pointer-events: auto;
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/searchbox_f175577.png) no-repeat 0 -76px #3385ff;
+    width: 57px;
+    height: 38px;
+    float: left;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+  }
+}
+#toast-wrapper {
+  pointer-events: auto;
+  visibility: hidden;
+  position: absolute;
+  width: 368px;
+  height: 35px;
+  left: 0;
+  bottom: -35px;
+  z-index: 1;
+  -webkit-transition: visibility .5s;
+  transition: visibility .5s;
+  overflow: hidden;
+}
+#toast {
+  box-sizing: border-box;
+  width: 100%;
+  line-height: 33px;
+  height: 35px;
+  text-align: center;
+  background: #ffffdf;
+  border: 1px solid #f4f4d3;
+  color: #666;
+  -webkit-transition: -webkit-transform .5s;
+  transition: transform .5s;
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+#toast .info-tip-img {
+  background: url(http://webmap2.map.bdstatic.com/wolfman/static/common/images/fav/tip_3f7f5a2.png) 0 0 no-repeat;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+#toast .info-tip-text {
+  vertical-align: -2px;
+}
+/*工具*/
+.BMap_noprint.anchorTR{
+  position: absolute;
+  bottom: 10px!important;
+}
+/*城市列表*/
+.BMap_CityListCtrl .citylist_popup_main{
+  height:350px!important;
+}
+.BMap_CityListCtrl a{
+  min-width: 100px;
+  text-align: center;
+}
+.ui_city_change{
+  line-height: 36px!important;
+  height: 36px!important;
+}
+.ui_city_change_top .ui_city_change_inner, .ui_city_change_bottom .ui_city_change_inner{
+  line-height: 36px!important;
+  height: 36px!important;
+}
+ .ui_city_change_click i{
+  top:19px!important;
+}
+/*.ui_city_change_top .ui_city_change_inner i{*/
+  /*top:10px!important;*/
+/*}*/
+.citylist_popup_main .city_content_top {
+  height: 35px!important;
+  padding: 10px 10px 0 10px!important;
+}
+#city_ctrl_form {
+  top: 7px!important;
+}
+#selCityWd {
+  border: 1px solid #ccc;
+  height: 24px!important;
+  width: 121px;
+  line-height: 20px;
+  text-indent: 4px;
+  outline: none;
+}
+/*tools*/
+.boxopt {
+  padding-right: 12px;
+  line-height: 28px;
+  float: left;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  top:90px;
+  right:155px;
+  border: 1px solid #c4c7cc;
+  background-color: #fff;
+  min-width: 100px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx), (min-resolution: 192dpi){
+  .boxutils.active,.boxutils:hover {
+    background-position: -32px -58px;
+  }
+  .boxutils {
+    background-position: -32px -22px;
+  }
+}
+ .boxopt span.active, .boxopt span.active {
+  background-color: #fff;
+}
+.boxopt:hover{
+  color: #579AFC;
+}
+.boxtext{
+  float: left;
+  font-size: 12px;
+  font-style: normal;
+  height: 34px;
+  line-height: 34px;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.boxutils.active,.boxutils:hover {
+  background-position: -34px -48px;
+}
+ .boxopt span,  .boxopt span{
+  float: left;
+  height: 34px;
+  width: 29px;
+  background-image: url(http://webmap1.map.bdstatic.com/wolfman/static/common/images/ui3/tools/newtools_9ddbaad.png);
+  background-repeat: no-repeat;
+}
+ .boxutils {
+  padding-right: 7px;
+  background-position: -34px -116px;
+}
+ .boxopt em {
+  width: 7px;
+  height: 7px;
+  float: left;
+  margin-top: 13px;
+  margin-left: 5px;
+  background-image: url(http://webmap1.map.bdstatic.com/wolfman/static/common/images/ui3/tools/newtools_9ddbaad.png);
+  background-repeat: no-repeat;
+  background-position: -13px -17px;
+}
+ .measure {
+   float: left;
+   height: 34px;
+   width: 29px;
+   background-repeat: no-repeat;
+   background-position: -85px -23px;
+   background-image: url(http://webmap1.map.bdstatic.com/wolfman/static/common/images/retina/new_retain_c1648fb.png);
+   background-size: 280px 115px;
+ }
+ .latlng{
+   float: left;
+   height: 34px;
+   width: 20px;
+   line-height: 34px;
+ }
+.detail-box{
+  position: absolute;
+  top: 125px;
+  right: 156px;
+  width: 98px;
+  background: #fff;
+  box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+  float: left;
+  z-index: 80000;
+  margin-bottom: 0;
+}
+.boxinfo{
+  padding: 0;
+  margin-bottom: 0;
+}
+.boxinfo li {
+  list-style: none;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: pointer;
+  height: 34px;
+  line-height: 34px;
+  padding-left: 7px;
+}
+.boxinfo i{
+  float: left;
+  font-size: 14px;
+  font-style: normal;
+  height: 34px;
+  line-height: 34px;
+  margin-left: 2px;
+  display: inline-block;
+}
+#search-button{
+  position: absolute;
+  top: 0;
+  left: 368px;
+}
+/*坐标*/
+.show-latlng{
+  opacity: 0.6;
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  background: #000;
+  color: #fff;
+  line-height: 30px;
+}
+.show-latlng p{
+  margin-bottom: 0;
+}
+#current_lat,#current_lng{
+  padding: 5px 10px;
+  display: inline-block;
+  min-width: 110px;
+
+}
+#current_lat,#current_lng{
+  border-right: 1px solid #ddd;
+}
+.remove_latlng{
+  font-size: 17px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 50px;
+  padding: 5px 10px;
+  line-height: 30px;
+  text-align: center;
+}
+.remove_latlng i{
+  margin-top: 5px;
+}
+/*route*/
+#route-searchbox-content {
+  z-index: 6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px 0 0 2px;
+  background: #fff;
+}
+.route-header {
+  overflow: hidden;
+}
+.searchbox-content-common {
+  box-sizing: border-box;
+  float: left;
+  width: 329px;
+  height: 38px;
+}
+.route-tabs {
+  position: relative;
+  border-bottom: 1px solid #A3C7FF;
+  color: #333;
+  text-decoration: none;
+}
+.route-tabs .tab-item {
+  box-sizing: border-box;
+  font-size: 12px;
+  float: left;
+  width: 25%;
+  height: 37px;
+  line-height: 37px;
+  text-align: center;
+  cursor: pointer;
+}
+.route-searchbox-content.bus .tab-item.bus-tab {
+  color: #3385ff;
+}
+.route-searchbox-content.drive .tab-item.drive-tab {
+  color: #3385ff;
+}
+.route-searchbox-content.walk .tab-item.walk-tab {
+  color: #3385ff;
+}
+
+.route-searchbox-content.bike .tab-item.bike-tab {
+  color: #3385ff;
+}
+.route-tabs .tab-item:hover {
+  color: #3385ff;
+}
+.route-searchbox-content.bike .arrow-wrap {
+  left: 87.5%;
+}
+.route-searchbox-content.walk .arrow-wrap {
+  left: 62.5%;
+}
+.route-tabs .arrow-wrap {
+  top: 34px;
+  -webkit-transition: left .2s ease-in;
+  transition: left .2s ease-in;
+}
+.route-searchbox-content.drive .arrow-wrap {
+  left: 37.5%;
+}
+.route-searchbox-content.bus .arrow-wrap {
+  left: 12.5%;
+}
+.arrow-wrap {
+  position: absolute;
+  height: 6px;
+  width: 6px;
+  background: #fff;
+  border-top: 1px solid #A5C4FF;
+  border-left: 1px solid #A5C4FF;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865475, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865475, SizingMethod='auto expand')";
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx), (min-resolution: 192dpi){
+  #route-searchbox-content.bus .tab-item.bus-tab i {
+    background-position: -66px -75px;
+  }
+  #route-searchbox-content  .tab-item.bus-tab i {
+    background-position: -45px -75px;
+  }
+  .route-tabs .tab-item.drive-tab i {
+    background-position: -91px -76px;
+  }
+  #route-searchbox-content.drive .tab-item.drive-tab i {
+    background-position: -112px -76px;
+  }
+  .route-tabs .tab-item.walk-tab i {
+    background-position: -90px -103px;
+  }
+  #route-searchbox-content.walk .tab-item.walk-tab i {
+    background-position: -110px -103px;
+  }
+  #route-searchbox-content  .tab-item.walk-tab i {
+    background-position: -90px -103px;
+  }
+  .route-tabs .tab-item.bike-tab i {
+    background-position: -187px -75px;
+  }
+  #route-searchbox-content.bike .tab-item.bike-tab i {
+    background-position: -209px -75px;
+  }
+  #route-searchbox-content .searchbox-content-button {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -210px -10px;
+    background-size: 428px auto;
+  }
+  .routebox .routebox-content .routebox-revert .routebox-revert-icon {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -248px -22px;
+    background-size: 428px auto;
+  }
+  .routebox .routebox-content .routebox-input .route-input-icon {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -276px -24px;
+    background-size: 428px auto;
+  }
+  .searchbox-content .input-clear {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -307px -10px #fff;
+    background-size: 428px auto;
+  }
+  #route-searchbox-content .routebox .routebox-content .routebox-input.route-end .route-input-icon {
+    background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png) no-repeat -291px -24px;
+    background-size: 428px auto;
+  }
+}
+.route-tabs .tab-item i {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/retina/new-route-retian_39406a2.png);
+  background-size: 428px auto;
+}
+.route-tabs .tab-item.bus-tab i {
+  width: 13px;
+  height: 15px;
+  /*background-position: 0 -34px;*/
+}
+.route-tabs .tab-item.drive-tab i {
+  width: 15px;
+  height: 14px;
+  /*background-position: 0 -68px;*/
+}
+.route-tabs .tab-item.walk-tab i {
+  width: 15px;
+  height: 17px;
+  /*background-position: 0 -100px;*/
+  top: 3px;
+}
+.route-tabs .tab-item.walk-tab i {
+  width: 15px;
+  height: 17px;
+  /*background-position: 0 -100px;*/
+  top: 3px;
+}
+.route-tabs .tab-item.bike-tab i {
+  width: 18px;
+  height: 15px;
+  /*background-position: 0 -138px;*/
+  top: 3px;
+}
+.route-tabs .tab-item span {
+  margin-left: 8px;
+}
+ .searchbox-content-button {
+  box-sizing: border-box;
+  float: left;
+  height: 38px;
+  width: 39px;
+  cursor: pointer;
+  position: relative;
+}
+.routebox {
+  -webkit-transition: max-height 1s ease-in;
+  transition: max-height 1s ease-in;
+  overflow: hidden;
+}
+.routebox .routebox-content {
+  height: auto!important;
+  position: relative;
+}
+
+.searchbox-content .searchbox-content-common {
+  box-sizing: border-box;
+  float: left;
+  width: 329px;
+  height: 38px;
+}
+
+.routebox .routebox-content .routebox-revert {
+  width: 39px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+.routebox .routebox-content .routebox-revert .routebox-revert-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 14px;
+  margin-left: -9px;
+  margin-top: -7px;
+  background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/revert_9adb172.png) no-repeat 0 0;
+}
+.routebox .routebox-content .routebox-inputs {
+  margin-left: 39px;
+}
+.routebox .routebox-content .routebox-input {
+  height: 40px;
+  width: 289px;
+  border-bottom: 1px solid #eaebed;
+  position: relative;
+}
+.routebox .routebox-content .routebox-input:last-child {
+  border-bottom: 0;
+}
+
+.routebox .routebox-content .routebox-input {
+  height: 40px;
+  width: 289px;
+  border-bottom: 1px solid #eaebed;
+  position: relative;
+}
+.routebox .routebox-content .routebox-input .route-input-icon {
+  width: 11px;
+  height: 10px;
+  background: url(http://webmap1.map.bdstatic.com/wolfman/static/common/images/new/start_f51000d.png) no-repeat 0 0;
+  position: absolute;
+  top: 15px;
+  left: 3px;
+}
+.routebox .routebox-content .routebox-input input {
+  box-sizing: border-box;
+  border: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 14px;
+  border-left: 20px solid transparent;
+  border-right: 27px solid transparent;
+  line-height: 20px;
+}
+.input-iploc {
+  color: #3385ff;
+}
+.routebox .routebox-content .routebox-input .input-clear {
+  left: auto;
+  right: 0;
+  top: 1px;
+}
+.searchbox-content .input-clear {
+  cursor: pointer;
+  position: absolute;
+  width: 27px;
+  height: 38px;
+  top: 0;
+  background: url(http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/searchbox_f175577.png) no-repeat 0 -114px #fff;
+  /*display: none;*/
+}
+.routebox .routebox-content .routebox-input .route-input-icon {
+  width: 11px;
+  height: 10px;
+  background: url(http://webmap1.map.bdstatic.com/wolfman/static/common/images/new/start_f51000d.png) no-repeat 0 0;
+  position: absolute;
+  top: 15px;
+  left: 3px;
+}

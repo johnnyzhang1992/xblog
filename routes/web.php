@@ -51,6 +51,8 @@ Route::group(['middleware' => 'web'], function () {
 // SiteMap
     Route::get('sitemap','SiteMapController@index');
     Route::get('sitemap.xml','SiteMapController@index');
+//  travel
+    Route::get('travel','TravelController@index');
 });
 
 
