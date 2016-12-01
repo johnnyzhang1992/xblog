@@ -26,5 +26,15 @@ class TravelController extends Controller
             ->get();
         return json_encode($_data);
     }
+    public function detail(Request $request,$id){
+        if($id){
+            $_data = DB::table('travel')
+                ->where('id','=',$id)
+                ->get();
+            return view('travel.detail')->with('poi',$_data[0]);
+        }else{
+            return redirect('/travel');
+        }
+    }
 }
 ?>

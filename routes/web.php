@@ -55,6 +55,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'travel'],function (){
         Route::get('/','TravelController@index');
         Route::get('/get_data','TravelController@get_data');
+        Route::get('/poi/{id}','TravelController@detail')->where('id', '[0-9]+');
     });
 
 });

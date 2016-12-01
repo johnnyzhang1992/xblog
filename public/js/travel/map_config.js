@@ -96,32 +96,58 @@ var bdMapController = {
     },
     render: {
         //小图标渲染函数
-        addMarker:function (latlng,name,tag,address,desc) {
+        addMarker:function (latlng,poi_name,id,tag,address,desc,img_url) {
             if(tag=='spot'){
                 tag = '景点';
             }else if(tag =='university'){
                 tag = '大学';
             }
             var marker = new BMap.Marker(latlng);
-            var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-                '地址：'+ address+'<br><i class="glyphicon glyphicon-tag"></i>' +tag+ '<br/>描述：'+desc + '</div>';
+            // var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+            //     '地址：'+ address+'<br><i class="glyphicon glyphicon-tag"></i>' +tag+ '<br/>描述：'+desc + '</div>';
             //创建检索信息窗口对象
-            var searchInfoWindow = null;
-            searchInfoWindow = new BMapLib.SearchInfoWindow(bdMapController.map, content, {
-                title  : name,      //标题
-                width  : 290,             //宽度
-                height : 105,              //高度
-                panel  : "panel",         //检索结果面板
-                enableAutoPan : true,     //自动平移
-                searchTypes   :[
-                    // BMAPLIB_TAB_SEARCH,   //周边检索
-                    // BMAPLIB_TAB_TO_HERE,  //到这里去
-                    // BMAPLIB_TAB_FROM_HERE //从这里出发
-                ]
+            // var searchInfoWindow = null;
+            // searchInfoWindow = new BMapLib.SearchInfoWindow(bdMapController.map, content, {
+            //     title  : name,      //标题
+            //     width  : 290,             //宽度
+            //     height : 105,              //高度
+            //     panel  : "panel",         //检索结果面板
+            //     enableAutoPan : true,     //自动平移
+            //     searchTypes   :[
+            //         // BMAPLIB_TAB_SEARCH,   //周边检索
+            //         // BMAPLIB_TAB_TO_HERE,  //到这里去
+            //         // BMAPLIB_TAB_FROM_HERE //从这里出发
+            //     ]
+            // });
+            var _link = 'travel/poi/'+id;
+            var description,_img_url;
+            if(desc !== null && desc !== undefined && desc !== ''){
+                description = desc;
+            }else{
+                description = '这里是描述';
+            }
+            if(img_url != null && img_url != undefined && img_url != ''){
+                _img_url = img_url;
+            }else{
+                _img_url = '/images/travel/001.png';
+            }
+            var sContent =
+                "<div style='width: 240px'>"+
+                "<h4 style='margin:0 0 5px 0;padding:0.2em 0'><a href='"+_link+"'>"+poi_name+"</a></h4>" +
+                "<div style='width: 240px;'><img style='margin:4px;width: 100%' id='imgDemo' src='"+_img_url+"' width='139' height='104' title='天安门'/></div>" +
+                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>"+description+"</p>" +
+                "</div>";
+            var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+            marker.addEventListener("click", function(){
+                this.openInfoWindow(infoWindow);
+                //图片加载完毕重绘infowindow
+                document.getElementById('imgDemo').onload = function (){
+                    infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+                }
             });
-            marker.addEventListener("click", function(e){//小图标添加监听事件"click"
-                searchInfoWindow.open(marker);
-            });
+            // marker.addEventListener("click", function(e){//小图标添加监听事件"click"
+            //     searchInfoWindow.open(marker);
+            // });
             bdMapController.map.addOverlay(marker); //在地图中添加marker
         },
         // 获取图标信息
@@ -137,11 +163,13 @@ var bdMapController = {
                         for (var i = 0; i < marker_points.length; i ++) {
                             var marker_point = marker_points[i];
                             var latlng = new BMap.Point(marker_point.lng,marker_point.lat);
-                            var name = marker_point.poi_name;
+                            var poi_name = marker_point.poi_name;
                             var tag =marker_point.tag;
                             var address =marker_point.address;
                             var desc =marker_point.description;
-                            bdMapController.render.addMarker(latlng,name,tag,address,desc);
+                            var id = marker_point.id;
+                            var img_url = marker_point.img_url;
+                            bdMapController.render.addMarker(latlng,poi_name,id,tag,address,desc,img_url);
                         }
                     }
                 },
