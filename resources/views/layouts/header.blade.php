@@ -33,6 +33,7 @@
                         <li><a class="menu-item"
                                href="{{ route('page.show',$page->name) }}">{{ $page->display_name }}</a></li>
                     @endforeach
+                    <li><a class="menu-item" href="{{ url('/travel') }}">旅行</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right blog-navbar">
                     @if(Auth::check())

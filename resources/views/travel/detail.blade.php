@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container" >
-        <div class="col-md-offset-1 col-md-10 col-xs-12" style="padding-top: 60px">
+        <div class="col-md-offset-1 col-md-10 col-xs-12">
             <div class="panel panel-default">
                 @if(Auth::check())
                 <div class="panel-heading">
@@ -20,13 +20,13 @@
                         </div>
                         <!--经纬度（LatLng）-->
                         <div class="form-group">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" style="padding-left: 0">
                                 <label class="col-sm-4 control-label" for="lat">经度(Lat)</label>
                                 <div class="col-sm-8">
                                     <input  type="text" id="lat" ng-model="lat" placeholder="{{@$poi->lat}}" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" style="padding-left: 0">
                                 <label class="col-sm-4 control-label" for="lng">纬度(Lng)</label>
                                 <div class="col-sm-8">
                                     <input  type="text" id="lng" ng-model="lng" placeholder="{{@$poi->lng}}" class="form-control">
@@ -120,6 +120,16 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/travel/main.css') }}">
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <style>
+        @media (min-width: 768px){
+            .form-horizontal .control-label {
+                text-align: left;
+                margin-bottom: 0;
+                padding-top: 7px;
+            }
+        }
+
+    </style>
 @endsection
 
 @section('script')
