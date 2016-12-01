@@ -77,7 +77,7 @@
                     <span class="last measure"></span><i>测距</i>
                 </li>
                 <li class="map-measure" ng-click="get_latlng()">
-                    <span class="glyphicon glyphicon-screenshot latlng"></span><i>获取坐标</i>
+                    <span class="latlng">+</span><i>获取坐标</i>
                 </li>
                 <!--<li class="map-mark" ng-click="mark">-->
                 <!--<span class="last mark"></span><i>标记</i>-->
@@ -104,12 +104,25 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/travel/main.css') }}">
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <style>
+        .main-header{
+            margin-bottom: 0;
+        }
+    </style>
 @endsection
 
 @section('script')
     {{--baidumap--}}
     <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=V5YM1CIwjDz2OEFTs4EAoPpv"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
     <script src="{{ asset('/js/travel/map_config.js') }}"></script>
     <script src="{{ asset('/js/travel/controllers/main.js') }}"></script>
     {{--endbaidumap--}}

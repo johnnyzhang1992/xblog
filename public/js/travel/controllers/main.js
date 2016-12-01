@@ -7,12 +7,32 @@
  * # MainCtrl
  * Controller of the baidumapApp
  */
-angular.module('baidumapApp')
+angular.module('baidumapApp',[
+    'ngAnimate',
+    'ngCookies',
+    'ngResource',
+    'ngRoute',
+    'ngSanitize'
+])
     .controller('MainCtrl',function ($scope,$http) {
-        $http.get("data/data.json")
-            .success(function(response) {
-                $scope.poi_data = response.poi_data;
-            });
+        // $http.get("travel/get_data")
+        //     .success(function(response) {
+        //         console.info(response.data);
+        //
+        //     });
+        $.ajax({
+            url: 'travel/get_data',
+            dataType: "json",
+            cache: false,
+            success: function(data){
+                $scope.data =data;
+                // console.info(data);
+            },
+            error: function(){
+                console.log("获取poi信息失败!");
+            }
+
+        });
         // window.onload = loadJScript();  //异步加载地图
         var current_lat,current_lng;
         $(document).ready(

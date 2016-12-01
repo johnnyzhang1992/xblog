@@ -52,7 +52,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('sitemap','SiteMapController@index');
     Route::get('sitemap.xml','SiteMapController@index');
 //  travel
-    Route::get('travel','TravelController@index');
+    Route::group(['prefix' => 'travel'],function (){
+        Route::get('/','TravelController@index');
+        Route::get('/get_data','TravelController@get_data');
+    });
+
 });
 
 

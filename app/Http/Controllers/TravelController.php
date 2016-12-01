@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TravelController extends Controller
 {
@@ -19,6 +20,11 @@ class TravelController extends Controller
     public function index()
     {
         return view('travel.index');
+    }
+    public function get_data(){
+        $_data = DB::table('travel')
+            ->get();
+        return json_encode($_data);
     }
 }
 ?>

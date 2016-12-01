@@ -32,12 +32,12 @@ var bdMapController = {
             // 导航
             var bottom_left_control = new BMap.ScaleControl({
                 anchor: BMAP_ANCHOR_BOTTOM_LEFT,
-                offset:new BMap.Size(60, 40)
-            });// 左上角，添加比例尺
+                offset:new BMap.Size(60, 80)
+            });// 左下角，添加比例尺
             var top_right_navigation = new BMap.NavigationControl({
                 // 靠左上角位置
                 anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-                offset: new BMap.Size(40, 80),
+                offset: new BMap.Size(80, 100),
                 // LARGE类型
                 type: BMAP_NAVIGATION_CONTROL_SMALL,
                 // 启用显示定位
@@ -45,7 +45,7 @@ var bdMapController = {
             });  //左上角，添加默认缩放平移控件
             var city_list_control = new BMap.CityListControl({
                 anchor: BMAP_ANCHOR_TOP_RIGHT,
-                offset: new BMap.Size(243, 90)
+                offset: new BMap.Size(255, 18)
                 // 切换城市之间事件
                 // onChangeBefore: function(){
                 //    alert('before');
@@ -103,16 +103,7 @@ var bdMapController = {
                 tag = '大学';
             }
             var marker = new BMap.Marker(latlng);
-            // bdMapController.map.addOverlay(marker);
-            //信息窗infoWindows
-            // var sContent =
-            //     "<div><a href='#/"+tag+"/"+id+"' target='_blank'>"+
-            //     "<img id='imgDemo' src='http://app.baidu.com/map/images/tiananmen.jpg' width='100%' height='104' title='"+name+"'/></a>" +
-            //     "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>"+name+"</p>" +
-            //     "</div>";
-            // var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
             var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
-                '<img src="../images/yeoman.png" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
                 '地址：'+ address+'<br><i class="glyphicon glyphicon-tag"></i>' +tag+ '<br/>描述：'+desc + '</div>';
             //创建检索信息窗口对象
             var searchInfoWindow = null;
@@ -123,9 +114,9 @@ var bdMapController = {
                 panel  : "panel",         //检索结果面板
                 enableAutoPan : true,     //自动平移
                 searchTypes   :[
-                    BMAPLIB_TAB_SEARCH,   //周边检索
-                    BMAPLIB_TAB_TO_HERE,  //到这里去
-                    BMAPLIB_TAB_FROM_HERE //从这里出发
+                    // BMAPLIB_TAB_SEARCH,   //周边检索
+                    // BMAPLIB_TAB_TO_HERE,  //到这里去
+                    // BMAPLIB_TAB_FROM_HERE //从这里出发
                 ]
             });
             marker.addEventListener("click", function(e){//小图标添加监听事件"click"
@@ -135,29 +126,30 @@ var bdMapController = {
         },
         // 获取图标信息
         marker_render: function()  {
-            var marker_points = {};
+            var marker_points = [];
             $.ajax({
-                type:"get",
-                // url: "data/get_data.php",
-                url: "data/data.json",
-                // dataType: "json",
-                async : false,
-                data:{},
-                success: function (data) {
-                    marker_points = data.poi_data;
+                url: 'travel/get_data',
+                dataType: "json",
+                cache: false,
+                success: function(data){
+                    marker_points = data;
+                    if(marker_points.length != 0){
+                        for (var i = 0; i < marker_points.length; i ++) {
+                            var marker_point = marker_points[i];
+                            var latlng = new BMap.Point(marker_point.lng,marker_point.lat);
+                            var name = marker_point.poi_name;
+                            var tag =marker_point.tag;
+                            var address =marker_point.address;
+                            var desc =marker_point.description;
+                            bdMapController.render.addMarker(latlng,name,tag,address,desc);
+                        }
+                    }
+                },
+                error: function(){
+                    console.log("获取poi信息失败!");
                 }
             });
-            if(marker_points.length !== 0){
-                for (var i = 0; i < marker_points.length; i ++) {
-                    var marker_point = marker_points[i];
-                    var latlng = new BMap.Point(marker_point.lng,marker_point.lat);
-                    var name = marker_point.name;
-                    var tag =marker_point.tag;
-                    var address =marker_point.address;
-                    var desc =marker_point.description;
-                    bdMapController.render.addMarker(latlng,name,tag,address,desc);
-                }
-            }
+
 
             // var bounds = bdMapController.map.getBounds();
             // var sw = bounds.getSouthWest();
@@ -165,6 +157,7 @@ var bdMapController = {
             // var lngSpan = Math.abs(sw.lng - ne.lng);
             // var latSpan = Math.abs(ne.lat - sw.lat);
         },
+        //鼠标测距
         open_distance_tool: function () {
             var myDis = new BMapLib.DistanceTool(bdMapController.map);
             myDis.open();  //开启鼠标测距
