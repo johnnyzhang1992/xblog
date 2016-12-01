@@ -133,7 +133,7 @@ var bdMapController = {
             }
             var sContent =
                 "<div style='width: 240px'>"+
-                "<h4 style='margin:0 0 5px 0;padding:0.2em 0'><a href='"+_link+"'>"+poi_name+"</a></h4>" +
+                "<h4 style='margin:0 0 5px 0;padding:0.2em 0'><a href='"+_link+"' target='_blank'>"+poi_name+"</a></h4>" +
                 "<div style='width: 240px;'><img style='margin:4px;width: 100%' id='imgDemo' src='"+_img_url+"' width='139' height='104' title='天安门'/></div>" +
                 "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>"+description+"</p>" +
                 "</div>";
