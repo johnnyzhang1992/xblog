@@ -36,5 +36,12 @@ class TravelController extends Controller
             return redirect('/travel');
         }
     }
+    public function detail_update(Request $request,$id){
+        $_poi = $request->input('_poi');
+        if(isset($id)){
+            DB::table('travel')->where('id',$id)->update($_poi);
+            return redirect('/travel/poi/'.$id);
+        }
+    }
 }
 ?>
