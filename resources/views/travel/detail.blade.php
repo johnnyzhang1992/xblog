@@ -71,13 +71,13 @@
                         </div>
                         <!--经纬度（LatLng）-->
                         <div class="col-md-12 col-sm-12">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" style="padding-left: 0">
                                 <p class="col-sm-4 ">经度(Lat)</p>
                                 <div class="col-sm-8">
                                     <p>{{@$poi->lat}}</p>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" style="padding-left: 0">
                                 <p class="col-sm-4 ">纬度(Lng)</p>
                                 <div class="col-sm-8">
                                     <p>{{@$poi->lng}}</p>
