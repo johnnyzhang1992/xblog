@@ -130,6 +130,24 @@
         </div>
 
         <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="{{ route('admin.pois') }}">
+                <div class="info-box">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="info-icon">
+                                <i class="fa fa-fort-awesome fa-fw"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <span>去过的地方</span>
+                            <div class="info-title">{{ $info['pois'] }}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
             <a href="{{ route('admin.visitors') }}">
                 <div class="info-box">
                     <div class="row">

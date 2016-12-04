@@ -57,6 +57,14 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/get_data','TravelController@get_data');
         Route::get('/poi/{id}','TravelController@detail')->where('id', '[0-9]+');
         Route::post('/poi/{id}/update','TravelController@detail_update');
+        /**
+         * poi
+         */
+        Route::post('/poi/publish/{id}','TravelController@publish')->where('id', '[0-9]+');
+        Route::post('/poi/edit/{id}','TravelController@edit')->where('id', '[0-9]+');
+        Route::post('/poi/restore/{id}','TravelController@restore')->where('id', '[0-9]+');
+        Route::get('/poi/preview/{id}','TravelController@detail')->where('id', '[0-9]+');
+        Route::post('/poi/destroy/{id}','TravelController@destroy')->where('id', '[0-9]+');
     });
 
 });
@@ -86,6 +94,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/categories', ['uses' => 'AdminController@categories', 'as' => 'admin.categories']);
     Route::get('/images', ['uses' => 'ImageController@images', 'as' => 'admin.images']);
     Route::get('/files', ['uses' => 'FileController@files', 'as' => 'admin.files']);
+    Route::get('/pois', ['uses' => 'AdminController@pois', 'as' => 'admin.pois']);
     Route::get('/visitors', ['uses' => 'VisitorController@visitors', 'as' => 'admin.visitors']);
 
     /**
@@ -100,6 +109,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::post('/post/{post}/restore', ['uses' => 'PostController@restore', 'as' => 'post.restore']);
     Route::get('/post/{slug}/preview', ['uses' => 'PostController@preview', 'as' => 'post.preview']);
     Route::post('/post/{post}/publish', ['uses' => 'PostController@publish', 'as' => 'post.publish']);
+
 
     /**
      * tag
