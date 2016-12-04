@@ -29,6 +29,7 @@
         ]); ?>
     </script>
     @include('widget.google_analytics')
+    @include('widget.baidu_tongji')
 </head>
 <body id="body">
 @include('layouts.header')

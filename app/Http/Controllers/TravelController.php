@@ -43,5 +43,6 @@ class TravelController extends Controller
             return redirect('/travel/poi/'.$id);
         }
     }
+
 }
 ?>
