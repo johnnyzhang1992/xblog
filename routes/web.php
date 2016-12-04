@@ -57,13 +57,13 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/get_data','TravelController@get_data');
         Route::get('/poi/{id}','TravelController@detail')->where('id', '[0-9]+');
         Route::post('/poi/{id}/update','TravelController@detail_update');
+        Route::get('/poi/preview/{id}','TravelController@detail')->where('id', '[0-9]+');
         /**
          * poi
          */
         Route::post('/poi/publish/{id}','TravelController@publish')->where('id', '[0-9]+');
         Route::post('/poi/edit/{id}','TravelController@edit')->where('id', '[0-9]+');
         Route::post('/poi/restore/{id}','TravelController@restore')->where('id', '[0-9]+');
-        Route::get('/poi/preview/{id}','TravelController@detail')->where('id', '[0-9]+');
         Route::post('/poi/destroy/{id}','TravelController@destroy')->where('id', '[0-9]+');
     });
 
@@ -109,6 +109,15 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::post('/post/{post}/restore', ['uses' => 'PostController@restore', 'as' => 'post.restore']);
     Route::get('/post/{slug}/preview', ['uses' => 'PostController@preview', 'as' => 'post.preview']);
     Route::post('/post/{post}/publish', ['uses' => 'PostController@publish', 'as' => 'post.publish']);
+
+
+    /**
+     * poi
+     */
+    Route::post('/poi/publish/{id}','TravelController@publish')->where('id', '[0-9]+');
+    Route::get('/poi/edit/{id}','TravelController@edit')->where('id', '[0-9]+');
+    Route::post('/poi/restore/{id}','TravelController@restore')->where('id', '[0-9]+');
+    Route::post('/poi/destroy/{id}','TravelController@destroy')->where('id', '[0-9]+');
 
 
     /**

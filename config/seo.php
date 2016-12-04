@@ -36,6 +36,9 @@ return array(
             '183.14.157.32',
             '112.95.179.174'
         ],
+        'name' => [
+            'johnnyzhang'
+        ]
     ],
 
     'default_sub_title' => '',

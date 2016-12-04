@@ -11,7 +11,9 @@
                     <table class="table table-hover table-bordered table-responsive">
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>景点名称</th>
+                            <th>分类</th>
                             <th>状态</th>
                             {{--<th>slug</th>--}}
                             <th>action</th>
@@ -31,17 +33,19 @@
                             }
                             ?>
                             <tr class="{{ $class }}">
+                                <td>{{ $poi->id }}</td>
                                 <td>{{ $poi->poi_name }}</td>
+                                <td>{{ $poi->tag }}</td>
                                 <td>{{ $status }}</td>
                                 <td>
                                     <div>
-                                        <a {{ $poi->status == 'delete'?'disabled':'' }} href="{{ $poi->status == 'delete'?'javascript:void(0)':url('travel/poi/edit',$poi->id) }}"
+                                        <a {{ $poi->status == 'delete'?'disabled':'' }} href="{{ $poi->status == 'delete'?'javascript:void(0)':url('admin/poi/edit',$poi->id) }}"
                                            data-toggle="tooltip" data-placement="top" title="编辑"
                                            class="btn btn-info">
                                             <i class="fa fa-pencil fa-fw"></i>
                                         </a>
                                         @if($poi->status == 'delete')
-                                            <form style="display: inline" method="post" action="{{ url('travel/poi/restore',$poi->id) }}">
+                                            <form style="display: inline" method="post" action="{{ url('admin/poi/restore',$poi->id) }}">
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="恢复">
                                                     <i class="fa fa-repeat fa-fw"></i>
@@ -61,7 +65,7 @@
                                         @endif
                                         <button class="btn btn-danger" data-toggle="modal" data-title="{{ $poi->poi_name }}"
                                                 data-toggle="tooltip" data-placement="top" title="删除"
-                                                data-url="{{ url('travel/poi/destroy',$poi->id) }}"
+                                                data-url="{{ url('admin/poi/destroy',$poi->id) }}"
                                                 data-force="{{ $poi->status == 'delete' }}"
                                                 data-target="#delete-poi-modal">
                                             <i class="fa fa-trash-o  fa-fw"></i>

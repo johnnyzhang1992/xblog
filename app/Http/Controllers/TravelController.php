@@ -21,13 +21,17 @@ class TravelController extends Controller
     {
         return view('travel.index');
     }
+    public function poi_count(){
+        $count = DB::table('travel')->count();
+        return $count;
+    }
     public function get_data(){
         $_data = DB::table('travel')
             ->get();
         return json_encode($_data);
     }
     public function detail(Request $request,$id){
-        if($id){
+        if($id <= $this->poi_count()){
             $_data = DB::table('travel')
                 ->where('id','=',$id)
                 ->get();
@@ -36,11 +40,23 @@ class TravelController extends Controller
             return redirect('/travel');
         }
     }
+    public function edit(Request $request,$id){
+        if($id <= $this->poi_count()){
+            $_data = DB::table('travel')
+                ->where('id','=',$id)
+                ->get();
+            return view('travel.edit')->with('poi',$_data[0]);
+        }else{
+            return redirect('/travel');
+        }
+    }
     public function detail_update(Request $request,$id){
         $_poi = $request->input('_poi');
-        if(isset($id)){
+        if($id <= $this->poi_count()){
             DB::table('travel')->where('id',$id)->update($_poi);
             return redirect('/travel/poi/'.$id);
+        }else{
+            return redirect('/travel');
         }
     }
 
