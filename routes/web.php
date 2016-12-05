@@ -118,6 +118,8 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/poi/edit/{id}','TravelController@edit')->where('id', '[0-9]+');
     Route::post('/poi/restore/{id}','TravelController@restore')->where('id', '[0-9]+');
     Route::post('/poi/destroy/{id}','TravelController@destroy')->where('id', '[0-9]+');
+    Route::get('/poi/create_new',function (){return view('travel.create');});
+    Route::post('/poi/create','TravelController@create');
 
 
     /**

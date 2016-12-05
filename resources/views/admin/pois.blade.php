@@ -8,6 +8,9 @@
                     <h6><i class="fa fa-sticky-note fa-fw"></i>目的地</h6>
                 </div>
                 <div class="widget-body">
+                    <a class="btn pull-right" href="{{ url('admin/poi/create_new') }}">
+                        <i class="fa fa-fort-awesome"></i> 添加新的目的地
+                    </a>
                     <table class="table table-hover table-bordered table-responsive">
                         <thead>
                         <tr>
@@ -41,7 +44,7 @@
                                     <div>
                                         <a {{ $poi->status == 'delete'?'disabled':'' }} href="{{ $poi->status == 'delete'?'javascript:void(0)':url('admin/poi/edit',$poi->id) }}"
                                            data-toggle="tooltip" data-placement="top" title="编辑"
-                                           class="btn btn-info">
+                                           class="btn btn-info" target="_blank">
                                             <i class="fa fa-pencil fa-fw"></i>
                                         </a>
                                         @if($poi->status == 'delete')
@@ -53,7 +56,7 @@
                                             </form>
                                         @else
                                             <a href="{{ url('travel/poi/preview',$poi->id) }}"  data-toggle="tooltip" data-placement="top" title="预览"
-                                               class="btn btn-default">
+                                               class="btn btn-default" target="_blank">
                                                 <i class="fa fa-eye fa-fw"></i>
                                             </a>
                                             {{--<form style="display: inline" method="post" action="{{ url('travel/poi/publish',$poi->id) }}">--}}

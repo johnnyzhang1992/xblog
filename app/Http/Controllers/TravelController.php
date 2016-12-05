@@ -59,6 +59,16 @@ class TravelController extends Controller
             return redirect('/travel');
         }
     }
+    public function create(Request $request){
+        $_poi = $request->input('_poi');
+        unset($_poi['id']);
+        $poi_id = DB::table('travel')->insertGetId($_poi);
+        if($poi_id){
+            return redirect('/travel/poi/'.$poi_id);
+        }else{
+            return redirect('/travel');
+        }
 
+    }
 }
 ?>
