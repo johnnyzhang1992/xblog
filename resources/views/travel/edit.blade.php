@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container" >
-        <div class="col-md-offset-1 col-md-10 col-xs-12">
+        <div class="col-md-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">{{@$poi->poi_name}}</h4>
@@ -68,6 +68,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/css/travel/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/summernote.css') }}">
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <style>
         @media (min-width: 768px){
@@ -82,5 +83,11 @@
 @endsection
 
 @section('script')
-
+    <script src="{{ asset('/js/summernote.min.js') }}"></script>
+    <script>
+        $("#description").summernote({
+            height: 100 ,
+            placeholder: '请输入内容...'
+        });
+    </script>
 @endsection
