@@ -70,7 +70,11 @@
                     <!--描述-->
                     <div class="col-md-12 col-sm-12">
                         <div class="col-sm-10">
-                            <p>{!! @$poi->description !!}</p>
+                            @if(!empty($poi->description))
+                                <p>{!! @$poi->description !!}</p>
+                            @else
+                                <p>暂无内容</p>
+                            @endif
                         </div>
                     </div>
                 </div>
