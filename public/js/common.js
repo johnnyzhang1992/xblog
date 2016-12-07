@@ -8,7 +8,6 @@ jQuery(document).ready(function(){
     // fade in #back-top
     jQuery(function () {
         jQuery(window).scroll(function () {
-            // console.log("jQuery(this).scrollTop()="+jQuery(this).scrollTop());
             if (jQuery(this).scrollTop() > 250) {
                 jQuery('#topon').fadeIn();
             } else {
