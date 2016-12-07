@@ -16,6 +16,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="http://assets.johnnyzhang.cn/favicon.ico"/>
+    <link rel="stylesheet" href="{{ asset('/css/common.css') }}">
     @if(isset($site_css) && $site_css)
         <link href="{{ $site_css }}" rel="stylesheet">
     @else
@@ -46,6 +47,7 @@
 @else
     <script src="{{ elixir('js/app.js') }}"></script>
 @endif
+<script src="{{ asset('/js/common.js') }}"></script>
 @yield('script')
 </body>
 </html>
