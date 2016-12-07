@@ -14,6 +14,7 @@
     @else
         <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
     @endif
+    <link rel="stylesheet" href="{{ asset('/css/common.css') }}">
     @yield('css')
     <script>
         window.XblogConfig = <?php echo json_encode([
@@ -37,6 +38,7 @@
 @else
     <script src="{{ elixir('js/app.js') }}"></script>
 @endif
+<script src="{{ asset('/js/common.js') }}"></script>
 @yield('script')
 </body>
 </html>

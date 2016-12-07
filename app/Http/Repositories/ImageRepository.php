@@ -64,7 +64,8 @@ class ImageRepository extends FileRepository
                 'name' => $file->getClientOriginalName(),
                 'key' => $url,
                 'size' => $file->getSize(),
-                'type' => 'image'
+                'type' => 'image',
+                'from' => 'local'
             ]);
             $result = $image->save();
         } else {

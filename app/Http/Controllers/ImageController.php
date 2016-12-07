@@ -47,4 +47,17 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    public function uploadImageToLocal(Request $request){
+        $this->validate($request, [
+            'image' => 'required|image|max:5000'
+        ]);
+        $type = $request->input('type', null);
+        if ($type != null && $type == 'xrt') {
+            return $this->imageRepository->uploadImageToLocal($request);
+        } else {
+            if ($this->imageRepository->uploadImageToLocal($request))
+                return back()->with('success', '上传成功');
+            return back()->withErrors('上传失败');
+        }
+    }
 }
