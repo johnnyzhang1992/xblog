@@ -10,6 +10,7 @@ namespace App\Http\Repositories;
 use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Storage;
 
 
@@ -56,7 +57,7 @@ class ImageRepository extends FileRepository
     public function uploadImageToLocal(Request $request)
     {
         $file = $request->file('image');
-        $path = $file->store('public/images/travel/');
+        $path = $file->store('public/images');
         $url = Storage::url($path);
 
         if ($path) {
@@ -70,6 +71,36 @@ class ImageRepository extends FileRepository
             $result = $image->save();
         } else {
             $result = false;
+        }
+        $this->clearCache();
+        return $path;
+    }
+    public function uploadImageToTravel(Request $request)
+    {
+        $file = $request->file('image');
+        $poi_id = $request->input('poi_id');
+        $user_id = $request->input('user_id');
+        $path = $file->store('public/images/travel/'.$poi_id);
+        $url = Storage::url($path);
+
+        if ($path) {
+//            $image = File::firstOrNew([
+//                'poi_id' => $poi_id,
+//                'user_id'=>$user_id,
+//                'name' => $file->getClientOriginalName(),
+//                'uri' => $url,
+//                'size' => $file->getSize(),
+//                'type' => 'image',
+//            ]);
+            $_image['poi_id'] =$poi_id;
+            $_image['user_id'] = $user_id;
+            $_image['name'] = $file->getClientOriginalName();
+            $_image['uri'] = $url;
+            $_image['size'] = $file->getSize();
+            $_image['type'] = 'image';
+//            $result = $image->save();
+            DB::table('travel_files')->insert($_image);
+        } else {
         }
         $this->clearCache();
         return $path;

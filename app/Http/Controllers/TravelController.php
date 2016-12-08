@@ -35,7 +35,12 @@ class TravelController extends Controller
             $_data = DB::table('travel')
                 ->where('id','=',$id)
                 ->get();
-            return view('travel.detail')->with('poi',$_data[0]);
+            $img_list = DB::table('travel_files')
+                ->where('poi_id','=',$id)
+                ->get();
+            $poi = $_data[0];
+            return view('travel.detail',compact('poi','img_list'));
+//            return view('travel.detail')->with('poi',$_data[0]);
         }else{
             return redirect('/travel');
         }
@@ -45,7 +50,11 @@ class TravelController extends Controller
             $_data = DB::table('travel')
                 ->where('id','=',$id)
                 ->get();
-            return view('travel.edit')->with('poi',$_data[0]);
+            $img_list = DB::table('travel_files')
+                ->where('poi_id','=',$id)
+                ->get();
+            $poi = $_data[0];
+            return view('travel.edit',compact('poi','img_list'));
         }else{
             return redirect('/travel');
         }

@@ -60,4 +60,17 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    public function uploadImageToTravel(Request $request){
+        $this->validate($request, [
+            'image' => 'required|image|max:50000'
+        ]);
+        $type = $request->input('type', null);
+        if ($type != null && $type == 'xrt') {
+            return $this->imageRepository->uploadImageToTravel($request);
+        } else {
+            if ($this->imageRepository->uploadImageToTravel($request))
+                return back()->with('success','上传成功' );
+            return back()->withErrors('上传失败');
+        }
+    }
 }
