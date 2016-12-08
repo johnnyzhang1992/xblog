@@ -56,7 +56,7 @@ class ImageController extends Controller
             return $this->imageRepository->uploadImageToLocal($request);
         } else {
             if ($this->imageRepository->uploadImageToLocal($request))
-                return back()->with('success', '上传成功');
+                return back()->with('success',$this->imageRepository->uploadImageToLocal($request) );
             return back()->withErrors('上传失败');
         }
     }

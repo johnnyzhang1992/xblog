@@ -29,10 +29,15 @@ class VisitorTracking
         if($_ip && is_string($_ip) && is_array(config('seo.exclude.ip')) && in_array($_ip, config('seo.exclude.ip'))) {
             return $next($request);
         }
-        $_name = auth()->user()->name;
-        if($_name && is_array(config('seo.exclude.name')) && in_array($_name, config('seo.exclude.name'))) {
-            return $next($request);
+        if(Auth::check()){
+            $_name = auth()->user()->name;
+            if($_name && is_array(config('seo.exclude.name')) && in_array($_name, config('seo.exclude.name'))) {
+                return $next($request);
+            }
+        }else{
+
         }
+
         $_record = [
             'from_url'      => \URL::previous(),
             'to_url'        => $request->fullUrl(),

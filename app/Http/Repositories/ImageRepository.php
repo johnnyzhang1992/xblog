@@ -56,7 +56,7 @@ class ImageRepository extends FileRepository
     public function uploadImageToLocal(Request $request)
     {
         $file = $request->file('image');
-        $path = $file->store('public/images');
+        $path = $file->store('public/images/travel/');
         $url = Storage::url($path);
 
         if ($path) {
@@ -72,7 +72,7 @@ class ImageRepository extends FileRepository
             $result = false;
         }
         $this->clearCache();
-        return $result;
+        return $path;
     }
 
     public function count()
