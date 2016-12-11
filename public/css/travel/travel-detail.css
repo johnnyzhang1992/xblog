@@ -22,6 +22,9 @@
     padding:0;
     margin-bottom: 0;
 }
+.head-box .poi-detail img{
+    width: 100%;
+}
 .head-content{
     position: absolute;
     left:0;
