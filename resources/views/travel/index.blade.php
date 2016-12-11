@@ -67,26 +67,26 @@
             </div>
         </div>
 
-        <div class="boxopt mark-active" ng-click="tool_toogle_box()">
-            <span id="util_control" class="boxutils boxicon" ></span>
-            <i class="boxtext" >工具</i><em class="active"></em>
-        </div>
-        <div class="detail-box"  ng-show="box_show">
-            <ul id="boxul" class="boxinfo">
-                <li class="map-measure" ng-click="measure()">
-                    <span class="last measure"></span><i>测距</i>
-                </li>
-                <li class="map-measure" ng-click="get_latlng()">
-                    <span class="latlng">+</span><i>获取坐标</i>
-                </li>
+        {{--<div class="boxopt mark-active" ng-click="tool_toogle_box()">--}}
+            {{--<span id="util_control" class="boxutils boxicon" ></span>--}}
+            {{--<i class="boxtext" >工具</i><em class="active"></em>--}}
+        {{--</div>--}}
+        {{--<div class="detail-box"  ng-show="box_show">--}}
+            {{--<ul id="boxul" class="boxinfo">--}}
+                {{--<li class="map-measure" ng-click="measure()">--}}
+                    {{--<span class="last measure"></span><i>测距</i>--}}
+                {{--</li>--}}
+                {{--<li class="map-measure" ng-click="get_latlng()">--}}
+                    {{--<span class="latlng">+</span><i>获取坐标</i>--}}
+                {{--</li>--}}
                 <!--<li class="map-mark" ng-click="mark">-->
                 <!--<span class="last mark"></span><i>标记</i>-->
                 <!--</li>-->
                 <!--<li class="map-share" ng-click="share"><span class="last share">-->
                 <!--</span><i>分享</i>-->
                 <!--</li>-->
-            </ul>
-        </div>
+            {{--</ul>--}}
+        {{--</div>--}}
         <!--显示坐标-->
         {{--<div class="show-latlng" style="position:absolute ;bottom: 100px;right: 100px;" ng-hide="remove_latlng">--}}
         {{--<p>--}}
