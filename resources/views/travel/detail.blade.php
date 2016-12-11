@@ -5,37 +5,12 @@
     <link rel="stylesheet" href="{{ asset('/css/travel/main.css') }}">
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <link rel="stylesheet" href="{{ asset('/css/jquery.flexslider.css') }}">
-    <style>
-        .flexslider{
-            margin-bottom: 20px;
-        }
-        .poi-detail{
-            background: #fff;
-            padding: 20px 15px;
-            margin-bottom: 15px;
-            border-radius:5px ;
-            position: relative;
-            box-shadow: 1px 1px 3px #666;
-            -moz-box-shadow: 1px 1px 3px #666;
-            -webkit-box-shadow: 1px 1px 3px #666;
-        }
-        .poi-detail h2{
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
-        .poi-detail h4 span{
-            margin-top: 5px;
-            border-left: 3px solid #43ce7b;
-            padding-left: 10px;
-        }
-        .poi-icons{
-            margin-right: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('/css/travel/travel-detail.css') }}">
 @endsection
 @section('content')
 
     <div class="container" >
+        {{--导航--}}
         <ol class="breadcrumb col-md-12">
             <li><a href="{{ url('/travel') }}">Travel</a></li>
             <li>{{@$poi->tag}}</li>
@@ -45,20 +20,49 @@
             @else
             @endif
         </ol>
+        {{--主要内容--}}
         <div class="poi-content clearfix">
-            <div class="col-md-12">
+            <div class="col-md-12 head-box">
+                {{--顶部信息--}}
                 <div class="poi-detail clearfix">
-                    <h2>{{ @$poi->poi_name }}</h2>
-                    <p>
-                        <span class="fa fa-map-marker poi-icons"></span>
-                        {{@$poi->address}}
-                    </p>
+                    @if(isset($img_list[0]))
+                        <img src='{{ asset($img_list[0]->uri) }}' alt="..."  class="img-responsive" >
+                    @else
+                        <img src="{{ asset('/storage/images/travel//1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
+                    @endif
+                    <div class="head-content">
+                        <h2>{{ @$poi->poi_name }} <small>更新时间：{{ $poi->update_at }}</small></h2>
+                        <p>
+                            <span class="fa fa-map-marker poi-icons"></span>
+                            {{@$poi->address}}
+                        </p>
+                    </div>
                 </div>
+            </div>
+            {{--左侧板块--}}
+            <div class="content-left col-md-9 col-sm-9 col-xs-12">
+                {{--基本信息--}}
+                <div class="poi-detail clearfix">
+                    <h4><span>基本信息</span></h4>
+                    <div class="col-md-6 col-xs-12">
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <td >经度(Lat)</td>
+                                <td>{{@$poi->lat}}</td>
+                            </tr>
+                            <tr>
+                                <td>纬度(Lng)</td>
+                                <td>{{@$poi->lng}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                {{--轮播--}}
                 <div class="poi-detail" style="padding: 0">
                     <div class="flexslider">
                         <ul class="slides">
                             @if(isset($img_list[0]))
-                                @foreach($img_list as $mun=>  $img)
+                                @foreach($img_list as $mun=> $img)
                                     <li>
                                         <img src='{{ asset($img->uri) }}' alt="..."  class="img-responsive" >
                                     </li>
@@ -77,24 +81,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="content-left col-md-9 com-sm-9 col-xs-12">
-                <div class="poi-detail clearfix">
-                    <h4><span>基本信息</span></h4>
-                    <div class="col-md-6 col-xs-12">
-                        <table class="table table-striped table-hover">
-                            <tr>
-                                <td >经度(Lat)</td>
-                                <td>{{@$poi->lat}}</td>
-                            </tr>
-                            <tr>
-                                <td>纬度(Lng)</td>
-                                <td>{{@$poi->lng}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
                 <div class="poi-detail clearfix">
                     <h4><span>基本介绍</span></h4>
                     <!--描述-->
@@ -108,6 +94,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="content-right col-md-3 col-sm-3 col-xs-12">
+
             </div>
         </div>
     </div>

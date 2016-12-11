@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class TravelController extends Controller
 {
@@ -71,6 +72,7 @@ class TravelController extends Controller
     public function create(Request $request){
         $_poi = $request->input('_poi');
         unset($_poi['id']);
+        $_poi['created_at'] = date('Y-m-d H:i:s');
         $poi_id = DB::table('travel')->insertGetId($_poi);
         if($poi_id){
             return redirect('/travel/poi/'.$poi_id);
