@@ -36,6 +36,15 @@ class TravelController extends Controller
             $_data = DB::table('travel')
                 ->where('id','=',$id)
                 ->get();
+            if($_data) {
+                $_data[0]->view_count += 1;
+
+                DB::table('travel')
+                    ->where('id', $id)
+                    ->update([
+                        'view_count' => $_data[0]->view_count
+                    ]);
+            }
             $img_list = DB::table('travel_files')
                 ->where('poi_id','=',$id)
                 ->get();
