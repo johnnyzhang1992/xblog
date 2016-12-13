@@ -31,7 +31,7 @@
                         <img src="{{ asset('/storage/images/travel//1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
                     @endif
                     <div class="head-content">
-                        <h2>{{ @$poi->poi_name }} <small>更新时间：{{ $poi->update_at }}</small></h2>
+                        <h2>{{ @$poi->poi_name }} <small>更新时间：{{ date('y-m-d',time($poi->update_at)) }}</small></h2>
                         <p>
                             <span class="fa fa-map-marker poi-icons"></span>
                             {{@$poi->address}}
