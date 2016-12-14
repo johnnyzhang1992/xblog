@@ -35,6 +35,19 @@
     opacity: 0.8;
     filter: Alpha(Opacity=80)
 }
+.upload-cover-image {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    padding: 0 15px;
+    line-height: 34px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccd8e1;
+    border-radius: 3px;
+}
 .poi-content .content-left{
     padding-left: 0;
 }

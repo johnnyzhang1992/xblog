@@ -84,14 +84,6 @@ class ImageRepository extends FileRepository
         $url = Storage::url($path);
 
         if ($path) {
-//            $image = File::firstOrNew([
-//                'poi_id' => $poi_id,
-//                'user_id'=>$user_id,
-//                'name' => $file->getClientOriginalName(),
-//                'uri' => $url,
-//                'size' => $file->getSize(),
-//                'type' => 'image',
-//            ]);
             $_image['poi_id'] =$poi_id;
             $_image['user_id'] = $user_id;
             $_image['name'] = $file->getClientOriginalName();
@@ -100,6 +92,28 @@ class ImageRepository extends FileRepository
             $_image['type'] = 'image';
 //            $result = $image->save();
             DB::table('travel_files')->insert($_image);
+        } else {
+        }
+        $this->clearCache();
+        return $path;
+    }
+    public function uploadTravelCoverImage(Request $request){
+        $file = $request->file('image');
+        $poi_id = $request->input('poi_id');
+        $user_id = $request->input('user_id');
+        $path = $file->store('public/images/travel/'.$poi_id.'/cover_image');
+        $url = Storage::url($path);
+
+        if ($path) {
+            $_image['poi_id'] =$poi_id;
+            $_image['user_id'] = $user_id;
+            $_image['name'] = $file->getClientOriginalName();
+            $_image['uri'] = $url;
+            $_image['size'] = $file->getSize();
+            $_image['type'] = 'image';
+//            $result = $image->save();
+//            DB::table('travel_files')->insert($_image);
+            DB::table('travel')->where('id','=',$poi_id)->update('cover_image',$_image['uri']);
         } else {
         }
         $this->clearCache();

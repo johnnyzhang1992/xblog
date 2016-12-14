@@ -73,4 +73,17 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    public function uploadTravelCoverImage(Request $request){
+        $this->validate($request, [
+            'image' => 'required|image|max:50000'
+        ]);
+        $type = $request->input('type', null);
+        if ($type != null && $type == 'xrt') {
+            return $this->imageRepository->uploadTravelCoverImage($request);
+        } else {
+            if ($this->imageRepository->uploadTravelCoverImage($request))
+                return back()->with('success','封面上传成功' );
+            return back()->withErrors('上传失败');
+        }
+    }
 }
