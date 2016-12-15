@@ -25,14 +25,14 @@
             <div class="col-md-12 head-box">
                 {{--顶部信息--}}
                 <div class="poi-detail clearfix">
-                    @if(isset($img_list[0]))
-                        <img src='{{ asset($img_list[0]->uri) }}' alt="..."  class="img-responsive" >
+                    @if(isset($poi->cover_image))
+                        <img src='{{ asset($poi->cover_image) }}' alt="..."  class="img-responsive" >
                     @else
                         <img src="{{ asset('/storage/images/travel//1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
                     @endif
                     {{--上传封面图片--}}
                     @if(Auth::check())
-                        <a class="upload-cover-image" href="#"><i class="fa fa-camera"></i>上传封面图片</a>
+                        <a class="upload-cover-image" role="button" onclick="javascript:$('#modal-upload-image').modal();return false;"><i class="fa fa-camera"></i>上传封面图片</a>
                     @endif
                     <div class="head-content">
                         <h2>{{ @$poi->poi_name }} <small>更新时间：{{ date('y-m-d',time($poi->update_at)) }}</small><small style="margin:0 5px">|</small><small>浏览量：{{ $poi->view_count }}</small></h2>
@@ -102,6 +102,31 @@
             <div class="content-right col-md-3 col-sm-3 col-xs-12">
 
             </div>
+        </div>
+
+    </div>
+    <div class="modal fade  " id="modal-upload-image" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="alert alert-warning alert-dismissible fade  alert-suc in" role="alert">
+            <form action="{{ route('travel.upload.cover_image') }}"
+                  role="form" class="form-horizontal" datatype="image"
+                  enctype="multipart/form-data" method="post">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="image" class="col-xs-2 col-xs-offset-1 control-label">
+                        上传到本地：<i class="fa fa-file-image-o fa-lg fa-fw"></i>
+                    </label>
+                    <div class="col-xs-6">
+                        <input id="image" class="form-control" accept="image/*" type="file" name="image">
+                        <input type="hidden" name="poi_id" value="{{ @$poi->id }}" >
+                        <input type="hidden" name="user_id" value="{{ auth() ->user()->id}}" >
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="submit" class="btn btn-primary">
+                            上传
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -122,6 +122,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/poi/create_new',function (){return view('travel.create');});
     Route::post('/poi/create','TravelController@create');
     Route::post('/travel/upload/image', ['uses' => 'ImageController@uploadImageToTravel', 'as' => 'travel.upload.images']);
+    Route::post('/travel/upload/cover_image', ['uses' => 'ImageController@uploadTravelCoverImage', 'as' => 'travel.upload.cover_image']);
 
 
     /**
