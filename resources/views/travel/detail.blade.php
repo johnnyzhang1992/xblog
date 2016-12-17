@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="poi-detail clearfix">
-                    <h4><span>基本介绍</span></h4>
+                    <h4><span>杂记</span></h4>
                     <!--描述-->
                     <div class="col-md-12 col-sm-12">
                         <div class="col-sm-10">
