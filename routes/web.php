@@ -57,7 +57,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/get_data','TravelController@get_data');
         Route::get('/poi/{id}','TravelController@detail')->where('id', '[0-9]+');
         Route::post('/poi/{id}/update','TravelController@detail_update');
-        Route::get('/poi/preview/{id}','TravelController@detail')->where('id', '[0-9]+');
         /**
          * poi
          */

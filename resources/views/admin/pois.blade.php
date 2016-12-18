@@ -55,7 +55,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            <a href="{{ url('travel/poi/preview',$poi->id) }}"  data-toggle="tooltip" data-placement="top" title="预览"
+                                            <a href="{{ url('travel/poi',$poi->id) }}"  data-toggle="tooltip" data-placement="top" title="预览"
                                                class="btn btn-default" target="_blank">
                                                 <i class="fa fa-eye fa-fw"></i>
                                             </a>
