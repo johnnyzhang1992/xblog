@@ -90,5 +90,13 @@ class TravelController extends Controller
         }
 
     }
+    public function destroy(Request $request,$id){
+        DB::table('travel')->where('id',$id)->update(['status' => 'delete']);
+        return back()->with('success','POi删除成功' );
+    }
+    public function restore(Request $request,$id){
+        DB::table('travel')->where('id',$id)->update(['status' => 'active']);
+        return back()->with('success','POi恢复状态成功' );
+    }
 }
 ?>
