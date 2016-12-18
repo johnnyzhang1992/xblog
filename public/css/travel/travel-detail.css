@@ -74,6 +74,15 @@
 .poi-icons{
     margin-right: 5px;
 }
+.poi-side-main{
+
+}
+.poi-side-main .side-head{
+    background: #fff;
+    line-height: 25px;
+    padding: 5px 15px;
+    border-radius: 5px 5px 0 0;
+}
 @media(max-width:568px){
     .poi-content .content-left,.poi-content .content-right{
         padding-left: 0;

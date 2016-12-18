@@ -100,7 +100,7 @@
                 </div>
             </div>
             <div class="content-right col-md-3 col-sm-3 col-xs-12">
-
+                @include('travel.widget.side')
             </div>
         </div>
 

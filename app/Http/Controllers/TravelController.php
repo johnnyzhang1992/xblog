@@ -98,5 +98,13 @@ class TravelController extends Controller
         DB::table('travel')->where('id',$id)->update(['status' => 'active']);
         return back()->with('success','POi恢复状态成功' );
     }
+    public function get_side_content(){
+        $poi = DB::table('travel')
+            ->where('view_count','>',0)
+            ->orderBy('view_count', 'desc')
+            ->get();
+        return view('travel.widget.side')->with('poi',$poi);
+
+    }
 }
 ?>
