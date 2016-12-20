@@ -49,7 +49,8 @@ class TravelController extends Controller
                 ->where('poi_id','=',$id)
                 ->get();
             $poi = $_data[0];
-            return view('travel.detail',compact('poi','img_list'));
+            $side_poi = $this->get_side_content();
+            return view('travel.detail',compact('poi','img_list','side_poi'));
 //            return view('travel.detail')->with('poi',$_data[0]);
         }else{
             return redirect('/travel');
@@ -99,11 +100,12 @@ class TravelController extends Controller
         return back()->with('success','POi恢复状态成功' );
     }
     public function get_side_content(){
-        $poi = DB::table('travel')
+        $side_poi = DB::table('travel')
             ->where('view_count','>',0)
             ->orderBy('view_count', 'desc')
-            ->get();
-        return view('travel.widget.side')->with('poi',$poi);
+            ->paginate(5);
+//        $side_content = '测试';
+        return $side_poi;
 
     }
 }

@@ -74,6 +74,14 @@
 .poi-icons{
     margin-right: 5px;
 }
+@media(max-width:568px){
+    .poi-content .content-left,.poi-content .content-right{
+        padding-left: 0;
+        padding-right:0;
+    }
+
+}
+/*------------------poi_side_css-----------------*/
 .poi-side-main{
 
 }
@@ -83,10 +91,32 @@
     padding: 5px 15px;
     border-radius: 5px 5px 0 0;
 }
-@media(max-width:568px){
-    .poi-content .content-left,.poi-content .content-right{
-        padding-left: 0;
-        padding-right:0;
-    }
-
+.side-item-list{
+    margin-top: 10px;
+}
+.side-item-list .item{
+    padding:0;
+    margin-bottom: 10px;
+}
+.item .item-left{
+    padding: 0;
+    min-height: 100px;
+    max-height: 125px;
+}
+.item .item-left img{
+    height:100px;
+}
+.item-right{
+    position: relative;
+    min-height:100px;
+}
+.item-title{
+    position: absolute;
+    top:5px;
+    right:0;
+}
+.item-view-count{
+    position: absolute;
+    bottom: 5px;
+    right:0;
 }
