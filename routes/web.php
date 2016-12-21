@@ -80,6 +80,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::post('/upload/image', ['uses' => 'ImageController@uploadImage', 'as' => 'upload.image']);
     Route::post('/upload/image/local', ['uses' => 'ImageController@uploadImageToLocal', 'as' => 'upload.image.local']);
     Route::delete('/delete/file', ['uses' => 'FileController@deleteFile', 'as' => 'delete.file']);
+    Route::delete('/delete/local_file', ['uses' => 'FileController@deleteLocalFile', 'as' => 'delete.local_file']);
     Route::post('/upload/file', ['uses' => 'FileController@uploadFile', 'as' => 'upload.file']);
 
 

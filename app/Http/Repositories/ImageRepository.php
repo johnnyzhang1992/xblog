@@ -57,7 +57,7 @@ class ImageRepository extends FileRepository
     public function uploadImageToLocal(Request $request)
     {
         $file = $request->file('image');
-        $path = $file->store('public/images');
+        $path = $file->store('public/images','public');
         $url = Storage::url($path);
 
         if ($path) {
@@ -101,7 +101,7 @@ class ImageRepository extends FileRepository
         $file = $request->file('image');
         $poi_id = $request->input('poi_id');
         $user_id = $request->input('user_id');
-        $path = $file->store('public/images/travel/'.$poi_id.'/cover_image');
+        $path = $file->store('public/images/travel/'.$poi_id.'/cover_image','public');
         $url = Storage::url($path);
 
         if ($path) {
@@ -136,5 +136,17 @@ class ImageRepository extends FileRepository
     public function type()
     {
         return ImageRepository::$tag;
+    }
+    public function deleteLocal($key)
+    {
+//       Storage::delete($key);
+        $delete = unlink('.'.$key);
+        if($delete){
+            DB::table('files')->where('key','=',$key)->delete();
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }

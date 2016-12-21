@@ -101,4 +101,24 @@ class FileController extends Controller
         }
         return back()->with('success', '删除失败');
     }
+    public function deleteLocalFile(Request $request)
+    {
+        $result = false;
+        switch ($request->get('type')) {
+            case 'image':
+                $result = $this->imageRepository->deleteLocal($request->get('key'));
+                break;
+            case 'js':
+                $result = $this->jsRepository->delete($request->get('key'));
+                break;
+            case 'css':
+                $result = $this->cssRepository->delete($request->get('key'));
+                break;
+        }
+        if ($result) {
+            return back()->with('success', '删除成功');
+        }
+        return back()->with('success', '删除失败');
+    }
+
 }

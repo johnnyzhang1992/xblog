@@ -80,7 +80,7 @@
                                 <button class="btn btn-danger"
                                         data-method="delete"
                                         data-modal-target="{{ $image->key }}"
-                                        data-url="{{ route('delete.file').'?key='.$image->key.'&type=image' }}"
+                                        data-url="{{ route('delete.local_file').'?key='.$image->key.'&type=image' }}"
                                         data-key="{{ $image->key }}">
                                     <i class="fa fa-trash-o fa-fw"></i>
                                 </button>
