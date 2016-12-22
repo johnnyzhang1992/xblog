@@ -72,7 +72,15 @@
                                     </li>
                                 @endforeach
                             @else
-
+                                <li>
+                                    <img src="{{ asset('/storage/images/travel//1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
+                                </li>
+                                <li>
+                                    <img src="{{ asset('/storage/images/4784572e91c0c539e7141598b483d523.jpeg')}}" class="img-responsive">
+                                </li>
+                                <li>
+                                    <img src="{{ asset('/storage/images/3ed735417518e1f7e7964c091607e27c.jpeg')}}" class="img-responsive">
+                                </li>
                             @endif
                         </ul>
                     </div>
