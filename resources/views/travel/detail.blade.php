@@ -28,7 +28,7 @@
                     @if(isset($poi->cover_image))
                         <img src='{{ asset($poi->cover_image) }}' alt="..."  class="img-responsive" >
                     @else
-                        <img src="{{ asset('/storage/images/travel//1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
+                        <img src="{{ asset('/storage/images/travel/1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
                     @endif
                     {{--上传封面图片--}}
                     @if(Auth::check())
@@ -72,15 +72,7 @@
                                     </li>
                                 @endforeach
                             @else
-                                <li>
-                                    <img src="{{ asset('/storage/images/travel//1bdd89d6fcb94845b0c89dd83b674dc9.jpeg')}}" class="img-responsive" >
-                                </li>
-                                <li>
-                                    <img src="{{ asset('/storage/images/4784572e91c0c539e7141598b483d523.jpeg')}}" class="img-responsive">
-                                </li>
-                                <li>
-                                    <img src="{{ asset('/storage/images/3ed735417518e1f7e7964c091607e27c.jpeg')}}" class="img-responsive">
-                                </li>
+
                             @endif
                         </ul>
                     </div>
@@ -105,31 +97,32 @@
         </div>
 
     </div>
-    <div class="modal fade  " id="modal-upload-image" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="alert alert-warning alert-dismissible fade  alert-suc in" role="alert">
-            <form action="{{ route('travel.upload.cover_image') }}"
-                  role="form" class="form-horizontal" datatype="image"
-                  enctype="multipart/form-data" method="post">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="image" class="col-xs-2 col-xs-offset-1 control-label">
-                        上传到本地：<i class="fa fa-file-image-o fa-lg fa-fw"></i>
-                    </label>
-                    <div class="col-xs-6">
-                        <input id="image" class="form-control" accept="image/*" type="file" name="image">
-                        <input type="hidden" name="poi_id" value="{{ @$poi->id }}" >
-                        <input type="hidden" name="user_id" value="{{ auth() ->user()->id}}" >
+    @if(Auth::check())
+        <div class="modal fade  " id="modal-upload-image" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="alert alert-warning alert-dismissible fade  alert-suc in" role="alert">
+                <form action="{{ route('travel.upload.cover_image') }}"
+                      role="form" class="form-horizontal" datatype="image"
+                      enctype="multipart/form-data" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="image" class="col-xs-2 col-xs-offset-1 control-label">
+                            上传到本地：<i class="fa fa-file-image-o fa-lg fa-fw"></i>
+                        </label>
+                        <div class="col-xs-6">
+                            <input id="image" class="form-control" accept="image/*" type="file" name="image">
+                            <input type="hidden" name="poi_id" value="{{ @$poi->id }}" >
+                            <input type="hidden" name="user_id" value="{{ auth() ->user()->id}}" >
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="submit" class="btn btn-primary">
+                                上传
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-xs-2">
-                        <button type="submit" class="btn btn-primary">
-                            上传
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-
+    @endif
 @endsection
 
 
