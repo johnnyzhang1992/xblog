@@ -97,7 +97,7 @@ class UserController extends Controller
             $fileName => 'required|image|mimes:jpeg,jpg,png|max:' . $max,
         ]);
         $image = $request->file($fileName);
-        return $this->imageRepository->uploadImage($image, $key);
+        return $this->imageRepository->uploadImageToLocal($request);
     }
 
 }

@@ -75,7 +75,7 @@ class ImageController extends Controller
     }
     public function uploadTravelCoverImage(Request $request){
         $this->validate($request, [
-            'image' => 'required|image|max:50000'
+            'image' => 'required|image|max:500000'
         ]);
         $type = $request->input('type', null);
         if ($type != null && $type == 'xrt') {
