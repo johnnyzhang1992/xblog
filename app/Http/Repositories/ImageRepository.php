@@ -57,7 +57,7 @@ class ImageRepository extends FileRepository
     public function uploadImageToLocal(Request $request)
     {
         $file = $request->file('image');
-        $path = $file->store('/images','public');
+        $path = $file->store('/images/local','public');
 //        $url = Storage::url($path);
 
         if ($path) {
@@ -73,7 +73,7 @@ class ImageRepository extends FileRepository
             $result = false;
         }
         $this->clearCache();
-        return $result;
+        return $path;
     }
     public function uploadImageToTravel(Request $request)
     {
