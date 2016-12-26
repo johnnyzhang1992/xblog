@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\Cloner\Data;
+use App\Configuration;
 
 class TravelController extends Controller
 {
@@ -59,14 +60,23 @@ class TravelController extends Controller
     public function edit(Request $request,$id){
         if($id <= $this->poi_count()){
             $_data = DB::table('travel')
-                ->join('configurations', function($join){$join->on('configurations.configurable_type', '=','App\Poi')->where('configurations.configurable_id', '=', $id);})
                 ->where('id','=',$id)
+                ->get();
+            $configurations = DB::table('configurations')
+                ->where('configurable_type','=','App\Poi')
+                ->where('configurable_id','=',$_data[0]->id)
                 ->get();
             $img_list = DB::table('travel_files')
                 ->where('poi_id','=',$id)
                 ->get();
             $poi = $_data[0];
-            return view('travel.edit',compact('poi','img_list'));
+            if(isset($configurations->id) && !empty($configurations->id)){
+                $configurations = $configurations[0];
+                return view('travel.edit',compact('poi','img_list','configurations'));
+            }else{
+                return view('travel.edit',compact('poi','img_list'));
+            }
+
         }else{
             return redirect('/travel');
         }
@@ -75,6 +85,24 @@ class TravelController extends Controller
         $_poi = $request->input('_poi');
         if($id <= $this->poi_count()){
             DB::table('travel')->where('id',$id)->update($_poi);
+            $configuration['config']['comment_type'] =$request['comment_type'];
+            $configuration['config']['comment_info'] = $request['comment_info'];
+            $config = json_encode($configuration['config']);
+            $configurations = DB::table('configurations')
+                ->where('configurable_type','=','App\Poi')
+                ->where('configurable_id','=',$id)
+                ->get();
+            if(isset($configurations->id)){
+                 DB::table('configurations')
+                    ->where('configurable_type','=','App\Poi')
+                    ->where('configurable_id','=',$id)
+                    ->update(array('config'=>$config));
+            }else{
+                $conf['configurable_id'] = $id;
+                $conf['configurable_type'] ='App\Poi';
+                $conf['config'] = $config;
+                DB::table('configurations')->insertGetId($conf);
+            }
             return redirect('/travel/poi/'.$id);
         }else{
             return redirect('/travel');
