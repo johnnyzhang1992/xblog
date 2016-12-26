@@ -59,6 +59,7 @@ class TravelController extends Controller
     public function edit(Request $request,$id){
         if($id <= $this->poi_count()){
             $_data = DB::table('travel')
+                ->join('configurations', function($join){$join->on('configurations.configurable_type', '=','App\Poi')->where('configurations.configurable_id', '=', $id);})
                 ->where('id','=',$id)
                 ->get();
             $img_list = DB::table('travel_files')

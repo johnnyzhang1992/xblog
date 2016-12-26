@@ -36,6 +36,23 @@
             <input  type="text" id="address" ng-model="address " name="_poi[address]"  class="form-control">
         </div>
     </div>
+    <div class="form-group">
+        <label for="comment_info" class="control-label">评论信息</label>
+        <select style="margin-top: 5px" id="comment_info" name="comment_info" class="form-control">
+            <option value="default" >默认</option>
+            <option value="force_disable" >强制关闭</option>
+            <option value="force_enable" >强制开启</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="comment_type" class="control-label">评论类型</label>
+        <select id="comment_type" name="comment_type" class="form-control">
+            <option value="default">默认</option>
+            <option value="raw">自带评论</option>
+            <option value="disqus">Disqus</option>
+            <option value="duoshuo">多说</option>
+        </select>
+    </div>
     <!--描述-->
     <div class="form-group">
         <label class="col-sm-2 " for="description">描述(Description)</label>

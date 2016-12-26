@@ -88,6 +88,25 @@
                                 <input  type="text" id="address" ng-model="address " name="_poi[address]" value="{{@$poi->address}}" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="comment_info" class="control-label">评论信息</label>
+                            <select style="margin-top: 5px" id="comment_info" name="comment_info" class="form-control">
+                                <?php $comment_info = isset($poi) && $poi->configuration ? $poi->configuration->config['comment_info'] : ''?>
+                                <option value="default" {{ $comment_info=='default'?' selected' : '' }}>默认</option>
+                                <option value="force_disable" {{ $comment_info=='force_disable'?' selected' : '' }}>强制关闭</option>
+                                <option value="force_enable" {{ $comment_info=='force_enable'?' selected' : '' }}>强制开启</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment_type" class="control-label">评论类型</label>
+                            <select id="comment_type" name="comment_type" class="form-control">
+                                <?php $comment_type = isset($poi) && $poi->configuration ? $poi->configuration->config['comment_type'] : ''?>
+                                <option value="default" {{ $comment_type=='default'?' selected' : '' }}>默认</option>
+                                <option value="raw" {{ $comment_type=='raw'?' selected' : '' }}>自带评论</option>
+                                <option value="disqus" {{ $comment_type=='disqus'?' selected' : '' }}>Disqus</option>
+                                <option value="duoshuo" {{ $comment_type=='duoshuo'?' selected' : '' }}>多说</option>
+                            </select>
+                        </div>
                         <!--描述-->
                         <div class="form-group">
                             <label class="col-sm-2 " for="description">描述(Description)</label>
