@@ -133,7 +133,6 @@ class TravelController extends Controller
             ->where('view_count','>',0)
             ->orderBy('view_count', 'desc')
             ->paginate(5);
-//        $side_content = '测试';
         return $side_poi;
 
     }

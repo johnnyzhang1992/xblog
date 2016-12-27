@@ -6,7 +6,7 @@
             ?>
             <a name="comment{{ $loop->index + 1 }}" href="{{ $href }}">
                 <img width="48px" height="48px" class="img-circle"
-                     src="{{ $comment->user ? $comment->user->avatar :'https://static.lufficc.com/image/default_avatar.png' }}">
+                     src="{{ $comment->user ? url($comment->user->avatar) :'https://static.lufficc.com/image/default_avatar.png' }}">
             </a>
         </div>
         <div class="comment-info">
