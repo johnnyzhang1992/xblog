@@ -68,6 +68,9 @@ Route::group(['middleware' => 'web'], function () {
          * comment
          */
     });
+    Route::group(['prefix' => 'book'],function (){
+       Route::get('/','BookController@index');
+    });
 
 });
 
@@ -99,6 +102,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/images', ['uses' => 'ImageController@images', 'as' => 'admin.images']);
     Route::get('/files', ['uses' => 'FileController@files', 'as' => 'admin.files']);
     Route::get('/pois', ['uses' => 'AdminController@pois', 'as' => 'admin.pois']);
+    Route::get('/books', ['uses' => 'AdminController@books', 'as' => 'admin.books']);
     Route::get('/visitors', ['uses' => 'VisitorController@visitors', 'as' => 'admin.visitors']);
 
     /**
@@ -127,6 +131,18 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::post('/travel/upload/image', ['uses' => 'ImageController@uploadImageToTravel', 'as' => 'travel.upload.images']);
     Route::post('/travel/upload/cover_image', ['uses' => 'ImageController@uploadTravelCoverImage', 'as' => 'travel.upload.cover_image']);
 
+
+    /**
+     * books
+     */
+
+    Route::post('/book/publish/{id}','BookController@publish')->where('id', '[0-9]+');
+    Route::get('/book/edit/{id}','BookController@edit')->where('id', '[0-9]+');
+    Route::post('/book/restore/{id}','BookController@restore')->where('id', '[0-9]+');
+    Route::get('/book/destroy/{id}','BookController@destroy')->where('id', '[0-9]+');
+    Route::get('/book/create_new',function (){return view('book.create');});
+    Route::post('/book/create','BookController@create');
+    Route::post('/book/upload/cover_image', ['uses' => 'ImageController@uploadBookCoverImage', 'as' => 'book.upload.cover_image']);
 
     /**
      * tag

@@ -140,7 +140,25 @@
                         </div>
                         <div class="col-xs-8">
                             <span>去过的地方</span>
-                            <div class="info-title">{{ $info['pois'] }}</div>
+                            <div class="info-title">{{ @$info['pois_count'] }}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="{{ route('admin.books') }}">
+                <div class="info-box">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="info-icon">
+                                <i class="fa fa-book fa-fw"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <span>书籍总数</span>
+                            <div class="info-title">{{ @$info['books_count'] }}</div>
                         </div>
                     </div>
                 </div>
