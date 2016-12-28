@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title','旅行日记-目的地')
+@section('title','读书笔记-书单列表')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -57,7 +57,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            <a href="{{ url('travel/book',$book->id) }}"  data-toggle="tooltip" data-placement="top" title="预览"
+                                            <a href="{{ url('book',$book->id) }}"  data-toggle="tooltip" data-placement="top" title="预览"
                                                class="btn btn-default" target="_blank">
                                                 <i class="fa fa-eye fa-fw"></i>
                                             </a>
