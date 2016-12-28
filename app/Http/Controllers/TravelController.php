@@ -40,7 +40,7 @@ class TravelController extends Controller
             if($_data) {
                 $_data[0]->view_count += 1;
 
-                DB::table('travel')
+                DB::table('pois')
                     ->where('id', $id)
                     ->update([
                         'view_count' => $_data[0]->view_count
@@ -50,6 +50,19 @@ class TravelController extends Controller
                 ->where('poi_id','=',$id)
                 ->get();
             $poi = $_data[0];
+            $configuration['config']['comment_type'] = 'default';
+            $configuration['config']['comment_info'] = 'default';
+            $config = json_encode($configuration['config']);
+            $configurations = DB::table('configurations')
+                ->where('configurable_type','=','App\Poi')
+                ->where('configurable_id','=',$id)
+                ->get();
+            if(!isset($configurations[0]->id)){
+                $conf['configurable_id'] = $id;
+                $conf['configurable_type'] ='App\Poi';
+                $conf['config'] = $config;
+                DB::table('configurations')->insertGetId($conf);
+            }
             $side_poi = $this->get_side_content();
             return view('travel.detail',compact('poi','img_list','side_poi'));
 //            return view('travel.detail')->with('poi',$_data[0]);
@@ -59,7 +72,7 @@ class TravelController extends Controller
     }
     public function edit(Request $request,$id){
         if($id <= $this->poi_count()){
-            $_data = DB::table('travel')
+            $_data = DB::table('pois')
                 ->where('id','=',$id)
                 ->get();
             $configurations = DB::table('configurations')
@@ -92,7 +105,7 @@ class TravelController extends Controller
                 ->where('configurable_type','=','App\Poi')
                 ->where('configurable_id','=',$id)
                 ->get();
-            if(isset($configurations->id)){
+            if(isset($configurations[0]->id)){
                  DB::table('configurations')
                     ->where('configurable_type','=','App\Poi')
                     ->where('configurable_id','=',$id)
