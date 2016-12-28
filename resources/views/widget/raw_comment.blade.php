@@ -31,8 +31,7 @@
                 </span>
             </div>
             <div class="form-group">
-                <input type="submit" id="comment-submit" class="btn btn-primary"
-                       value="回复"/>
+                <input type="submit" id="comment-submit" class="btn btn-primary" value="回复"/>
             </div>
         </form>
     </div>

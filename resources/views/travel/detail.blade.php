@@ -98,6 +98,30 @@
                         </div>
                     </div>
                 </div>
+                @if(!(isset($preview) && $preview))
+                    <?php
+                    $configuration =  null;
+                    if (!$configuration) {
+                        $configuration = [];
+                        $configuration['comment_info'] = 'default';
+                        $configuration['comment_type'] = 'default';
+                    }
+                    ?>
+                    @if($configuration['comment_info'] != 'force_disable' && ($configuration['comment_info'] == 'force_enable' || !isset($comment_type) || $comment_type != 'none'))
+                        <div class="row">
+                            <div id="comment-wrap" class="col-md-12  col-sm-12 col-sm-12-no-padding">
+                                @include('widget.comment',[
+                                'comment_key'=>$poi->poi_name,
+                                'comment_title'=>$poi->poi_name,
+                                'comment_url'=>url("/travel/poi".$poi->id),
+                                'commentable'=>$poi,
+                                'commentable_config'=>$configuration['comment_type'],
+                                'redirect'=>request()->fullUrl(),
+                                 'commentable_type'=>'App\Poi'])
+                            </div>
+                        </div>
+                    @endif
+                @endif
             </div>
             <div class="content-right col-md-3 col-sm-3 col-xs-12">
                 @include('travel.widget.side')

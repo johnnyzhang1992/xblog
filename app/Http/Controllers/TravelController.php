@@ -34,7 +34,7 @@ class TravelController extends Controller
     }
     public function detail(Request $request,$id){
         if($id <= $this->poi_count()){
-            $_data = DB::table('travel')
+            $_data = DB::table('pois')
                 ->where('id','=',$id)
                 ->get();
             if($_data) {
@@ -84,7 +84,7 @@ class TravelController extends Controller
     public function detail_update(Request $request,$id){
         $_poi = $request->input('_poi');
         if($id <= $this->poi_count()){
-            DB::table('travel')->where('id',$id)->update($_poi);
+            DB::table('pois')->where('id',$id)->update($_poi);
             $configuration['config']['comment_type'] =$request['comment_type'];
             $configuration['config']['comment_info'] = $request['comment_info'];
             $config = json_encode($configuration['config']);
@@ -112,7 +112,7 @@ class TravelController extends Controller
         $_poi = $request->input('_poi');
         unset($_poi['id']);
         $_poi['created_at'] = date('Y-m-d H:i:s');
-        $poi_id = DB::table('travel')->insertGetId($_poi);
+        $poi_id = DB::table('pois')->insertGetId($_poi);
         if($poi_id){
             return redirect('/travel/poi/'.$poi_id);
         }else{
@@ -121,15 +121,15 @@ class TravelController extends Controller
 
     }
     public function destroy(Request $request,$id){
-        DB::table('travel')->where('id',$id)->update(['status' => 'delete']);
+        DB::table('pois')->where('id',$id)->update(['status' => 'delete']);
         return back()->with('success','POi删除成功' );
     }
     public function restore(Request $request,$id){
-        DB::table('travel')->where('id',$id)->update(['status' => 'active']);
+        DB::table('pois')->where('id',$id)->update(['status' => 'active']);
         return back()->with('success','POi恢复状态成功' );
     }
     public function get_side_content(){
-        $side_poi = DB::table('travel')
+        $side_poi = DB::table('pois')
             ->where('view_count','>',0)
             ->orderBy('view_count', 'desc')
             ->paginate(5);

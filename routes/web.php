@@ -64,6 +64,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/poi/edit/{id}','TravelController@edit')->where('id', '[0-9]+');
         Route::post('/poi/restore/{id}','TravelController@restore')->where('id', '[0-9]+');
         Route::post('/poi/destroy/{id}','TravelController@destroy')->where('id', '[0-9]+');
+        /**
+         * comment
+         */
     });
 
 });

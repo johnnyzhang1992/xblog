@@ -113,7 +113,7 @@ class ImageRepository extends FileRepository
             $_image['type'] = 'image';
 //            $result = $image->save();
 //            DB::table('travel_files')->insert($_image);
-            DB::table('travel')->where('id',$poi_id)->update(['cover_image' => $path]);
+            DB::table('pois')->where('id',$poi_id)->update(['cover_image' => $path]);
         } else {
         }
         $this->clearCache();

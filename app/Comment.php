@@ -50,6 +50,12 @@ class Comment extends Model
                     $this->commentableData['title'] = $page->display_name;
                     $this->commentableData['url'] = route('page.show', $page->name);
                     break;
+                case 'App\Poi':
+                    $poi = app('App\Poi')->where('id', $this->commentable_id)->select('id', 'poi_name')->firstOrFail();
+                    $this->commentableData['type'] = '游记';
+                    $this->commentableData['title'] = $poi->poi_name;
+                    $this->commentableData['url'] = route('travel.poi', $poi->id);
+                    break;
             }
         }
 

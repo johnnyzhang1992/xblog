@@ -70,7 +70,7 @@ class AdminController extends Controller
         $info['tag_count'] = $this->tagRepository->count();
         $info['page_count'] = $this->pageRepository->count();
         $info['image_count'] = $this->imageRepository->count();
-        $info['pois'] = DB::table('travel')->count();
+        $info['pois'] = DB::table('pois')->count();
         $info['visitors_count'] = DB::table('visitor_tracking')->where('created_at', '>', DB::raw('CURDATE()'))->count(DB::raw('DISTINCT ip'));
 
         return view('admin.index', compact('info'));
