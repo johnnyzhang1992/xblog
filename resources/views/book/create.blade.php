@@ -17,6 +17,13 @@
                                 <input  type="text" id="name" ng-model="name" name="_book[book_name]"  class="form-control">
                             </div>
                         </div>
+                        <!--名称-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="name">书籍作者</label>
+                            <div class="col-sm-10">
+                                <input  type="text" id="name" ng-model="name" name="_book[book_author]"  class="form-control">
+                            </div>
+                        </div>
                     <!--标签（Tag）-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
@@ -54,30 +61,31 @@
                                 </select>
                             </div>
                         </div>
-
                         {{--评论--}}
                         <div class="form-group">
-                            <label for="comment_info" class="control-label">评论信息</label>
-                            <select style="margin-top: 5px" id="comment_info" name="comment_info" class="form-control">
-                                <option value="default" >默认</option>
-                                <option value="force_disable" >强制关闭</option>
-                                <option value="force_enable" >强制开启</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment_type" class="control-label">评论类型</label>
-                            <select id="comment_type" name="comment_type" class="form-control">
-                                <option value="default">默认</option>
-                                <option value="raw">自带评论</option>
-                                <option value="disqus">Disqus</option>
-                                <option value="duoshuo">多说</option>
-                            </select>
+                            <label for="comment_info" class="control-label col-sm-2">评论信息</label>
+                            <div class="col-sm-4">
+                                <select style="margin-top: 5px" id="comment_info" name="comment_info" class="form-control ">
+                                    <option value="default" >默认</option>
+                                    <option value="force_disable" >强制关闭</option>
+                                    <option value="force_enable" >强制开启</option>
+                                </select>
+                            </div>
+                            <label for="comment_type" class="control-label col-sm-2">评论类型</label>
+                            <div class="col-md-4">
+                                <select id="comment_type" name="comment_type" class="form-control">
+                                    <option value="default">默认</option>
+                                    <option value="raw">自带评论</option>
+                                    <option value="disqus">Disqus</option>
+                                    <option value="duoshuo">多说</option>
+                                </select>
+                            </div>
                         </div>
                         <!--描述-->
                         <div class="form-group">
-                            <label class="col-sm-2 " for="description">笔记</label>
+                            <label class="control-label col-sm-2 " for="description">笔记</label>
                             <div class="col-sm-10">
-                                <textarea  rows="3" id="description" ng-model="description" name="_book[content]" class="form-control">目的地描述</textarea>
+                                <textarea  rows="3" id="description" ng-model="description" name="_book[content]" class="form-control"></textarea>
                             </div>
                         </div>
                         <button type="submit"  class="btn btn-success btn-lg" style="width: 100%;">保存</button>

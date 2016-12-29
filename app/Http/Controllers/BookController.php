@@ -24,6 +24,12 @@ class BookController extends Controller
         unset($_book['id']);
         $_book['created_at'] = date('Y-m-d H:i:s');
         $book_id = DB::table('books')->insertGetId($_book);
+        $configurations['configurable_id'] = $book_id;
+        $configurations['configurable_type'] = 'App\Book';
+        $configurations['config']['comment_type'] =$request['comment_type'];
+        $configurations['config']['comment_info'] = $request['comment_info'];
+        $configurations['config'] = json_encode($configurations['config']);
+        DB::table('configurations')->insert($configurations);
         if($book_id){
 //            return redirect('/book/'.$book_id);
             return back()->with('success','Book创建成功' );
