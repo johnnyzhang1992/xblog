@@ -17,7 +17,8 @@ class BookController extends Controller
         }else{
             $books = '无内容！';
         }
-        return view('book.index',compact('books'));
+        $books_count = count($books);
+        return view('book.index',compact('books','books_count'));
     }
     public function create(Request $request){
         $_book = $request->input('_book');
