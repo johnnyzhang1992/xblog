@@ -14,21 +14,21 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="name">书籍名称(Name)</label>
                             <div class="col-sm-10">
-                                <input  type="text" id="name" ng-model="name" name="_book[book_name]"  class="form-control">
+                                <input  type="text" id="name" name="_book[book_name]"  class="form-control">
                             </div>
                         </div>
                         <!--名称-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="name">书籍作者</label>
                             <div class="col-sm-10">
-                                <input  type="text" id="name" ng-model="name" name="_book[book_author]"  class="form-control">
+                                <input  type="text" id="name" name="_book[book_author]"  class="form-control">
                             </div>
                         </div>
                     <!--标签（Tag）-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
                             <div class="col-sm-10">
-                                <input  type="text" id="tag" ng-model="tag" name="_book[tag]"  class="form-control">
+                                <input  type="text" id="tag" name="_book[tag]"  class="form-control">
                             </div>
                         </div>
                         <!--地址-->
@@ -36,13 +36,13 @@
                             <div class="col-sm-6" style="padding-left: 0">
                                 <label class="col-sm-4 control-label" for="lat">豆瓣地址</label>
                                 <div class="col-sm-8">
-                                    <input  type="text" id="lat" ng-model="lat" name="_book[douban_url]"  class="form-control">
+                                    <input  type="text" id="lat"  name="_book[douban_url]"  class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6" style="padding-left: 0">
                                 <label class="col-sm-4 control-label" for="lng">Kindle地址</label>
                                 <div class="col-sm-8">
-                                    <input  type="text" id="lng" ng-model="lng" name="_book[kindle_url]" class="form-control">
+                                    <input  type="text" id="lng"  name="_book[kindle_url]" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="year">读书年份</label>
                             <div class="col-sm-4">
-                                <input  type="text" id="year" ng-model="address " name="_book[year]"  class="form-control">
+                                <input  type="text" id="year" name="_book[year]"  class="form-control">
                             </div>
                             <label class="col-sm-2 control-label" for="status">读书进度</label>
                             <div class="col-sm-4">

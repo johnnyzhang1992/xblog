@@ -39,6 +39,23 @@ class BookController extends Controller
         }
 
     }
+    public  function edit(Request $request,$id){
+        $book_id = $id;
+        $book = DB::table('books')
+            ->where('id','=',$book_id)
+            ->get();
+        return view('book.edit',compact('book'));
+    }
+    public function  update(Request $request,$id){
+        $book = $request->input('book');
+        $book['update_at'] =
+        $book_id = $id;
+        DB::table('books')
+            ->where('id','=',$book_id)
+            ->update($book);
+
+    }
+
     public function destroy(Request $request,$id){
         DB::table('books')->where('id',$id)->update(['status' => 'delete']);
         return back()->with('success','POi删除成功' );
