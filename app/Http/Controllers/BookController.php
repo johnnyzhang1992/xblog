@@ -24,6 +24,7 @@ class BookController extends Controller
         $_book = $request->input('_book');
         unset($_book['id']);
         $_book['created_at'] = date('Y-m-d H:i:s');
+        $_book['updated_at'] = date('Y-m-d H:i:s');
         $book_id = DB::table('books')->insertGetId($_book);
         $configurations['configurable_id'] = $book_id;
         $configurations['configurable_type'] = 'App\Book';
@@ -44,16 +45,24 @@ class BookController extends Controller
         $book = DB::table('books')
             ->where('id','=',$book_id)
             ->get();
+        $book = $book[0];
         return view('book.edit',compact('book'));
     }
     public function  update(Request $request,$id){
-        $book = $request->input('book');
-        $book['update_at'] =
+        $book = $request->input('_book');
+        $book['updated_at'] = date('Y-m-d H:i:s');
         $book_id = $id;
         DB::table('books')
             ->where('id','=',$book_id)
             ->update($book);
-
+        $configuration['config']['comment_type'] =$request['comment_type'];
+        $configuration['config']['comment_info'] = $request['comment_info'];
+        $config = json_encode($configuration['config']);
+        $book_update = DB::table('configurations')
+            ->where('configurable_type','=','App\Poi')
+            ->where('configurable_id','=',$id)
+            ->update(array('config'=>$config));
+        return redirect('/admin');
     }
 
     public function destroy(Request $request,$id){

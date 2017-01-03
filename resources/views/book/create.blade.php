@@ -17,7 +17,7 @@
                                 <input  type="text" id="name" name="_book[book_name]"  class="form-control">
                             </div>
                         </div>
-                        <!--名称-->
+                        <!--作者-->
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="name">书籍作者</label>
                             <div class="col-sm-10">
@@ -85,7 +85,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2 " for="description">笔记</label>
                             <div class="col-sm-10">
-                                <textarea  rows="3" id="description" ng-model="description" name="_book[content]" class="form-control"></textarea>
+                                <textarea  rows="3" id="description" name="_book[content]" class="form-control"></textarea>
                             </div>
                         </div>
                         <button type="submit"  class="btn btn-success btn-lg" style="width: 100%;">保存</button>

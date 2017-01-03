@@ -18,7 +18,7 @@
                                 上传到本地：<i class="fa fa-file-image-o fa-lg fa-fw"></i>
                             </label>
                             <div class="col-xs-6">
-                                <input id="image" class="form-control" accept="image/*" type="file" name="image">
+                                <input id="image" class="form-control" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" type="file" name="image">
                                 <input type="hidden" name="poi_id" value="{{ @$poi->id }}" >
                                 <input type="hidden" name="user_id" value="{{ auth() ->user()->id}}" >
                             </div>

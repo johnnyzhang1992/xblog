@@ -102,24 +102,25 @@ class ImageRepository extends FileRepository
         $poi_id = $request->input('poi_id');
         $user_id = $request->input('user_id');
         $path = $file->store('/images/travel/'.$poi_id.'/cover_image','public');
-//        $url = Storage::url($path);
 
         if ($path) {
-            $_image['poi_id'] =$poi_id;
-            $_image['user_id'] = $user_id;
-            $_image['name'] = $file->getClientOriginalName();
-            $_image['uri'] = $path;
-            $_image['size'] = $file->getSize();
-            $_image['type'] = 'image';
-//            $result = $image->save();
-//            DB::table('travel_files')->insert($_image);
             DB::table('pois')->where('id',$poi_id)->update(['cover_image' => $path]);
         } else {
         }
         $this->clearCache();
         return $path;
     }
-
+    public function uploadBookCoverImage(Request $request){
+        $file = $request->file('image');
+        $book_id = $request->input('book_id');
+        $path = $file->store('/images/book/'.$book_id.'/cover_image','public');
+        if ($path) {
+            DB::table('books')->where('id',$book_id)->update(['cover_image' => $path]);
+        } else {
+        }
+        $this->clearCache();
+        return $path;
+    }
     public function count()
     {
         $count = $this->remember($this->tag() . '.count', function () {
