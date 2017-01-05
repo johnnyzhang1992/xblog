@@ -12,7 +12,9 @@
                             </div>
                             <div class="cd-timeline-content">
                                 <div class="cover-image">
-                                    <img src="{{ asset(@$book->cover_image) }}" alt="" class="img-responsive">
+                                    @if(!empty($book->cover_image))
+                                        <img src="{{ asset(@$book->cover_image) }}" alt="{{ @$book->book_name }}" class="img-responsive" style="margin: 0 auto">
+                                    @endif
                                 </div>
                                 <a href="#">
                                     <div class="title">{{ @$book->book_name }}<br> <small style="font-size: 70%">作者： {{ @$book->book_author }}</small></div>
