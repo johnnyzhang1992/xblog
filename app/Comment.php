@@ -56,6 +56,12 @@ class Comment extends Model
                     $this->commentableData['title'] = $poi->poi_name;
                     $this->commentableData['url'] = url('travel/poi', $poi->id);
                     break;
+                case 'App\Book':
+                    $book = app('App\Book')->where('id', $this->commentable_id)->select('id', 'book_name')->firstOrFail();
+                    $this->commentableData['type'] = '书籍';
+                    $this->commentableData['title'] = $book->book_name;
+                    $this->commentableData['url'] = url('book/', $book->id);
+                    break;
             }
         }
 

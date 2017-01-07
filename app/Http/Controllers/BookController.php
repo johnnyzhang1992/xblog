@@ -20,6 +20,36 @@ class BookController extends Controller
         $books_count = count($books);
         return view('book.index',compact('books','books_count'));
     }
+    public function detail(Request $request,$id){
+        $_data = DB::table('books')
+            ->where('id','=',$id)
+            ->get();
+        if($_data) {
+            $_data[0]->view_count += 1;
+
+            DB::table('books')
+                ->where('id', $id)
+                ->update([
+                    'view_count' => $_data[0]->view_count
+                ]);
+        }
+        $book = $_data[0];
+        $configuration['config']['comment_type'] = 'default';
+        $configuration['config']['comment_info'] = 'default';
+        $config = json_encode($configuration['config']);
+        $configurations = DB::table('configurations')
+            ->where('configurable_type','=','App\Book')
+            ->where('configurable_id','=',$id)
+            ->get();
+        if(!isset($configurations[0]->id)){
+            $conf['configurable_id'] = $id;
+            $conf['configurable_type'] ='App\Book';
+            $conf['config'] = $config;
+            DB::table('configurations')->insertGetId($conf);
+        }
+        return view('book.detail',compact('book'));
+
+    }
     public function create(Request $request){
         $_book = $request->input('_book');
         unset($_book['id']);

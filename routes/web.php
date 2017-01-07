@@ -70,6 +70,7 @@ Route::group(['middleware' => 'web'], function () {
     });
     Route::group(['prefix' => 'book'],function (){
        Route::get('/','BookController@index');
+       Route::get('/{id}','BookController@detail');
        Route::post('{id}/update','BookController@update');
     });
 

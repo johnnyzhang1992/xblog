@@ -16,7 +16,7 @@
                                         <img src="{{ asset(@$book->cover_image) }}" alt="{{ @$book->book_name }}" class="img-responsive" style="margin: 0 auto">
                                     @endif
                                 </div>
-                                <a href="#">
+                                <a href="{{ url("book/".@$book->id) }}">
                                     <div class="title">{{ @$book->book_name }}<br> <small style="font-size: 70%">作者： {{ @$book->book_author }}</small></div>
                                 </a>
                                 <span class="cd-date">{{ @$book->created_at}}</span>
