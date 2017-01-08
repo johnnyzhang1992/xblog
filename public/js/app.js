@@ -520,7 +520,6 @@ var imgLiquid=imgLiquid||{VER:"0.9.944"};imgLiquid.bgs_Available=!1,imgLiquid.bg
             this.bootUp();
         },
         bootUp: function () {
-            console.log('bootUp');
             loadComments(false);
             initComment();
             initMarkdownTarget();

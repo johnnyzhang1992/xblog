@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','旅行日记')
+@section('title','读书')
 
 @section('css')
     <style>
@@ -29,19 +29,14 @@
                         @if(isset($book->cover_image))
                             <img src='{{ asset(@$book->cover_image) }}' alt="{{ @$book->book_name."封面" }}"  class="img-responsive" >
                         @endif
-                        {{--上传封面图片--}}
-                        @if(Auth::check())
-                            <a class="upload-cover-image" role="button" onclick="javascript:$('#modal-upload-image').modal();return false;"><i class="fa fa-camera"></i>上传封面图片</a>
-                        @endif
                     </div>
                     <div class="col-md-6 col-xs-12">
                         <div class="head-content">
                             <h2>{{ @$book->book_name }} <small>更新时间：{{ date('y-m-d',time($book->updated_at)) }}</small><small style="margin:0 5px">|</small><small>浏览量：{{ $book->view_count }}</small></h2>
-
                         </div>
                     </div>
                 </div>
-                <div class="book-detail clearfix">
+                <div class="book-detail col-md-12 col-xs-12 clearfix">
                     <h4><span>读书杂记</span></h4>
                     <!--描述-->
                     <div class="book-detail-content">
@@ -77,32 +72,29 @@
 
             {{--</div>--}}
         </div>
-
     </div>
-    @if(Auth::check())
-        <div class="modal fade  " id="modal-upload-image" role="dialog" aria-labelledby="gridSystemModalLabel">
-            <div class="alert alert-warning alert-dismissible fade  alert-suc in" role="alert">
-                <form action="{{ route('book.upload.cover_image') }}"
-                      role="form" class="form-horizontal" datatype="image"
-                      enctype="multipart/form-data" method="post">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label for="image" class="col-xs-2 col-xs-offset-1 control-label">
-                            上传到本地：<i class="fa fa-file-image-o fa-lg fa-fw"></i>
-                        </label>
-                        <div class="col-xs-6">
-                            <input id="image" class="form-control" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" type="file" name="image">
-                            <input type="hidden" name="book_id" value="{{ @$book->id }}" >
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id}}" >
-                        </div>
-                        <div class="col-xs-2">
-                            <button type="submit" class="btn btn-primary">
-                                上传
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endif
+@endsection
+
+@section('script')
+    <script>
+        //使用豆瓣API拿指定iD書籍的信息
+        $.ajax({
+            type: "get",
+            url: "https://api.douban.com/v2/book/26910597",//最後一位是書籍id
+            data: $(this).serialize(),
+            async: false,
+            dataType:'jsonp',
+            jsonp: 'callback',
+            success: function(data){
+                console.info(JSON.stringify(data.id));
+                console.info(JSON.stringify(data.title));
+                console.info(JSON.stringify(data.author));
+                console.info(JSON.stringify(data.rating.max))
+            },
+            error: function (xhr,status,error) {
+                console.info('');
+            }
+        });
+    </script>
+
 @endsection
