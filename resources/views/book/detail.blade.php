@@ -3,8 +3,14 @@
 
 @section('css')
     <style>
+        .breadcrumb{
+            margin-bottom: 0;
+        }
+        .book-content,.content-left,.book-detail{
+            padding:0;
+        }
         .book-name{
-
+            padding: 0 15px;
         }
         .book_cover_image{
             float: left;
@@ -15,6 +21,9 @@
         .book-info{
             float: left;
             padding-left:15px ;
+        }
+        .rating-content{
+            border-left: 1px solid #ddd;
         }
     </style>
 @endsection
@@ -36,8 +45,8 @@
             <div class="content-left col-md-12  col-sm-12 col-xs-12">
                 {{--基本信息--}}
                 <div class="book-detail col-md-12 clearfix">
+                    <h4 class="book-name"><span>{{ @$book->book_name }}</span></h4>
                     <div class="col-md-8 col-xs-12">
-                        <h4 class="book-name"><span>{{ @$book->book_name }}</span></h4>
                         <div class="book_cover_image">
                             @if(isset($book->cover_image))
                                 <img src='{{ asset(@$book->cover_image) }}' alt="{{ @$book->book_name."封面" }}"  class="img-responsive" >
@@ -59,7 +68,7 @@
                             <span class="pl">ISBN:</span> <span class="book-isbn">9787550013247</span><br>
                             </div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-4 rating-content col-xs-12">
                         <div class="head-content">
                             <div class="rating-logo">豆瓣评分</div>
                             <div class="rating-self"><span class="book-douban-rating">7</span></div>
@@ -70,7 +79,21 @@
                     </div>
                 </div>
                 <div class="book-detail col-md-12 col-xs-12 clearfix">
-                    <h4><span>读书杂记</span></h4>
+                    <h4><span>内容简介</span> &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</h4>
+                    <div class="book-detail-content">
+                        单亲女孩迪伦，15岁的世界一片狼藉：与母亲总是无话可说，在学校里经常受到同学的捉弄，唯一谈得来的好友也因为转学离开了。这一切都让迪伦感到无比痛苦。
+                        她决定去看望久未谋面的父亲，然而，路上突发交通事故。等她拼命爬出火车残骸之后，却惊恐地发现，自己是唯一的幸存者，而眼前，竟是一片荒原。
+                        此时，迪伦看到不远处的山坡上一个男孩的身影。
+                        男孩将她带离了事故现场。但是，迪伦很快意识到，男孩并不是偶然出现的路人，他似乎是特意在此等候。
+                        命运，从他们相遇的那刻开始，发生了无法预料的转变……
+                    </div>
+                    <h4><span>作者简介</span> &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</h4>
+                    <div class="book-detail-content">
+                        克莱儿•麦克福尔居住在苏格兰格拉斯哥南部，是英国文坛备受瞩目的实力作家。
+                        她的作品往往在出其不意的情节架构中饱含感人至深的真情，贯穿着人生思索和人性独白。
+                        《摆渡人》是她最著名的作品，一举摘得五项世界文学大奖，版权销售33个国家，是令千万读者灵魂震颤的心灵治愈小说。
+                    </div>
+                    <h4><span>读书杂记</span> &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</h4>
                     <!--描述-->
                     <div class="book-detail-content">
                         {!! @$book->content !!}
