@@ -3,7 +3,19 @@
 
 @section('css')
     <style>
+        .book-name{
 
+        }
+        .book_cover_image{
+            float: left;
+        }
+        .book_cover_image img{
+            width: 150px;
+        }
+        .book-info{
+            float: left;
+            padding-left:15px ;
+        }
     </style>
 @endsection
 @section('content')
@@ -24,15 +36,36 @@
             <div class="content-left col-md-12  col-sm-12 col-xs-12">
                 {{--基本信息--}}
                 <div class="book-detail col-md-12 clearfix">
-                    <h4><span>基本信息</span></h4>
-                    <div class="col-md-6 col-xs-12">
-                        @if(isset($book->cover_image))
-                            <img src='{{ asset(@$book->cover_image) }}' alt="{{ @$book->book_name."封面" }}"  class="img-responsive" >
-                        @endif
+                    <div class="col-md-8 col-xs-12">
+                        <h4 class="book-name"><span>{{ @$book->book_name }}</span></h4>
+                        <div class="book_cover_image">
+                            @if(isset($book->cover_image))
+                                <img src='{{ asset(@$book->cover_image) }}' alt="{{ @$book->book_name."封面" }}"  class="img-responsive" >
+                            @endif
+                        </div>
+                        <div class="book-info">
+                            <span>
+                                <span class="pl"> 作者</span>:
+                                <a class="" href="#" class="book-douban-url"><span class="book-author">[英]克莱儿·麦克福尔</span></a>
+                            </span><br>
+                            <span class="pl">出版社:</span> <span class="book-publisher">百花洲文艺出版社</span><br>
+                            <span class="pl">原作名:</span> <span class="origin-title">Ferryman</span><br>
+                            <span>
+                                <span class="pl"> 译者</span>:
+                                <span class="book-translator">付强</span>
+                            </span><br>
+                            <span class="pl">出版年:</span><span class="pubdate">2015-6-1</span><br>
+                            <span class="pl">页数:</span> <span class="book-pages">280</span><br>
+                            <span class="pl">ISBN:</span> <span class="book-isbn">9787550013247</span><br>
+                            </div>
                     </div>
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col-md-4 col-xs-12">
                         <div class="head-content">
-                            <h2>{{ @$book->book_name }} <small>更新时间：{{ date('y-m-d',time($book->updated_at)) }}</small><small style="margin:0 5px">|</small><small>浏览量：{{ $book->view_count }}</small></h2>
+                            <div class="rating-logo">豆瓣评分</div>
+                            <div class="rating-self"><span class="book-douban-rating">7</span></div>
+                            <small>更新时间：{{ date('y-m-d',time($book->updated_at)) }}</small>
+                            <small style="margin:0 5px">|</small>
+                            <small>浏览量：{{ $book->view_count }}</small>
                         </div>
                     </div>
                 </div>
@@ -97,6 +130,9 @@
                 console.info(JSON.stringify("简介summary:"+data.summary));
                 console.info(JSON.stringify("序言catalog:"+data.catalog));
                 console.info(JSON.stringify("pages:"+data.pages));
+                console.info(JSON.stringify("ISBN:"+data.isbn13));
+                console.info(JSON.stringify("出版社:"+data.publisher));
+                console.info(JSON.stringify("出版时间:"+data.pubdate));
                 console.info(JSON.stringify("translator:"+data.translator));
                 console.info(JSON.stringify("评分:"+data.rating.average));
             },
