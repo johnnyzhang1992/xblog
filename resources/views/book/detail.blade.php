@@ -80,16 +80,25 @@
         //使用豆瓣API拿指定iD書籍的信息
         $.ajax({
             type: "get",
-            url: "https://api.douban.com/v2/book/26910597",//最後一位是書籍id
+            url: "https://api.douban.com/v2/book/26356948",//最後一位是書籍id
             data: $(this).serialize(),
             async: false,
             dataType:'jsonp',
             jsonp: 'callback',
             success: function(data){
-                console.info(JSON.stringify(data.id));
-                console.info(JSON.stringify(data.title));
-                console.info(JSON.stringify(data.author));
-                console.info(JSON.stringify(data.rating.max))
+                console.info(JSON.stringify("id:"+data.id));
+                console.info(JSON.stringify("alt:"+data.alt));
+                console.info(JSON.stringify("alt_title:"+data.alt_title));
+                console.info(JSON.stringify("title:"+data.title));
+                console.info(JSON.stringify("原作名origin_title:"+data.origin_title));
+                console.info(JSON.stringify("cover_image:"+data.image));
+                console.info(JSON.stringify("author:"+data.author_intro));
+                console.info(JSON.stringify("author_intro:"+data.author));
+                console.info(JSON.stringify("简介summary:"+data.summary));
+                console.info(JSON.stringify("序言catalog:"+data.catalog));
+                console.info(JSON.stringify("pages:"+data.pages));
+                console.info(JSON.stringify("translator:"+data.translator));
+                console.info(JSON.stringify("评分:"+data.rating.average));
             },
             error: function (xhr,status,error) {
                 console.info('');
