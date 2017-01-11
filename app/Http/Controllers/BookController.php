@@ -63,12 +63,11 @@ class BookController extends Controller
         $configurations['config'] = json_encode($configurations['config']);
         DB::table('configurations')->insert($configurations);
         if($book_id){
-//            return redirect('/book/'.$book_id);
-            return back()->with('success','Book创建成功' );
-        }else{
-//            return redirect('/book');
-        }
+            return redirect('/book/'.$book_id);
 
+        }else{
+            return back()->with('error','Book创建失败' );
+        }
     }
     public  function edit(Request $request,$id){
         $book_id = $id;
@@ -92,7 +91,7 @@ class BookController extends Controller
             ->where('configurable_type','=','App\Poi')
             ->where('configurable_id','=',$id)
             ->update(array('config'=>$config));
-        return redirect('/admin');
+        return redirect('/book/'.$id);
     }
 
     public function destroy(Request $request,$id){

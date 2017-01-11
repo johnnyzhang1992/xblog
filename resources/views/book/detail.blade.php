@@ -22,8 +22,27 @@
             float: left;
             padding-left:15px ;
         }
+        .book-detail h4 {
+            color: #42c37b;
+            font-size: 20px;
+            border-left: 4px solid #43ce7b;
+            padding-left: 10px;
+        }
         .rating-content{
             border-left: 1px solid #ddd;
+        }
+        .book-douban-rating{
+            font-size: 25px;
+            margin-left: 10px;
+        }
+        .comment-content,#comment-wrap{
+            padding: 0;
+        }
+
+        @media(max-width:768px){
+            .rating-content{
+                margin-top: 20px;
+            }
         }
     </style>
 @endsection
@@ -53,20 +72,19 @@
                             @endif
                         </div>
                         <div class="book-info">
-                            <span>
-                                <span class="pl"> 作者</span>:
-                                <a class="" href="#" class="book-douban-url"><span class="book-author">[英]克莱儿·麦克福尔</span></a>
-                            </span><br>
-                            <span class="pl">出版社:</span> <span class="book-publisher">百花洲文艺出版社</span><br>
-                            <span class="pl">原作名:</span> <span class="origin-title">Ferryman</span><br>
-                            <span>
+                            <p class="p1">
+                                 作者: <a  href="#" class="book-douban-url"><span class="book-author">[英]克莱儿·麦克福尔</span></a>
+                            </p>
+                            <p class="pl">出版社: <span class="book-publisher">百花洲文艺出版社</span></p>
+                            <p class="pl">原作名: <span class="origin-title">Ferryman</span></p>
+                            <p>
                                 <span class="pl"> 译者</span>:
                                 <span class="book-translator">付强</span>
-                            </span><br>
-                            <span class="pl">出版年:</span><span class="pubdate">2015-6-1</span><br>
-                            <span class="pl">页数:</span> <span class="book-pages">280</span><br>
-                            <span class="pl">ISBN:</span> <span class="book-isbn">9787550013247</span><br>
-                            </div>
+                            </p>
+                            <p class="pl">出版年: <span class="pubdate">2015-6-1</span></p>
+                            <p class="pl">页数: <span class="book-pages">280</span></p>
+                            <p class="pl">ISBN: <span class="book-isbn">9787550013247</span></p>
+                        </div>
                     </div>
                     <div class="col-md-4 rating-content col-xs-12">
                         <div class="head-content">
@@ -109,7 +127,7 @@
                     }
                     ?>
                     @if($configuration['comment_info'] != 'force_disable' && ($configuration['comment_info'] == 'force_enable' || !isset($comment_type) || $comment_type != 'none'))
-                        <div class="row">
+                        <div class="comment-content col-md-12 col-xs-12 clearfix">
                             <div id="comment-wrap" class="col-md-12  col-sm-12 col-sm-12-no-padding">
                                 @include('widget.comment',[
                                 'comment_key'=>$book->book_name,

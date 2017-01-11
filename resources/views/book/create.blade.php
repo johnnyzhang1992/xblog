@@ -26,9 +26,17 @@
                         </div>
                     <!--标签（Tag）-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
-                            <div class="col-sm-10">
-                                <input  type="text" id="tag" name="_book[tag]"  class="form-control">
+                            <div class="col-sm-6" style="padding-left: 0">
+                                <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
+                                <div class="col-sm-10">
+                                    <input  type="text" id="tag" name="_book[tag]"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="padding-left: 0">
+                                <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
+                                <div class="col-sm-10">
+                                    <input  type="text" id="tag" name="_book[tag]"  class="form-control">
+                                </div>
                             </div>
                         </div>
                         <!--地址-->
