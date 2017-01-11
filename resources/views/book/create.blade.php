@@ -12,14 +12,14 @@
                     {{ csrf_field() }}
                     <!--名称-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="name">书籍名称(Name)</label>
+                            <label class="col-sm-2 control-label" for="name">书籍名称(Name): <span style="color:red">*</span></label>
                             <div class="col-sm-10">
                                 <input  type="text" id="name" name="_book[book_name]"  class="form-control">
                             </div>
                         </div>
                         <!--作者-->
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="name">书籍作者</label>
+                            <label class="col-sm-2 control-label" for="name">书籍作者: <span style="color:red">*</span></label>
                             <div class="col-sm-10">
                                 <input  type="text" id="name" name="_book[book_author]"  class="form-control">
                             </div>
@@ -27,15 +27,15 @@
                     <!--标签（Tag）-->
                         <div class="form-group">
                             <div class="col-sm-6" style="padding-left: 0">
-                                <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
-                                <div class="col-sm-10">
+                                <label class="col-sm-4 control-label" for="tag">标签(Tag)</label>
+                                <div class="col-sm-8">
                                     <input  type="text" id="tag" name="_book[tag]"  class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6" style="padding-left: 0">
-                                <label class="col-sm-2 control-label" for="tag">标签(Tag)</label>
-                                <div class="col-sm-10">
-                                    <input  type="text" id="tag" name="_book[tag]"  class="form-control">
+                                <label class="col-sm-4 control-label" for="tag">豆瓣ID：<span style="color:red">*</span></label>
+                                <div class="col-sm-8">
+                                    <input  type="text" id="tag" name="_book[bouban_id]"  class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -56,11 +56,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="year">读书年份</label>
+                            <label class="col-sm-2 control-label" for="year">读书年份： <span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 <input  type="text" id="year" name="_book[year]"  class="form-control">
                             </div>
-                            <label class="col-sm-2 control-label" for="status">读书进度</label>
+                            <label class="col-sm-2 control-label" for="status">读书进度： <span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 <select id="status" name="_book[status]" class="form-control">
                                     <option value="finish">完成</option>
