@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-4">
                 <div class="slide">
-                 往年历史
+                 {{--往年历史--}}
                 </div>
             </div>
         </div>

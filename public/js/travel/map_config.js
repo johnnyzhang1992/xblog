@@ -122,7 +122,12 @@ var bdMapController = {
             var _link = 'travel/poi/'+id;
             var description,_img_url;
             if(desc !== null && desc !== undefined && desc !== ''){
-                description = desc;
+                if(desc.length < 50){
+                    description = desc;
+                }else{
+                    description = desc.substr(0,48)+'...';
+                }
+
             }else{
                 description = '这里是描述';
             }
@@ -168,7 +173,7 @@ var bdMapController = {
                             var address =marker_point.address;
                             var desc =marker_point.description;
                             var id = marker_point.id;
-                            var img_url = marker_point.img_url;
+                            var img_url = marker_point.cover_image;
                             bdMapController.render.addMarker(latlng,poi_name,id,tag,address,desc,img_url);
                         }
                     }

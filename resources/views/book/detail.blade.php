@@ -138,35 +138,35 @@
 
 @section('script')
     <script> window.douban_id = '{{ @$book->douban_id }}'</script>
-    <script>
-        //使用豆瓣API拿指定iD書籍的信息
-//        var douban_id = window.douban_id;
-//        $.ajax({
-//            type: "get",
-//            url: "https://api.douban.com/v2/book/"+douban_id,//最後一位是書籍id
-//            data: $(this).serialize(),
-//            async: false,
-//            dataType:'jsonp',
-//            jsonp: 'callback',
-//            success: function(data){
-//                $('#cover_image').attr('src',data.image);
-//                $('.book-author').html(data.author);
-//                $('.book-douban-url').attr('href',data.alt);
-//                $('.origin-title').html(data.origin_title);
-//                $('.book-pages').html(data.pages);
-//                $('.book-isbn').html(data.isbn13);
-//                $('.book-publisher').html(data.publisher);
-//                $('.book-pubdate').html(data.pubdate);
-//                $('.book-translator').html(data.translator);
-//                $('.book-douban-rating').html(data.rating.average);
-//                $('#author_intro').html(data.author_intro);
-//                $('#book-summary').html(data.summary);
-////                console.info(JSON.stringify("alt_title:"+data.alt_title));
-//            },
-//            error: function (xhr,status,error) {
-//                console.info('获取豆瓣图书内容失败！');
-//            }
-//        });
-    </script>
+    {{--<script>--}}
+        {{--//使用豆瓣API拿指定iD書籍的信息--}}
+        {{--var douban_id = window.douban_id;--}}
+        {{--$.ajax({--}}
+            {{--type: "get",--}}
+            {{--url: "https://api.douban.com/v2/book/"+douban_id,//最後一位是書籍id--}}
+            {{--data: $(this).serialize(),--}}
+            {{--async: false,--}}
+            {{--dataType:'jsonp',--}}
+            {{--jsonp: 'callback',--}}
+            {{--success: function(data){--}}
+                {{--$('#cover_image').attr('src',data.image);--}}
+                {{--$('.book-author').html(data.author);--}}
+                {{--$('.book-douban-url').attr('href',data.alt);--}}
+                {{--$('.origin-title').html(data.origin_title);--}}
+                {{--$('.book-pages').html(data.pages);--}}
+                {{--$('.book-isbn').html(data.isbn13);--}}
+                {{--$('.book-publisher').html(data.publisher);--}}
+                {{--$('.book-pubdate').html(data.pubdate);--}}
+                {{--$('.book-translator').html(data.translator);--}}
+                {{--$('.book-douban-rating').html(data.rating.average);--}}
+                {{--$('#author_intro').html(data.author_intro);--}}
+                {{--$('#book-summary').html(data.summary);--}}
+{{--//                console.info(JSON.stringify("alt_title:"+data.alt_title));--}}
+            {{--},--}}
+            {{--error: function (xhr,status,error) {--}}
+                {{--console.info('获取豆瓣图书内容失败！');--}}
+            {{--}--}}
+        {{--});--}}
+    {{--</script>--}}
 
 @endsection
