@@ -62,7 +62,7 @@
             {{--左侧板块--}}
             <div class="content-left col-md-12  col-sm-12 col-xs-12">
                 {{--基本信息--}}
-                <div class="book-detail col-md-12 clearfix">
+                <div id="book-detail" class="book-detail col-md-12 clearfix">
                     <h4 class="book-name"><span>{{ @$book->book_name }}</span></h4>
                     <div class="col-md-8 col-xs-12">
                         <div class="book_cover_image">

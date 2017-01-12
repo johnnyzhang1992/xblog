@@ -99,5 +99,17 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    public function uploadImageByAjax(Request $request){
+        $file = $request->file('file');
+        $poi_id = $request->input('poi_id');
+        $poi_type = $request->input('poi_type');
+        // 获取文件相关信息
+//        $originalName = $file->getClientOriginalName(); // 文件原名
+//        $ext = $file->getClientOriginalExtension();     // 扩展名
+//        $realPath = $file->getRealPath();   //临时文件的绝对路径
+//        $img_type = $file->getClientMimeType();     // image/jpeg
+        $path = $file->store('/images/'.$poi_type.'/'.$poi_id.'/','public');
+        return asset($path);
+    }
 
 }

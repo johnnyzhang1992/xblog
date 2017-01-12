@@ -152,7 +152,62 @@
     <script>
         $("#description").summernote({
             height: 100 ,
-            placeholder: '请输入内容...'
+            placeholder: '请输入内容...',
+            //使用ajax上传图片
+            callbacks: {
+                onImageUpload: function (files) {
+                    var $files = $(files);
+                    var $this = $(this);
+                    var poi_type="poi";
+                    var xhrOnProgress=function(fun) {
+                        xhrOnProgress.onprogress = fun; //绑定监听
+                        //使用闭包实现监听绑
+                        return function() {
+                            //通过$.ajaxSettings.xhr();获得XMLHttpRequest对象
+                            var xhr = $.ajaxSettings.xhr();
+                            //判断监听函数是否为函数
+                            if (typeof xhrOnProgress.onprogress !== 'function')
+                                return xhr;
+                            //如果有监听函数并且xhr对象支持绑定时就把监听函数绑定上去
+                            if (xhrOnProgress.onprogress && xhr.upload) {
+                                xhr.upload.onprogress = xhrOnProgress.onprogress;
+                            }
+                            return xhr;
+                        }
+                    };
+                    $files.each(function () {
+                        var file = this;
+                        var data = new FormData();
+                        data.append("file", file);
+                        data.append('poi_type',poi_type);
+                        data.append('_token',"{{ csrf_token() }}");
+                        data.append('poi_id',"{{ @$poi->id }}");
+                        $.ajax({
+                            data: data,
+                            type: "POST",
+                            url: "/upload/local-image",
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            xhr:xhrOnProgress(function(e){
+                                var up_interval = setInterval(function () {
+                                    var percent=e.loaded / e.total;//计算百分比
+//                                    console.info(percent);
+                                    if(percent == '1'){
+                                        clearInterval(up_interval);
+                                    }
+                                },100);
+                            }),
+                            success: function (response) {
+                                $this.summernote('insertImage',  response, function ($image) {});
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                console.error("ajaxOptions: " + ajaxOptions + ";thrownError:" + thrownError);
+                            }
+                        })
+                    })
+                }
+            }
         });
         //轮播图
         $('.flexslider').flexslider({

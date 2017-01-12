@@ -76,6 +76,14 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 
+/* 上传文件 */
+Route::group([
+    'prefix' => 'upload',
+    'middleware' => ['auth','admin']
+],function (){
+    Route::match(['GET', 'POST'],'/local-image','ImageController@uploadImageByAjax');
+
+});
 
 Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], function () {
 
