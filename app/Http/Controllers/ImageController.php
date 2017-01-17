@@ -32,6 +32,7 @@ class ImageController extends Controller
     /**
      * @param Request $request
      * @return mixed
+     * 上传文件到七牛
      */
     public function uploadImage(Request $request)
     {
@@ -60,6 +61,9 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    /**
+     * 上传图片到Travel
+     */
     public function uploadImageToTravel(Request $request){
         $this->validate($request, [
             'image' => 'required|image|max:50000'
@@ -73,6 +77,9 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    /**
+     * 上传poi的封面图
+     */
     public function uploadTravelCoverImage(Request $request){
         $this->validate($request, [
             'image' => 'required|image|max:500000'
@@ -86,6 +93,9 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    /**
+     * 上传书籍的封面图
+     */
     public function uploadBookCoverImage(Request $request){
         $this->validate($request, [
             'image' => 'required|image|max:500000'
@@ -99,6 +109,9 @@ class ImageController extends Controller
             return back()->withErrors('上传失败');
         }
     }
+    /**
+     * summernote 编辑器图片上传部分改造
+     */
     public function uploadImageByAjax(Request $request){
         $file = $request->file('file');
         $poi_id = $request->input('poi_id');
