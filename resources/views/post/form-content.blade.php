@@ -11,7 +11,7 @@
 </div>
 <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
     <label for="type" class="control-label">文章类型*</label>
-    <input id="type" type="text" class="form-control" name="title"
+    <input id="type" type="text" class="form-control" name="type"
            value="{{ isset($post) ? $post->type : old('type') }}"
            autofocus>
     @if ($errors->has('type'))
