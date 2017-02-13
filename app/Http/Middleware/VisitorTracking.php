@@ -50,7 +50,16 @@ class VisitorTracking
             'browser_version' => Agent::version( Agent::browser() ),
             'robot'         => null,
         ];
-
+        // 设备类型
+        if(Agent::isMobile()){
+            $_record['device'] = Agent::device().'-Mobile';
+        }else if(Agent::isTablet()){
+            $_record['device'] = Agent::device().'-Tablet';
+        }else if(Agent::isDesktop()){
+            $_record['device'] = Agent::device().'-Desktop';
+        }else{
+            $_record['device'] = Agent::device();
+        }
         if(Agent::isRobot()) {
             $_record['robot'] = Agent::robot();
         }
