@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\VarDumper\Cloner\Data;
+use App\Configuration;
+
+class StudentController extends Controller
+{
+    public function  create(Request $request){
+        $_student = $request->input('_student');
+        $student_id = DB::table('students')->insertGetId($_student);
+        if($student_id){
+            return back()->with('success','信息添加成功！' );
+        }else{
+            return back()->with('error','创建失败' );
+        }
+    }
+    public function edit(Request $request){
+        $_student = $request->input('_student');
+        $_id = intval($request->input('id'));
+        $students = DB::table('students')
+            ->where('id','=',$_id)
+            ->update($_student);
+        if($students){
+            return back()->with('success','信息编辑保存成功！' );
+        }else{
+            return back()->with('success','信息编辑保存失败！' );
+        }
+    }
+
+    public function delete(Request $request){
+        $_id = intval($request->input('id'));
+        $students = DB::table('students')
+            ->where('id','=',$_id)
+            ->delete();
+        if($students){
+            return back()->with('success','删除成功！' );
+        }else{
+            return back()->with('success','删除失败！' );
+        }
+    }
+}

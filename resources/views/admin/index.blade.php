@@ -182,5 +182,23 @@
                 </div>
             </a>
         </div>
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="{{ route('admin.students') }}">
+                <div class="info-box">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="info-icon">
+                                <i class="fa fa-bar-chart fa-fw"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <span>豌豆兼职学生信息管理</span>
+                            <div class="info-title">{{ @$info['students_count'] }}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
 @endsection

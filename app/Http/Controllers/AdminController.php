@@ -72,6 +72,7 @@ class AdminController extends Controller
         $info['image_count'] = $this->imageRepository->count();
         $info['pois_count'] = DB::table('pois')->count();
         $info['books_count'] = DB::table('books')->count();
+        $info['students_count'] = DB::table('students')->count();
         $info['visitors_count'] = DB::table('visitor_tracking')->where('created_at', '>', DB::raw('CURDATE()'))->count(DB::raw('DISTINCT ip'));
 
         return view('admin.index', compact('info'));
@@ -132,5 +133,9 @@ class AdminController extends Controller
     public function books(){
         $books = DB::table('books')->paginate(20);
         return view('admin.books',compact('books'));
+    }
+    public function  students(){
+        $students = DB::table('students')->paginate(20);
+        return view('admin.students',compact('students'));
     }
 }

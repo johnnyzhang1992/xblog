@@ -114,6 +114,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/pois', ['uses' => 'AdminController@pois', 'as' => 'admin.pois']);
     Route::get('/books', ['uses' => 'AdminController@books', 'as' => 'admin.books']);
     Route::get('/visitors', ['uses' => 'VisitorController@visitors', 'as' => 'admin.visitors']);
+    Route::get('/students', ['uses' => 'AdminController@students', 'as' => 'admin.students']);
 
     /**
      * comment
@@ -167,9 +168,24 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::resource('category', 'CategoryController', ['except' => ['index', 'show', 'create']]);
     Route::resource('page', 'PageController', ['except' => ['show', 'index']]);
 
+    /**
+     * students
+     */
+    Route::post('/student/create','StudentController@create');
+    Route::post('/student/edit','StudentController@edit');
+    Route::post('/student/delete','StudentController@delete');
 });
 /*
  * must last
  * use page slug
  */
+/*  */
+Route::group([
+    'prefix' => 'excel',
+    'middleware' => ['auth','admin']
+],function (){
+    Route::get('/export','ExcelController@export');
+    Route::get('/import','ExcelController@import');
+});
+
 Route::get('/{name}', ['uses' => 'PageController@show', 'as' => 'page.show']);
