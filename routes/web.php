@@ -174,6 +174,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::post('/student/create','StudentController@create');
     Route::post('/student/edit','StudentController@edit');
     Route::post('/student/delete','StudentController@delete');
+    Route::post('/student/restore/{id}','StudentController@restore');
 });
 /*
  * must last

@@ -35,11 +35,22 @@ class StudentController extends Controller
         $_id = intval($request->input('id'));
         $students = DB::table('students')
             ->where('id','=',$_id)
-            ->delete();
+            ->update(array('status'=>'delete'));
         if($students){
             return back()->with('success','删除成功！' );
         }else{
             return back()->with('success','删除失败！' );
+        }
+    }
+    public function restore($id,Request $request){
+        $_id = intval($id);
+        $students = DB::table('students')
+            ->where('id','=',$_id)
+            ->update(array('status'=>'active'));
+        if($students){
+            return back()->with('success','恢复成功！' );
+        }else{
+            return back()->with('success','恢复失败！' );
         }
     }
 }

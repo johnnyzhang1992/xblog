@@ -136,6 +136,8 @@ class AdminController extends Controller
     }
     public function  students(){
         $students = DB::table('students')->paginate(20);
-        return view('admin.students',compact('students'));
+        $students_count = DB::table('students')->count();
+
+        return view('admin.students',compact('students','students_count'));
     }
 }

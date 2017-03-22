@@ -6,7 +6,7 @@
             <div class="widget widget-default">
                 <div class="widget-header">
                     <h6>
-                        <i class="fa fa-user fa-fw"></i>用户
+                        <i class="fa fa-user fa-fw"></i>用户({{ @$students_count }})
                         <a href="#"></a>
                         <a id="create_btn" class="btn pull-right" href="#create-student-modal" data-toggle="modal" data-target="#create-student-modal">
                             <i class="fa fa-user"></i>  添加新的用户数据
@@ -16,6 +16,7 @@
                 <div class="widget-body">
                     <table class="table table-hover table-bordered table-responsive">
                         <thead>
+
                         <tr>
                             <th>ID</th>
                             <th>姓名</th>
@@ -27,7 +28,7 @@
                         </thead>
                         <tbody>
                         @foreach($students as $student)
-                            <tr>
+                            <tr @if($student->status == 'delete') class="danger" @endif>
                                 <td>{{ $student->id }}</td>
                                 <td >{{ $student->name }}</td>
                                 <td>{{ $student->school }}</td>
@@ -36,15 +37,24 @@
                                 <td data-id="{{ $student->id }}" data-name="{{ $student->name }}" data-school="{{ $student->school }}"
                                     data-phone="{{ $student->phone }}" data-content="{!! $student->experience !!}">
                                     <div>
-                                        <a href="#edit-student-modal" data-toggle="modal" data-target="#edit-student-modal"
-                                           title="编辑" class="btn btn-info" target="_blank" onclick="edit(this)">
-                                            <i class="fa fa-pencil fa-fw"></i>
-                                        </a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-id="{{ $student->id }}"
-                                                data-placement="top" title="删除"
-                                                data-target="#delete-book-modal" onclick="_delete(this)">
-                                            <i class="fa fa-trash-o  fa-fw"></i>
-                                        </button>
+                                        @if($student->status == 'delete')
+                                            <form style="display: inline" method="post" action="{{ url('admin/student/restore',$student->id) }}">
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="恢复">
+                                                    <i class="fa fa-repeat fa-fw"></i>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <a href="#edit-student-modal" data-toggle="modal" data-target="#edit-student-modal"
+                                               title="编辑" class="btn btn-info" target="_blank" onclick="edit(this)">
+                                                <i class="fa fa-pencil fa-fw"></i>
+                                            </a>
+                                            <button class="btn btn-danger" data-toggle="modal" data-id="{{ $student->id }}"
+                                                    data-placement="top" title="删除"
+                                                    data-target="#delete-book-modal" onclick="_delete(this)">
+                                                <i class="fa fa-trash-o  fa-fw"></i>
+                                            </button>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

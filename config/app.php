@@ -239,7 +239,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'XblogConfig' => App\Facades\XblogConfig::class,
         'Agent'     => Jenssegers\Agent\Facades\Agent::class,
-//        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+//        'Excel'      => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
