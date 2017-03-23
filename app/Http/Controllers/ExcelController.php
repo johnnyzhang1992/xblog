@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Excel;
+
 class ExcelController extends Controller
 {
+    //
     //Excel文件导出功能 By Laravel学院
     public function export(){
         $cellData = [

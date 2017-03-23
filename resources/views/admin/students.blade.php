@@ -11,6 +11,9 @@
                         <a id="create_btn" class="btn pull-right" href="#create-student-modal" data-toggle="modal" data-target="#create-student-modal">
                             <i class="fa fa-user"></i>  添加新的用户数据
                         </a>
+                        <a id="create_btn" class="btn pull-right" href="{{ url('/admin/student/excel') }}" target="_blank">
+                            <i class="fa fa-folder"></i> Excel 导出
+                        </a>
                     </h6>
                 </div>
                 <div class="widget-body">
@@ -120,7 +123,7 @@
                         <div class="form-group clearfix">
                             <label class="col-sm-2 control-label" for="phone">电话: <span style="color:red">*</span></label>
                             <div class="col-sm-10">
-                                <input  type="text" id="phone" name="_student[phone]" placeholder="电话"  class="form-control">
+                                <input  type="text" id="phone" name="_student[phone]"  placeholder="电话"  class="form-control">
                             </div>
                         </div>
                         <div class="form-group clearfix">

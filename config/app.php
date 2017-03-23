@@ -190,7 +190,7 @@ return [
         App\Providers\CacheServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         //Barryvdh\Debugbar\ServiceProvider::class,
-//        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -239,7 +239,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'XblogConfig' => App\Facades\XblogConfig::class,
         'Agent'     => Jenssegers\Agent\Facades\Agent::class,
-//        'Excel'      => Maatwebsite\Excel\Facades\Excel::class,
+        /*
+        * Excel
+       */
+        'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
