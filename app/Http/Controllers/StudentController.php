@@ -80,6 +80,6 @@ class StudentController extends Controller
             $excel->sheet('score', function($sheet) use ($ret){
                 $sheet->rows($ret);
             });
-        })->export('csv');
+        })->export('xls');
     }
 }
