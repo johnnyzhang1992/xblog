@@ -147,4 +147,5 @@ class AuthController extends Controller
         $githubData['url'] = $githubUser->user['html_url'];
         return $githubData;
     }
+
 }

@@ -36,7 +36,14 @@
                                 @endif
                             </div>
                         </div>
-
+                        <div class="form-group code">
+                            <label class="col-md-4 control-label" for="captcha">验证码</label>
+                            <div class="col-md-6">
+                                <input class="tt-text form-control" id="captcha" name="captcha" style="display: inline-block;width: 150px;">
+                                <img id="captcha_image" src="{{captcha_src()}}">
+                                <a href='javascript:void(0);' id="reload_captcha">reload</a>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
@@ -67,4 +74,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $('#reload_captcha').click(function(event){
+            $('#captcha_image').attr('src', $('#captcha_image').attr('src')+'{{ captcha_src() }}');
+        });
+    </script>
 @endsection

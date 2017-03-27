@@ -37,7 +37,7 @@
                                 <td>{{ $student->school }}</td>
                                 <td>{{ $student->phone }}</td>
                                 <td>{!! substr($student->experience,0,30) !!}</td>
-                                <td data-id="{{ $student->id }}" data-name="{{ $student->name }}" data-school="{{ $student->school }}"
+                                <td id="item-{{ $student->id }}" data-id="{{ $student->id }}" data-name="{{ $student->name }}" data-school="{{ $student->school }}"
                                     data-phone="{{ $student->phone }}" data-content="{!! $student->experience !!}">
                                     <div>
                                         @if($student->status == 'delete')
@@ -176,7 +176,7 @@
                         <div class="form-group clearfix">
                             <label class="col-sm-2 control-label" for="edit-experience">兼职经历:</label>
                             <div class="col-sm-10">
-                                <textarea  rows="3" id="edit-experience" name="_student[experience]"  class=" form-control"></textarea>
+                                <textarea  rows="3" id="edit-experience" name="_student[experience]"  class=" form-control">{{ '' }}</textarea>
                             </div>
                         </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -215,21 +215,22 @@
             height: 100 ,
             placeholder: '请输入内容...'
         });
+        $("#edit-experience").summernote({
+            height: 100 ,
+        });
         function edit(th) {
-            var id = $(th).parent().parent().attr('data-id');
-            var name = $(th).parent().parent().attr('data-name');
-            var school = $(th).parent().parent().attr('data-school');
-            var phone = $(th).parent().parent().attr('data-phone');
-            var experience = $(th).parent().parent().attr('data-content');
-            $('#edit-id').attr('value',id);
-            $('#edit-name').val(name);
-            $('#edit-school').val(school);
-            $('#edit-phone').val(phone);
-            $('#edit-experience').html(experience);
-            $("#edit-experience").summernote({
-                height: 100 ,
-                placeholder: '请输入内容...'
-            });
+            $('#edit-id').attr('value',$(th).parent().parent().attr('data-id'));
+            $('#edit-name').val($(th).parent().parent().attr('data-name'));
+            $('#edit-school').val($(th).parent().parent().attr('data-school'));
+            $('#edit-phone').val($(th).parent().parent().attr('data-phone'));
+            if($(th).parent().parent().attr('data-content') == ""){
+                console.info("为空！");
+                $('#edit-experience').html('');
+                $('.note-editable').html('');
+            }else{
+                $('#edit-experience').html($(th).parent().parent().attr('data-content'));
+                $('.note-editable').html($(th).parent().parent().attr('data-content'));
+            }
         }
         function _delete(th) {
             var id = $(th).attr('data-id');

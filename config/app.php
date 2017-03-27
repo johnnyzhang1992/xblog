@@ -191,6 +191,8 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         //Barryvdh\Debugbar\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        //验证码
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -243,6 +245,10 @@ return [
         * Excel
        */
         'Excel'  => Maatwebsite\Excel\Facades\Excel::class,
+        /*
+         * 验证码
+         */
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];
