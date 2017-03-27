@@ -30,7 +30,8 @@ class StudentController extends Controller
         $_student['status'] = 'active';
         $_id = intval($request->input('id'));
         $_phone = $request->input('_student[phone]');
-        if(empty(trim($_phone)) ){
+        print $_phone;
+        if($_phone == '' || $_phone == null || $_phone){
             $_student['phone'] = null;
         }
         $students = DB::table('students')

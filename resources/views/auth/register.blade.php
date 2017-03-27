@@ -68,7 +68,13 @@
                                     @endif
                                 </div>
                             </div>
-
+                            <div class="form-group code">
+                                <label class="col-md-4 control-label" for="captcha">验证码</label>
+                                <div class="col-md-6">
+                                    <input class="tt-text form-control" id="captcha" name="captcha" style="display: inline-block;width: 150px;">
+                                    <img id="captcha_image" onclick="this.src='/captcha/default?'+Math.random()" src="{{captcha_src()}}">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

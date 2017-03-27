@@ -30,6 +30,7 @@ class RegisterController extends Controller
             'name' => 'required|regex:/^[a-zA-Z-_]+$/u|max:16|min:3|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'captcha' => 'required|captcha'
         ],[
             'name.regex' => "Username can only contains letter,number or -,_",
         ]);
