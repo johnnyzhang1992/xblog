@@ -35,7 +35,7 @@
                             <div class="col-sm-6" style="padding-left: 0">
                                 <label class="col-sm-4 control-label" for="tag">豆瓣ID：<span style="color:red">*</span></label>
                                 <div class="col-sm-8">
-                                    <input  type="text" id="tag" name="_book[bouban_id]"  class="form-control">
+                                    <input  type="text" id="tag" name="_book[douban_id]"  class="form-control">
                                 </div>
                             </div>
                         </div>
