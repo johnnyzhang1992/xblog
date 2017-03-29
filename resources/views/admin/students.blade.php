@@ -36,7 +36,7 @@
                                 <td >{{ $student->name }}</td>
                                 <td>{{ $student->school }}</td>
                                 <td>{{ $student->phone }}</td>
-                                <td>{!! substr($student->experience,0,30) !!}</td>
+                                <td>{!! substr($student->experience,0,50) !!}</td>
                                 <td id="item-{{ $student->id }}" data-id="{{ $student->id }}" data-name="{{ $student->name }}" data-school="{{ $student->school }}"
                                     data-phone="{{ $student->phone }}" data-content="{!! $student->experience !!}">
                                     <div>
@@ -158,25 +158,25 @@
                         <div class="form-group clearfix">
                             <label class="col-sm-2 control-label" for="edit-name">姓名: <span style="color:red">*</span></label>
                             <div class="col-sm-10">
-                                <input  type="text" id="edit-name" name="_student[name]" placeholder="姓名"  class="form-control">
+                                <input  type="text" id="edit-name" name="student[name]" placeholder="姓名"  class="form-control">
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <label class="col-sm-2 control-label" for="edit-school">学校: <span style="color:red">*</span></label>
                             <div class="col-sm-10">
-                                <input  type="text" id="edit-school" name="_student[school]" placeholder="学校"  class="form-control">
+                                <input  type="text" id="edit-school" name="student[school]" placeholder="学校"  class="form-control">
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <label class="col-sm-2 control-label" for="edit-phone">电话: <span style="color:red">*</span></label>
                             <div class="col-sm-10">
-                                <input  type="text" id="edit-phone" name="_student[phone]" placeholder="电话"  class="form-control">
+                                <input  type="number" id="edit-phone" name="student[phone]" placeholder="电话"  class="form-control">
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <label class="col-sm-2 control-label" for="edit-experience">兼职经历:</label>
                             <div class="col-sm-10">
-                                <textarea  rows="3" id="edit-experience" name="_student[experience]"  class=" form-control">{{ '' }}</textarea>
+                                <textarea  rows="3" id="edit-experience" name="student[experience]"  class=" form-control">{{ '' }}</textarea>
                             </div>
                         </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

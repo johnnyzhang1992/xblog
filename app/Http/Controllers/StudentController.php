@@ -13,7 +13,7 @@ class StudentController extends Controller
     public function  create(Request $request){
         $_student = $request->input('_student');
         $_student['status'] = 'active';
-        $_phone = $request->input('_student[phone]');
+        $_phone = $_student['phone'];
         if(empty(trim($_phone)) ){
             $_student['phone'] = null;
         }
@@ -26,21 +26,20 @@ class StudentController extends Controller
     }
     public function edit(Request $request){
 
-        $_student = $request->input('_student');
+        $_student = $request->input('student');
         $_student['status'] = 'active';
         $_id = intval($request->input('id'));
-        $_phone = $request->input('_student[phone]');
-        print $_phone;
-        if($_phone == '' || $_phone == null || $_phone){
+        $_phone = $_student['phone'];
+        if(empty($_phone)){
             $_student['phone'] = null;
         }
         $students = DB::table('students')
             ->where('id','=',$_id)
             ->update($_student);
         if($students){
-            return back()->with('success','信息编辑保存成功！' );
+            return back()->with('success','信息编辑保存成功！');
         }else{
-            return back()->with('success','信息编辑保存失败！phone:'.$_student['phone'] );
+            return back()->with('success','信息编辑保存失败！phone:'.$_phone );
         }
     }
 
