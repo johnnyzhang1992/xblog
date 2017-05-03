@@ -17,7 +17,7 @@ class MapController extends Controller
     public function __construct(MapRepository $mapRepository)
     {
         $this->mapRepository = $mapRepository;
-        $this->middleware(['auth', 'admin']);
+//        $this->middleware(['auth', 'admin']);
     }
 
     public function store(Request $request)
@@ -38,5 +38,8 @@ class MapController extends Controller
         if (is_null($map))
             abort(404);
         return $map;
+    }
+    public function index(){
+        return view('map.index');
     }
 }

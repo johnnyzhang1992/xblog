@@ -189,5 +189,10 @@ Route::group([
     Route::get('/export','ExcelController@export');
     Route::get('/import','ExcelController@import');
 });
-
+/*
+ * google map
+ */
+Route::group(['prefix' => 'map'],function (){
+    Route::get('/','MapController@index');
+});
 Route::get('/{name}', ['uses' => 'PageController@show', 'as' => 'page.show']);
