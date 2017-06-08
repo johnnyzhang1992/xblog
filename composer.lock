@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0111a403ce46e62a1cf09938cd2fec0e",
-    "content-hash": "bc650413c8a1dd8ef1590d668862585e",
+    "hash": "4a83125dd2595688042f753962babd81",
+    "content-hash": "9b7ce6a064aab8a6168fea5c4814e7aa",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -211,6 +211,54 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "e421083458/wxxcx",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/e421083458/wxxcx.git",
+                "reference": "99d5db569f726fcac70d7aecd8dbb5912ac63eee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/e421083458/wxxcx/99d5db569f726fcac70d7aecd8dbb5912ac63eee.zip",
+                "reference": "99d5db569f726fcac70d7aecd8dbb5912ac63eee",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5",
+                "ixudra/curl": ">=6.3.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "E421083458\\Wxxcx": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Neil",
+                    "email": "e421083458@163.com",
+                    "homepage": "http://blog.csdn.net/e421083458",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A WeChat applet plugins for Laravel.",
+            "keywords": [
+                "laravel",
+                "wechat",
+                "wxxcx"
+            ],
+            "time": "2017-04-07 08:56:43"
         },
         {
             "name": "erusev/parsedown",
@@ -537,6 +585,86 @@
                 "watermark"
             ],
             "time": "2017-02-04 10:37:19"
+        },
+        {
+            "name": "iwanli/wxxcx",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lanceWan/wxxcx.git",
+                "reference": "c6a1c4a62ac5028f99245fa5bcb4d6a8fbddc655"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/lanceWan/wxxcx/c6a1c4a62ac5028f99245fa5bcb4d6a8fbddc655.zip",
+                "reference": "c6a1c4a62ac5028f99245fa5bcb4d6a8fbddc655",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iwanli\\Wxxcx\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "晚黎",
+                    "email": "ibanya@126.com"
+                }
+            ],
+            "description": "A WeChat applet (xiaochengxu) plugins for Laravel 5.",
+            "time": "2017-06-08 03:13:33"
+        },
+        {
+            "name": "ixudra/curl",
+            "version": "6.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ixudra/curl.git",
+                "reference": "0b801533e9ac5acdb2f0d69984c8b495deada210"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/ixudra/curl/0b801533e9ac5acdb2f0d69984c8b495deada210.zip",
+                "reference": "0b801533e9ac5acdb2f0d69984c8b495deada210",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ixudra\\Curl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Oris",
+                    "email": "jan.oris@ixudra.be"
+                }
+            ],
+            "description": "Custom PHP Curl library for the Laravel 5 framework - developed by Ixudra",
+            "homepage": "http://ixudra.be",
+            "keywords": [
+                "Ixudra",
+                "curl",
+                "laravel"
+            ],
+            "time": "2017-03-29 08:23:59"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3246,7 +3374,7 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {

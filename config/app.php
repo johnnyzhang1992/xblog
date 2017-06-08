@@ -193,6 +193,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         //验证码
         Mews\Captcha\CaptchaServiceProvider::class,
+        //微信小程序
+        Iwanli\Wxxcx\WxxcxServiceProvider::class,
     ],
 
     /*

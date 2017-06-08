@@ -195,4 +195,8 @@ Route::group([
 Route::group(['prefix' => 'map'],function (){
     Route::get('/','MapController@index');
 });
+/*
+ * 微信小程序
+ */
+Route::get('/wxxcx', 'WxxcxController@getWxUserInfo');
 Route::get('/{name}', ['uses' => 'PageController@show', 'as' => 'page.show']);

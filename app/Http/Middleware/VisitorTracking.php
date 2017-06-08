@@ -39,8 +39,8 @@ class VisitorTracking
         }
 
         $_record = [
-            'from_url'      => \URL::previous(),
-            'to_url'        => $request->fullUrl(),
+            'from_url'      => substr(\URL::previous(),0,255),
+            'to_url'        => substr($request->fullUrl(),0,255),
             'session_id'    => \Session::getId(),
             'ip'            => $_ip,
             'device'        => Agent::device(),
