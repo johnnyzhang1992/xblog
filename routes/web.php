@@ -198,5 +198,12 @@ Route::group(['prefix' => 'map'],function (){
 /*
  * 微信小程序
  */
-Route::get('/wxxcx', 'WxxcxController@getWxUserInfo');
+Route::group(['prefix' => 'wxxcx'],function (){
+    Route::match(['GET', 'POST'],'/userinfo','WxxcxController@getWxUserInfo');
+    Route::get('/rundata','WxxcxController@getWxUserRunData');
+    Route::get('/run','WxxcxController@WxUserRunData');
+    Route::get('/run','WxxcxController@WxUserRunData');
+});
+
+
 Route::get('/{name}', ['uses' => 'PageController@show', 'as' => 'page.show']);
