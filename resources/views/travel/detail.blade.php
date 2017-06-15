@@ -35,7 +35,7 @@
                         <a class="upload-cover-image" role="button" onclick="javascript:$('#modal-upload-image').modal();return false;"><i class="fa fa-camera"></i>上传封面图片</a>
                     @endif
                     <div class="head-content">
-                        <h2>{{ @$poi->poi_name }} <small>更新时间：{{ date('y-m-d',time($poi->update_at)) }}</small><small style="margin:0 5px">|</small><small>浏览量：{{ $poi->view_count }}</small></h2>
+                        <h2>{{ @$poi->poi_name }} <small>更新时间：{{ date('y-m-d',time($poi->updated_at)) }}</small><small style="margin:0 5px">|</small><small>浏览量：{{ $poi->view_count }}</small></h2>
                         <p>
                             <span class="fa fa-map-marker poi-icons"></span>
                             {{@$poi->address}}

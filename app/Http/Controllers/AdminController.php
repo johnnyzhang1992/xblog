@@ -73,7 +73,7 @@ class AdminController extends Controller
         $info['pois_count'] = DB::table('pois')->count();
         $info['books_count'] = DB::table('books')->count();
 //        $info['students_count'] = DB::table('students')->count();
-        $info['visitors_count'] = DB::table('visitor_tracking')->where('created_at', '>', DB::raw('CURDATE()'))->count(DB::raw('DISTINCT ip'));
+        $info['visitors_count'] = DB::table('visitor_tracking')->where('created_at', '>', DB::raw('CURRENT_DATE'))->count(DB::raw('DISTINCT ip'));
 
         return view('admin.index', compact('info'));
     }

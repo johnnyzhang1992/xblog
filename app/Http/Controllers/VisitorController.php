@@ -34,12 +34,12 @@ class VisitorController extends Controller
 //        ];
         $_visitors = DB::table('visitor_tracking')
 //            ->select($_fields)
-            ->where([['created_at', '>', DB::raw('CURDATE()')]])
+            ->where([['created_at', '>', DB::raw('CURRENT_DATE')]])
             ->orderBy('created_at', 'desc')
             ->distinct()
             ->get();
         $_visitors_count = DB::table('visitor_tracking')
-            ->where([['created_at', '>', DB::raw('CURDATE()')]])
+            ->where([['created_at', '>', DB::raw('CURRENT_DATE')]])
             ->count(DB::raw('DISTINCT ip'));
 
         return view('admin.visitors')
