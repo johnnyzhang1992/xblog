@@ -49,6 +49,7 @@ class VisitorTracking
             'browser'       => Agent::browser(),
             'browser_version' => Agent::version( Agent::browser() ),
             'robot'         => null,
+            'created_at'   =>gmdate("Y-m-d H:i:s", time())
         ];
         // 设备类型
         if(Agent::isMobile()){

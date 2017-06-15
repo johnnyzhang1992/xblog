@@ -114,7 +114,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     Route::get('/pois', ['uses' => 'AdminController@pois', 'as' => 'admin.pois']);
     Route::get('/books', ['uses' => 'AdminController@books', 'as' => 'admin.books']);
     Route::get('/visitors', ['uses' => 'VisitorController@visitors', 'as' => 'admin.visitors']);
-    Route::get('/students', ['uses' => 'AdminController@students', 'as' => 'admin.students']);
+//    Route::get('/students', ['uses' => 'AdminController@students', 'as' => 'admin.students']);
 
     /**
      * comment
@@ -171,11 +171,29 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth', 'admin']]], functio
     /**
      * students
      */
-    Route::post('/student/create','StudentController@create');
-    Route::post('/student/edit','StudentController@edit');
-    Route::post('/student/delete','StudentController@delete');
-    Route::post('/student/restore/{id}','StudentController@restore');
-    Route::get('/student/excel','StudentController@excel');
+//    Route::post('/student/create','StudentController@create');
+//    Route::post('/student/edit','StudentController@edit');
+//    Route::post('/student/delete','StudentController@delete');
+//    Route::post('/student/restore/{id}','StudentController@restore');
+//    Route::get('/student/excel','StudentController@excel');
+    /**
+     * excel 导出数据库信息
+     */
+//    Route::get('/excel/books','ExcelController@books');
+//    Route::get('/excel/categories','ExcelController@categories');
+//    Route::get('/excel/comments','ExcelController@comments');
+//    Route::get('/excel/configurations','ExcelController@configurations');
+//    Route::get('/excel/files','ExcelController@files');
+//    Route::get('/excel/maps','ExcelController@maps');
+//    Route::get('/excel/pages','ExcelController@pages');
+//    Route::get('/excel/pois','ExcelController@pois');
+//    Route::get('/excel/sports','ExcelController@sports');
+//    Route::get('/excel/posts','ExcelController@posts');
+//    Route::get('/excel/post_tag','ExcelController@post_tag');
+//    Route::get('/excel/tags','ExcelController@tags');
+//    Route::get('/excel/travel','ExcelController@travel');
+//    Route::get('/excel/travel_files','ExcelController@travel_files');
+//    Route::get('/excel/users','ExcelController@users');
 });
 /*
  * must last

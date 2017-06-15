@@ -40,7 +40,7 @@ class WxxcxController extends Controller
         //获取解密后的用户信息
         $user = json_decode($this->wxxcx->getUserInfo($encryptedData, $iv));
         $_user['name'] = $user->nickName;
-        $_user['email'] = null;
+        $_user['email'] = $user->openId.'@johnnyzhang.com';
         $_user['password'] =  bcrypt('123456');
         $_user['avatar'] = $user->avatarUrl;
         $_user['remember_token'] = $user->openId;
