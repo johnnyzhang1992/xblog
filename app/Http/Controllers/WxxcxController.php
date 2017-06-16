@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 use Iwanli\Wxxcx\Wxxcx;
+use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,18 +80,21 @@ class WxxcxController extends Controller
         // 然后再获取的最新信息对比
         // 把找到的对应数据后面的数据
         // 保存到数据库
+        $_old_step = null;
         if($userInfo){
             $open_id = DB::table('users')->where('id','=',$id)->value('remember_token');
-//             DB::table('sports')->where('remember_token','=',$open_id)->update(array('more_info'=>$_runData,'updated_at'=>date('Y-m-d H:i:s')));
-            if ($open_id >0) {
+            DB::table('sports')->where('remember_token','=',$open_id)->update(array('more_info'=>$_runData,'updated_at'=>date('Y-m-d H:i:s')));
+            if ($open_id) {
                 //查看是否在数据库里面存在记录
-                $_u = DB::table('sports')->where('remember_token','=',$open_id)->get();
-                $_new_step = json_decode($_u[0])->stepInfoList;
+                $_u = DB::table('sports')->where('remember_token','=',$open_id)->value('step');
+                $_s = DB::table('sports')->where('remember_token','=',$open_id)->value('more_info');
+                $a = json_decode($_u);
+                $_new_step = json_decode($_s)->stepInfoList;
                 $_new_count = count($_new_step);
+                $_old_step = json_decode($_u)->stepInfoList;
+                $_old_count = count($_old_step);
                 if($_u){
                     //如果库里存在旧记录
-                    $_old_step = json_decode($_u[0])->stepInfoList;
-                    $_old_count = count($_old_step);
                     //更新数据
 //                     查看新旧两次数据是否相同
                     if($_new_step[$_new_count-1]->timestamp == $_old_step[$_old_count-1]->timestamp){
@@ -98,55 +102,60 @@ class WxxcxController extends Controller
                         // 对比数据是否相同
                         if($_new_step[$_new_count-1]->step !== $_old_step[$_old_count-1]->step){
                             $_old_step[$_old_count-1]->step = $_new_step[$_new_count-1]->step;
-                            DB::table('sports')->where('remember_token','=',$open_id)->update(array('updated_at'=>date('Y-m-d H:i:s'),'step'=>$_old_step));
+                            $a->stepInfoList = $_old_step;
+                            DB::table('sports')->where('remember_token','=',$open_id)->update(array('updated_at'=>date('Y-m-d H:i:s'),'step'=>json_encode($a)));
                         }
+                        return json_encode($a);
                     }else{
+
                         // 如果最后一条数据的时间戳不一样
                         // 在新数据中查找是否存在此时间戳{ole_one}
                         $old_last_time = $_old_step[$_old_count-1]->timestamp;
                         $num = -1;
-                        for($j=0;$j<$_new_count;$j++){
-                            // 遍历新数据
-                            // 比对时间戳
-                            if($old_last_time == $_new_step[$j]->timestamp){
+                        foreach ($_new_step as $index=>$_step){
+                            if($old_last_time == $_step->timestamp){
                                 // 如果存在记录此时的序列
-                                $num = $j+1;
+                                $num = $index;
                             }
-                            break;
                         }
                         if($num !== -1){
                             // 将数据导入数据库
-                            $obj = [];
+                            $_num = 0;
                             // 获取old最后一条时间戳后面的数据
-                            for($k=$num;$k<$_new_count;$k++){
-                                $_obj = [];
-                                $_obj['time'] =  $_new_step[$k]->timestamp;
-                                $_obj['step'] = $_new_step[$k]->step;
-                                array($obj,$_obj);
+                            foreach ($_new_step as $index=>$_step){
+                                if($index > $num ){
+                                    $_old_step[$_old_count +$_num]['timestamp'] = $_step->timestamp;
+                                    $_old_step[$_old_count +$_num]['step'] = $_step->step;
+                                    $_num ++;
+                                }
                             }
-                            array_push($_old_step,$obj);
-                            DB::table('sports')->where('remember_token','=',$open_id)->update(array('step'=>$_old_step,'updated_at'=>date("Y-m-d H:i:s")));
+                            info('-----------step_count:'.count($_old_step).'----------------');
+                            $a->stepInfoList = $_old_step;
+                            DB::table('sports')->where('remember_token','=',$open_id)->update(array(
+                                   'step'=>json_encode($a),'more_info'=>null,'updated_at'=>date("Y-m-d H:i:s")
+                            ));
+                            info('-----------Done----------------');
                         }
+                        return json_encode($a);
                     }
+
                 }else{
                     //如果，库里没有记录，数据入库
                     $_step['user_name'] = DB::table('users')->where('id','=',$id)->value('name');
                     $_step['remember_token'] = $open_id;
                     $_step['step'] = $_runData;
                     DB::table('sports')->insertGetId($_step);
+                    return $_runData;
                 }
             }
         }
-
-
-        return $_runData;
     }
     public function WxUserRunData(){
         $open_id = DB::table('users')->where('id','=',13)->value('remember_token');
 
         $_u = DB::table('sports')->where('remember_token','=',$open_id)->value('step');
         $step = json_decode($_u)->stepInfoList;
-        return $step;
+        return count($step);
     }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);
