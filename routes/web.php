@@ -220,7 +220,10 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::match(['GET', 'POST'],'/userinfo','WxxcxController@getWxUserInfo');
     Route::get('/rundata','WxxcxController@getWxUserRunData');
     Route::get('/run','WxxcxController@WxUserRunData');
-    Route::get('/run','WxxcxController@WxUserRunData');
+    /*
+     * 个人信息设置部分
+     */
+    Route::get('/set/name','WxxcxController@updateName');
 });
 
 

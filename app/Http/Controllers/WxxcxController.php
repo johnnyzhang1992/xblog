@@ -48,15 +48,16 @@ class WxxcxController extends Controller
         $_user['register_form'] = 'weixin';
         //判断用户是否存在
         $_u = DB::table('users')->where('remember_token','=',$user->openId)->get();
-
+        $user_info = [];
         if(!$_u){
             //用户信息入库
            $user_id =  DB::table('users')->insertGetId($_user);
         }else{
             DB::table('users')->where('remember_token','=',$user->openId)->update(array('meta'=>$systemInfo));
-            $user_id = $_u[0]->id;
+            $user_info['user_id'] = $_u[0]->id;
+            $user_info['user_name'] = $_u[0]->name;
         }
-        return $user_id;
+        return $user_info;
     }
 
     /**
@@ -150,12 +151,21 @@ class WxxcxController extends Controller
             }
         }
     }
-    public function WxUserRunData(){
-        $open_id = DB::table('users')->where('id','=',13)->value('remember_token');
 
-        $_u = DB::table('sports')->where('remember_token','=',$open_id)->value('step');
-        $step = json_decode($_u)->stepInfoList;
-        return count($step);
+    /**
+     * 更新用户昵称
+     */
+    public function updateName(){
+        $id = request('id','');
+        $name = request('name','');
+        $msg = '';
+        if($id && $name){
+             DB::table('users')->where('id','=',$id)->update(array('name'=>$name));
+             $msg = 'success';
+        }else{
+            $msg = 'fail';
+        }
+        return $msg;
     }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);
