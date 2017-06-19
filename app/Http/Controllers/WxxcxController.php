@@ -56,6 +56,8 @@ class WxxcxController extends Controller
             DB::table('users')->where('remember_token','=',$user->openId)->update(array('meta'=>$systemInfo));
             $user_info['user_id'] = $_u[0]->id;
             $user_info['user_name'] = $_u[0]->name;
+            $user_info['signature'] = $_u[0]->description;
+            $user_info['address'] = json_decode($_u[0]->address);
         }
         return $user_info;
     }
@@ -167,6 +169,41 @@ class WxxcxController extends Controller
         }
         return $msg;
     }
+
+    /**
+     * 更新用户个性签名
+     * @return string
+     */
+    public function updateSignature(){
+        $id = request('id','');
+        $signature = request('signature','');
+        $msg = '';
+        if($id && $signature){
+             DB::table('users')->where('id','=',$id)->update(array('description'=>$signature));
+             $msg = 'success';
+        }else{
+            $msg = 'fail';
+        }
+        return $msg;
+    }
+
+    /**
+     * 更新用户地址
+     * @return string
+     */
+    public function updateAddress(){
+        $id = request('id','');
+        $address = request('address','');
+        $msg = '';
+        if($id && $address){
+            DB::table('users')->where('id','=',$id)->update(array('address'=>$address));
+            $msg = 'success';
+        }else{
+            $msg = 'fail';
+        }
+        return $msg;
+    }
+
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);
 //        $decodeData = "";

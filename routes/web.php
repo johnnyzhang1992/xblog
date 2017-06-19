@@ -224,6 +224,8 @@ Route::group(['prefix' => 'wxxcx'],function (){
      * 个人信息设置部分
      */
     Route::get('/set/name','WxxcxController@updateName');
+    Route::get('/set/address','WxxcxController@updateAddress');
+    Route::get('/set/signature','WxxcxController@updateSignature');
 });
 
 
