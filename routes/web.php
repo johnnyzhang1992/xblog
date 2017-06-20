@@ -226,6 +226,11 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/set/name','WxxcxController@updateName');
     Route::get('/set/address','WxxcxController@updateAddress');
     Route::get('/set/signature','WxxcxController@updateSignature');
+    /*
+     * 阅读部分
+     */
+    Route::get('/get/book','WxxcxController@getBook');
+    Route::get('/get/book_detail','WxxcxController@getBookDetail');
 });
 
 

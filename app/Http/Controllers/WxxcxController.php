@@ -204,6 +204,37 @@ class WxxcxController extends Controller
         return $msg;
     }
 
+    /**
+     * 获取阅读的数据
+     */
+    public function getBook(){
+        $books = DB::table('books')
+            ->orderBy('id', 'asc')
+            ->get();
+        if(isset($books) && $books){
+            return $books;
+        }else{
+            $books = '无内容！';
+            return $books;
+        }
+    }
+    /**
+     * 获取单个书籍的详细信息
+     */
+    public function getBookDetail(){
+        $id = request('id','');
+        $book_id = request('book_id','');
+        $books = DB::table('books')
+            ->where('created_id','=',$id)
+            ->where('id','=',$book_id)
+            ->get();
+        if(isset($books) && $books){
+            return $books;
+        }else{
+            $books = '无内容！';
+            return $books;
+        }
+    }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);
 //        $decodeData = "";
