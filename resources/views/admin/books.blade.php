@@ -16,9 +16,9 @@
                         <tr>
                             <th>ID</th>
                             <th>书籍名字</th>
-                            <th>豆瓣地址</th>
-                            <th>亚马逊地址</th>
+                            <th>作者</th>
                             <td>状态</td>
+                            <td>创建者</td>
                             {{--<th>slug</th>--}}
                             <th>action</th>
                         </tr>
@@ -39,9 +39,9 @@
                             <tr class="{{ $class }}">
                                 <td>{{ $book->id }}</td>
                                 <td>{{ $book->book_name }}</td>
-                                <td>{{ $book->douban_url }}</td>
-                                <td>{{ $book->kindle_url }}</td>
+                                <td>{{ $book->book_author }}</td>
                                 <td>{{ $status }}</td>
+                                <td>{{ $book->created_id }}</td>
                                 <td>
                                     <div>
                                         <a {{ $book->status == 'delete'?'disabled':'' }} href="{{ $book->status == 'delete'?'javascript:void(0)':url('admin/book/edit',$book->id) }}"

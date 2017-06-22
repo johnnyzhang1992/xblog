@@ -230,6 +230,7 @@ Route::group(['prefix' => 'wxxcx'],function (){
      * 阅读部分
      */
     Route::get('/get/book','WxxcxController@getBook');
+    Route::get('/save/book','WxxcxController@createBook');
     Route::get('/get/book_detail','WxxcxController@getBookDetail');
 });
 

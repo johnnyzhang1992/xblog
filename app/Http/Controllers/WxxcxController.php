@@ -235,6 +235,37 @@ class WxxcxController extends Controller
             return $books;
         }
     }
+    /**
+     * 添加新书
+     */
+    public function createBook(){
+        $_id = request('id','');
+        $_book['book_name'] = request('book_name');
+        $_book['book_author'] = request('book_author');
+        $_book['douban_id'] = request('douban_id');
+        $_book['tag'] = '小说';
+        $_book['content'] = request('content');
+        $_book['cover_image'] = request('cover_image');
+        $_book['year'] = date('Y');
+        $_book['status'] = 'finish';
+        $_book['created_at'] = $_id;
+        $_book['created_at'] = date('Y-m-d H:i:s');
+        $_book['updated_at'] = date('Y-m-d H:i:s');
+        $book_id = DB::table('books')->insertGetId($_book);
+        $configurations['configurable_id'] = $book_id;
+        $configurations['configurable_type'] = 'App\Book';
+        $configurations['config']['comment_type'] ='default';
+        $configurations['config']['comment_info'] = 'default';
+        $configurations['config'] = json_encode($configurations['config']);
+        DB::table('configurations')->insert($configurations);
+        if($book_id){
+            $msg = 'success';
+
+        }else{
+            $msg = 'fail';
+        }
+        return $msg;
+    }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);
 //        $decodeData = "";
