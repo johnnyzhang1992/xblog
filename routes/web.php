@@ -232,6 +232,13 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/get/book','WxxcxController@getBook');
     Route::get('/save/book','WxxcxController@createBook');
     Route::get('/get/book_detail','WxxcxController@getBookDetail');
+    /*
+     * posts
+     */
+    Route::get('/get/posts','WxxcxController@getPosts');
+    Route::get('/get/post_detail','WxxcxController@getPostDetail');
+    Route::get('/get/pois','WxxcxController@getPois');
+    Route::get('/get/poi_detail','WxxcxController@getPoiDetail');
 });
 
 

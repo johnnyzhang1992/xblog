@@ -24,11 +24,11 @@ class TravelController extends Controller
         return view('travel.index');
     }
     public function poi_count(){
-        $count = DB::table('travel')->count();
+        $count = DB::table('pois')->count();
         return $count;
     }
     public function get_data(){
-        $_data = DB::table('travel')
+        $_data = DB::table('pois')
             ->get();
         return json_encode($_data);
     }

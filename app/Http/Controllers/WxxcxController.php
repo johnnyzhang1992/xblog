@@ -41,6 +41,7 @@ class WxxcxController extends Controller
         //获取解密后的用户信息
         $user = json_decode($this->wxxcx->getUserInfo($encryptedData, $iv));
         $_user['name'] = $user->nickName;
+        $_user['user_name'] = $user->nickName;
         $_user['email'] = $user->openId.'@johnnyzhang.cn';
         $_user['password'] =  bcrypt('123456');
         $_user['avatar'] = $user->avatarUrl;
@@ -222,10 +223,10 @@ class WxxcxController extends Controller
      * 获取单个书籍的详细信息
      */
     public function getBookDetail(){
-        $id = request('id','');
+//        $id = request('id','');
         $book_id = request('book_id','');
         $books = DB::table('books')
-            ->where('created_id','=',$id)
+//            ->where('created_id','=',$id)
             ->where('id','=',$book_id)
             ->get();
         if(isset($books) && $books){
@@ -265,6 +266,76 @@ class WxxcxController extends Controller
             $msg = 'fail';
         }
         return $msg;
+    }
+    /**
+     *  获取posts
+     */
+    public function getPosts(){
+        $posts = DB::table('posts')
+            ->where('posts.type','=','zaji')
+            ->leftJoin('categories','categories.id','=','posts.category_id')
+            ->leftJoin('users','users.id','=','posts.user_id')
+            ->select('categories.name','users.user_name','posts.*')
+            ->orderBy('id', 'asc')
+            ->get();
+        if(isset($posts) && $posts){
+            return $posts;
+        }else{
+            $posts = '无内容！';
+            return $posts;
+        }
+    }
+    /**
+     *  获取post详细信息
+     */
+    public function getPostDetail(){
+        $post_id = request('post_id','');
+        $post = DB::table('posts')
+            ->where('posts.id','=',$post_id)
+            ->leftJoin('categories','categories.id','=','posts.category_id')
+            ->leftJoin('users','users.id','=','posts.user_id')
+            ->select('categories.name','users.user_name','posts.*')
+            ->get();
+        if(isset($post) && $post){
+            return $post;
+        }else{
+           $post = null;
+           return $post;
+        }
+    }
+    /**
+     * 获取pois
+     */
+    public function getPois(){
+        $pois = DB::table('pois')
+            ->leftJoin('users','users.id','=','pois.user_id')
+            ->select('users.user_name','pois.*')
+            ->orderBy('pois.created_at', 'asc')
+            ->get();
+        if(isset($pois) && $pois){
+            return $pois;
+        }else{
+            $pois = '无内容！';
+            return $pois;
+        }
+    }
+    /**
+     * 获取poi的详细信息
+     */
+    public function getPoiDetail(){
+//        $id = request('id','');
+        $poi_id = request('poi_id','');
+        $poi = DB::table('pois')
+            ->leftJoin('users','users.id','=','pois.user_id')
+            ->where('pois.id','=',$poi_id)
+            ->select('users.user_name','pois.*')
+            ->get();
+        if(isset($poi) && $poi){
+            return $poi;
+        }else{
+            $poi = null;
+            return $poi;
+        }
     }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);
