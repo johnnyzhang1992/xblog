@@ -288,6 +288,7 @@ class WxxcxController extends Controller
     /**
      *  获取post详细信息
      */
+
     public function getPostDetail(){
         $post_id = request('post_id','');
         $post = DB::table('posts')
@@ -302,6 +303,35 @@ class WxxcxController extends Controller
            $post = null;
            return $post;
         }
+    }
+    /**
+     * 保存新的post
+     * @return string
+     */
+    public function savePost(){
+        $user_id = request('id','');
+        $title = request('title','');
+        $content = request('content','');
+        $des = request('des','');
+        $msg = '';
+        $post['user_id'] = $user_id;
+        $post['category_id'] = 9;
+        $post['title'] = $title;
+        $post['description'] = $des;
+        $post['slug'] = 'post-'.$user_id.'-'.date('Y-m-d').'-'.str_random(5);
+        $post['content'] = $content;
+        $post['html_content'] = $content;
+        $post['type'] = 'zaji';
+        $post['created_at'] = date('Y-m-d H:i:s');
+        $post['updated_at'] = date('Y-m-d H:i:s');
+        $post['published_at'] = date('Y-m-d H:i:s');
+        $id = DB::table('posts')->insertGetId($post);
+        if($id){
+            $msg = 'success';
+        }else{
+            $msg = 'fail';
+        }
+        return $msg;
     }
     /**
      * 获取pois

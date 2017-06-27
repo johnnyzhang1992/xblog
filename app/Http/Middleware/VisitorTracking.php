@@ -79,9 +79,11 @@ class VisitorTracking
             $_record['username'] = '游客';
             $_record['email'] = '';
         }
+        if(!$_record['robot']){
+            DB::table('visitor_tracking')
+                ->insert($_record);
+        }
 
-        DB::table('visitor_tracking')
-            ->insert($_record);
 
         return $next($request);
     }
