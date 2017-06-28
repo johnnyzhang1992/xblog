@@ -206,6 +206,22 @@ class WxxcxController extends Controller
     }
 
     /**
+     * 获取用户各种信息的总数
+     */
+    public function userCount(){
+        $user_id = request('user_id','');
+        $book_count = DB::table('books')->where('created_id','=',$user_id)->count();
+        $posts_count = DB::table('posts')->where('user_id','=',$user_id)->count();
+        $pois_count = DB::table('pois')->where('user_id','=',$user_id)->count();
+        $record_count = DB::table('records')->where('user_id','=',$user_id)->count();
+        $count = [];
+        $count['book'] = $book_count;
+        $count['posts'] = $posts_count;
+        $count['pois'] = $pois_count;
+        $count['records'] = $record_count;
+        return compact('count');
+    }
+    /**
      * 获取阅读的数据
      */
     public function getBook(){
@@ -277,7 +293,27 @@ class WxxcxController extends Controller
             ->leftJoin('categories','categories.id','=','posts.category_id')
             ->leftJoin('users','users.id','=','posts.user_id')
             ->select('categories.name','users.user_name','posts.*')
-            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'asc')
+            ->get();
+        if(isset($posts) && $posts){
+            return $posts;
+        }else{
+            $posts = '无内容！';
+            return $posts;
+        }
+    }
+    /**
+     * 获取某个人的所有posts
+     */
+    public function getUserAllPosts(){
+        $user_id = request('user_id','');
+        $posts = DB::table('posts')
+            ->where('posts.type','=','story')
+            ->where('posts.user_id','=',$user_id)
+            ->leftJoin('categories','categories.id','=','posts.category_id')
+            ->leftJoin('users','users.id','=','posts.user_id')
+            ->select('categories.name','users.user_name','posts.*')
+            ->orderBy('created_at', 'desc')
             ->get();
         if(isset($posts) && $posts){
             return $posts;
@@ -357,6 +393,24 @@ class WxxcxController extends Controller
             ->leftJoin('users','users.id','=','pois.user_id')
             ->select('users.user_name','pois.*')
             ->orderBy('pois.created_at', 'asc')
+            ->get();
+        if(isset($pois) && $pois){
+            return $pois;
+        }else{
+            $pois = '无内容！';
+            return $pois;
+        }
+    }
+    /**
+     * 获取某个人的所有pois
+     */
+    public function getUserAllPois(){
+        $user_id = request('user_id','');
+        $pois = DB::table('pois')
+            ->where('pois.user_id','=',$user_id)
+            ->leftJoin('users','users.id','=','pois.user_id')
+            ->select('users.user_name','pois.*')
+            ->orderBy('created_at', 'asc')
             ->get();
         if(isset($pois) && $pois){
             return $pois;

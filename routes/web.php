@@ -223,6 +223,7 @@ Route::group(['prefix' => 'wxxcx'],function (){
     /*
      * 个人信息设置部分
      */
+    Route::get('/get/user_count','WxxcxController@userCount');
     Route::get('/set/name','WxxcxController@updateName');
     Route::get('/set/address','WxxcxController@updateAddress');
     Route::get('/set/signature','WxxcxController@updateSignature');
@@ -236,9 +237,11 @@ Route::group(['prefix' => 'wxxcx'],function (){
      * posts
      */
     Route::get('/get/posts','WxxcxController@getPosts');
+    Route::get('/get/user_posts','WxxcxController@getUserAllPosts');
     Route::get('/save/post','WxxcxController@savePost');
     Route::get('/get/post_detail','WxxcxController@getPostDetail');
     Route::get('/get/pois','WxxcxController@getPois');
+    Route::get('/get/user_pois','WxxcxController@getUserAllPois');
     Route::get('/get/poi_detail','WxxcxController@getPoiDetail');
 });
 
