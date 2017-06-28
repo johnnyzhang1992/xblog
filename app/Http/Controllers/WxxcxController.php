@@ -210,7 +210,8 @@ class WxxcxController extends Controller
      */
     public function getBook(){
         $books = DB::table('books')
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
+            ->take(10)
             ->get();
         if(isset($books) && $books){
             return $books;
@@ -272,11 +273,11 @@ class WxxcxController extends Controller
      */
     public function getPosts(){
         $posts = DB::table('posts')
-            ->where('posts.type','=','zaji')
+            ->where('posts.type','=','story')
             ->leftJoin('categories','categories.id','=','posts.category_id')
             ->leftJoin('users','users.id','=','posts.user_id')
             ->select('categories.name','users.user_name','posts.*')
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->get();
         if(isset($posts) && $posts){
             return $posts;
@@ -309,24 +310,39 @@ class WxxcxController extends Controller
      * @return string
      */
     public function savePost(){
+        $post_id = request('post_id','');
         $user_id = request('id','');
         $title = request('title','');
         $content = request('content','');
         $des = request('des','');
+        $status = request('status','');
         $msg = '';
+        $id ='';
         $post['user_id'] = $user_id;
         $post['category_id'] = 9;
+        $post['status'] = $status;
         $post['title'] = $title;
         $post['description'] = $des;
         $post['slug'] = 'post-'.$user_id.'-'.date('Y-m-d').'-'.str_random(5);
         $post['content'] = $content;
         $post['html_content'] = $content;
-        $post['type'] = 'zaji';
-        $post['created_at'] = date('Y-m-d H:i:s');
+        $post['type'] = 'story';
         $post['updated_at'] = date('Y-m-d H:i:s');
-        $post['published_at'] = date('Y-m-d H:i:s');
-        $id = DB::table('posts')->insertGetId($post);
-        if($id){
+        if($post_id && $post_id !==''){
+            DB::table('posts')->where('id','=',$post_id)->update(array(
+                'title'=>$post['title'],
+                'description'=>$post['description'],
+                'content' =>$post['content'],
+                'status'=>$status
+                ));
+            $id = 999;
+        }else {
+            $post['created_at'] = date('Y-m-d H:i:s');
+            $post['published_at'] = date('Y-m-d H:i:s');
+            $id = DB::table('posts')->insertGetId($post);
+        }
+
+        if($id>0){
             $msg = 'success';
         }else{
             $msg = 'fail';

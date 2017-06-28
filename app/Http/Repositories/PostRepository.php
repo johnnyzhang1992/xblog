@@ -126,7 +126,7 @@ class PostRepository extends Repository
                 array_push($ids, $tag->id);
             }
         }
-        $status = $request->get('status', 0);
+        $status = $request->get('status', -1);
         if ($status == 1) {
             $request['published_at'] = Carbon::now();
         }
