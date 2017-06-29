@@ -40,27 +40,33 @@ class WxxcxController extends Controller
         $systemInfo = $request->input('systemInfo','');
         //获取解密后的用户信息
         $user = json_decode($this->wxxcx->getUserInfo($encryptedData, $iv));
-        $_user['name'] = $user->nickName;
-        $_user['user_name'] = $user->nickName;
-        $_user['email'] = $user->openId.'@johnnyzhang.cn';
-        $_user['password'] =  bcrypt('123456');
-        $_user['avatar'] = $user->avatarUrl;
-        $_user['remember_token'] = $user->openId;
-        $_user['register_form'] = 'weixin';
-        //判断用户是否存在
-        $_u = DB::table('users')->where('remember_token','=',$user->openId)->get();
         $user_info = [];
-        if(!$_u){
-            //用户信息入库
-           $user_id =  DB::table('users')->insertGetId($_user);
+        if($user){
+            $_user['name'] = $user->nickName;
+            $_user['user_name'] = $user->nickName;
+            $_user['email'] = $user->openId.'@johnnyzhang.cn';
+            $_user['password'] =  bcrypt('123456');
+            $_user['avatar'] = $user->avatarUrl;
+            $_user['remember_token'] = $user->openId;
+            $_user['register_from'] = 'weixin';
+            //判断用户是否存在
+            $_u = DB::table('users')->where('remember_token','=',$user->openId)->get();
+
+            if(!isset($_u[0]->id)){
+                //用户信息入库
+                $user_id =  DB::table('users')->insertGetId($_user);
+            }else{
+                DB::table('users')->where('remember_token','=',$user->openId)->update(array('meta'=>$systemInfo));
+                $user_info['user_id'] = $_u[0]->id;
+                $user_info['user_name'] = $_u[0]->name;
+                $user_info['signature'] = $_u[0]->description;
+                $user_info['address'] = json_decode($_u[0]->address);
+            }
+            return $user_info;
         }else{
-            DB::table('users')->where('remember_token','=',$user->openId)->update(array('meta'=>$systemInfo));
-            $user_info['user_id'] = $_u[0]->id;
-            $user_info['user_name'] = $_u[0]->name;
-            $user_info['signature'] = $_u[0]->description;
-            $user_info['address'] = json_decode($_u[0]->address);
+            return $user;
         }
-        return $user_info;
+
     }
 
     /**
@@ -163,7 +169,7 @@ class WxxcxController extends Controller
         $name = request('name','');
         $msg = '';
         if($id && $name){
-             DB::table('users')->where('id','=',$id)->update(array('name'=>$name));
+             DB::table('users')->where('id','=',$id)->update(array('name'=>$name,'user_name'=>$name));
              $msg = 'success';
         }else{
             $msg = 'fail';
@@ -226,8 +232,29 @@ class WxxcxController extends Controller
      */
     public function getBook(){
         $books = DB::table('books')
+            ->leftJoin('users','users.id','=','books.created_id')
+            ->select('books.*','users.user_name')
             ->orderBy('id', 'desc')
-            ->take(10)
+            ->take(5)
+            ->get();
+        if(isset($books) && $books){
+            return $books;
+        }else{
+            $books = '无内容！';
+            return $books;
+        }
+    }
+    /**
+     * 获取指定用户的所有阅读数据
+     */
+    public function getUserAllBook(){
+        $user_id = request('user_id','');
+        $books = DB::table('books')
+            ->where('books.created_id','=',$user_id)
+            ->leftJoin('users','users.id','=','books.created_id')
+            ->select('books.*','users.user_name')
+            ->orderBy('id', 'desc')
+            ->take(5)
             ->get();
         if(isset($books) && $books){
             return $books;
@@ -294,6 +321,7 @@ class WxxcxController extends Controller
             ->leftJoin('users','users.id','=','posts.user_id')
             ->select('categories.name','users.user_name','posts.*')
             ->orderBy('created_at', 'asc')
+            ->take(5)
             ->get();
         if(isset($posts) && $posts){
             return $posts;
@@ -352,10 +380,10 @@ class WxxcxController extends Controller
         $content = request('content','');
         $des = request('des','');
         $status = request('status','');
-        $msg = '';
+        $msg = [];
         $id ='';
         $post['user_id'] = $user_id;
-        $post['category_id'] = 9;
+        $post['category_id'] = 10;
         $post['status'] = $status;
         $post['title'] = $title;
         $post['description'] = $des;
@@ -379,11 +407,12 @@ class WxxcxController extends Controller
         }
 
         if($id>0){
-            $msg = 'success';
+            $msg['msg'] = 'success';
+            $msg['id'] = $id;
         }else{
-            $msg = 'fail';
+            $msg['msg'] = 'fail';
         }
-        return $msg;
+        return  compact('msg');
     }
     /**
      * 获取pois
@@ -393,6 +422,7 @@ class WxxcxController extends Controller
             ->leftJoin('users','users.id','=','pois.user_id')
             ->select('users.user_name','pois.*')
             ->orderBy('pois.created_at', 'asc')
+            ->take(5)
             ->get();
         if(isset($pois) && $pois){
             return $pois;
