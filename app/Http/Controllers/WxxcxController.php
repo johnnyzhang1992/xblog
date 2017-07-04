@@ -24,7 +24,7 @@ class WxxcxController extends Controller
     /**
      * 小程序登录获取用户信息
      * @date   2017-05-27T14:37:08+0800
-     * @return [type]                   [description]
+     * return user
      */
     public function getWxUserInfo(Request $request)
     {
@@ -56,7 +56,7 @@ class WxxcxController extends Controller
                 //用户信息入库
                 $user_id =  DB::table('users')->insertGetId($_user);
             }else{
-                DB::table('users')->where('remember_token','=',$user->openId)->update(array('meta'=>$systemInfo));
+                DB::table('users')->where('remember_token','=',$user->openId)->update(array('meta'=>$systemInfo,'updated_at'=>date('Y-m-d H:i:s')));
                 $user_info['user_id'] = $_u[0]->id;
                 $user_info['user_name'] = $_u[0]->name;
                 $user_info['signature'] = $_u[0]->description;
@@ -217,7 +217,11 @@ class WxxcxController extends Controller
     public function userCount(){
         $user_id = request('user_id','');
         $book_count = DB::table('books')->where('created_id','=',$user_id)->count();
-        $posts_count = DB::table('posts')->where('user_id','=',$user_id)->count();
+        $posts_count = DB::table('posts')
+            ->where('user_id','=',$user_id)
+            ->where('type','=','story')
+            ->where('posts.deleted_at','=',null)
+            ->count();
         $pois_count = DB::table('pois')->where('user_id','=',$user_id)->count();
         $record_count = DB::table('records')->where('user_id','=',$user_id)->count();
         $count = [];
@@ -254,7 +258,6 @@ class WxxcxController extends Controller
             ->leftJoin('users','users.id','=','books.created_id')
             ->select('books.*','users.user_name')
             ->orderBy('id', 'desc')
-            ->take(5)
             ->get();
         if(isset($books) && $books){
             return $books;
@@ -317,6 +320,7 @@ class WxxcxController extends Controller
     public function getPosts(){
         $posts = DB::table('posts')
             ->where('posts.type','=','story')
+            ->where('posts.deleted_at','=',null)
             ->leftJoin('categories','categories.id','=','posts.category_id')
             ->leftJoin('users','users.id','=','posts.user_id')
             ->select('categories.name','users.user_name','posts.*')
@@ -338,6 +342,7 @@ class WxxcxController extends Controller
         $posts = DB::table('posts')
             ->where('posts.type','=','story')
             ->where('posts.user_id','=',$user_id)
+            ->where('posts.deleted_at','=',null)
             ->leftJoin('categories','categories.id','=','posts.category_id')
             ->leftJoin('users','users.id','=','posts.user_id')
             ->select('categories.name','users.user_name','posts.*')
@@ -375,7 +380,7 @@ class WxxcxController extends Controller
      */
     public function savePost(){
         $post_id = request('post_id','');
-        $user_id = request('id','');
+        $user_id = request('user_id','');
         $title = request('title','');
         $content = request('content','');
         $des = request('des','');
@@ -411,6 +416,24 @@ class WxxcxController extends Controller
             $msg['id'] = $id;
         }else{
             $msg['msg'] = 'fail';
+        }
+        return  compact('msg');
+    }
+    /**
+     * 删除某个post
+     */
+    public function deletePost(){
+        $post_id = request('post_id','');
+        $msg = [];
+        if($post_id && $post_id !==''){
+            DB::table('posts')
+                ->where('id','=',$post_id)
+                ->update(array(
+                'status'=>-2,
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'deleted_at'=>date('Y-m-d H:i:s'),
+            ));
+            $msg['msg'] = 'success';
         }
         return  compact('msg');
     }
@@ -466,6 +489,13 @@ class WxxcxController extends Controller
             $poi = null;
             return $poi;
         }
+    }
+    /**
+     *  获取所有微信注册用户信息
+     */
+    public function getUsers(){
+        $users = DB::table('users')->where('register_from','=','weixin')->get();
+        return $users;
     }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);

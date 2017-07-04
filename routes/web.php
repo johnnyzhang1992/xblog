@@ -238,12 +238,17 @@ Route::group(['prefix' => 'wxxcx'],function (){
      * posts
      */
     Route::get('/get/posts','WxxcxController@getPosts');
+    Route::get('/delete/post','WxxcxController@deletePost');
     Route::get('/get/user_posts','WxxcxController@getUserAllPosts');
     Route::get('/save/post','WxxcxController@savePost');
     Route::get('/get/post_detail','WxxcxController@getPostDetail');
     Route::get('/get/pois','WxxcxController@getPois');
     Route::get('/get/user_pois','WxxcxController@getUserAllPois');
     Route::get('/get/poi_detail','WxxcxController@getPoiDetail');
+    /*
+     * 管理员
+     */
+    Route::get('/get/users','WxxcxController@getUsers');
 });
 
 
