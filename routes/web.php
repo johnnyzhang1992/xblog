@@ -247,6 +247,7 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/get/post_detail','WxxcxController@getPostDetail');
     Route::get('/get/pois','WxxcxController@getPois');
     Route::get('/save/poi','WxxcxController@savePoi');
+    Route::get('/delete/poi','WxxcxController@deletePoi');
     Route::get('/get/user_pois','WxxcxController@getUserAllPois');
     Route::get('/get/poi_detail','WxxcxController@getPoiDetail');
     /*

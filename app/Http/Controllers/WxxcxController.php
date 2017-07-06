@@ -485,6 +485,7 @@ class WxxcxController extends Controller
     public function getPois(){
         $pois = DB::table('pois')
             ->leftJoin('users','users.id','=','pois.user_id')
+            ->where('pois.status','!=','delete')
             ->select('users.user_name','pois.*')
             ->orderBy('pois.created_at', 'desc')
             ->take(5)
@@ -497,12 +498,30 @@ class WxxcxController extends Controller
         }
     }
     /**
+     * 删除某个poi
+     */
+    public function deletePoi(){
+        $poi_id = request('poi_id','');
+        $msg = [];
+        if($poi_id && $poi_id !==''){
+            DB::table('pois')
+                ->where('id','=',$poi_id)
+                ->update(array(
+                    'status'=>'delete',
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                ));
+            $msg['msg'] = 'success';
+        }
+        return  compact('msg');
+    }
+    /**
      * 获取某个人的所有pois
      */
     public function getUserAllPois(){
         $user_id = request('user_id','');
         $pois = DB::table('pois')
             ->where('pois.user_id','=',$user_id)
+            ->where('pois.status','!=','delete')
             ->leftJoin('users','users.id','=','pois.user_id')
             ->select('users.user_name','pois.*')
             ->orderBy('created_at', 'asc')
