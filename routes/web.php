@@ -241,8 +241,12 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/delete/post','WxxcxController@deletePost');
     Route::get('/get/user_posts','WxxcxController@getUserAllPosts');
     Route::get('/save/post','WxxcxController@savePost');
+    /*
+     * poi
+     */
     Route::get('/get/post_detail','WxxcxController@getPostDetail');
     Route::get('/get/pois','WxxcxController@getPois');
+    Route::get('/save/poi','WxxcxController@savePoi');
     Route::get('/get/user_pois','WxxcxController@getUserAllPois');
     Route::get('/get/poi_detail','WxxcxController@getPoiDetail');
     /*

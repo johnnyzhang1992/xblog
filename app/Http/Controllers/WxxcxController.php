@@ -438,13 +438,55 @@ class WxxcxController extends Controller
         return  compact('msg');
     }
     /**
+     * 保存新的poi
+     */
+    public function savePoi(){
+        $poi_id = request('poi_id','');
+        $user_id = request('user_id','');
+        $title = request('title','');
+        $lat= request('lat','');
+        $lng = request('lng','');
+        $content = request('content','');
+        $address = request('address','');
+        $status = request('status','');
+        $tag = request('tag','');
+        $more_info = request('more_info','');
+        $msg = [];
+        $id ='';
+        $poi['user_id'] = $user_id;
+        $poi['status'] = $status;
+        $poi['tag'] = $tag;
+        $poi['lat'] = $lat;
+        $poi['lng'] = $lng;
+        $poi['address'] = $address;
+        $poi['poi_name'] = $title;
+        $poi['description'] = $content;
+        $poi['more_info'] = $more_info;
+        $poi['updated_at'] = date('Y-m-d H:i:s');
+        if($poi_id && $poi_id !==''){
+            DB::table('pois')->where('id','=',$poi_id)->update($poi);
+            $id = 999;
+        }else {
+            $poi['created_at'] = date('Y-m-d H:i:s');
+            $id = DB::table('pois')->insertGetId($poi);
+        }
+
+        if($id>0){
+            $msg['msg'] = 'success';
+            $msg['id'] = $id;
+        }else{
+            $msg['msg'] = 'fail';
+        }
+        return  compact('msg');
+    }
+    /**
      * 获取pois
      */
     public function getPois(){
         $pois = DB::table('pois')
             ->leftJoin('users','users.id','=','pois.user_id')
             ->select('users.user_name','pois.*')
-            ->orderBy('pois.created_at', 'asc')
+            ->orderBy('pois.created_at', 'desc')
             ->take(5)
             ->get();
         if(isset($pois) && $pois){
