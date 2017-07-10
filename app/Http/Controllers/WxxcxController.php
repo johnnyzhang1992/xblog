@@ -552,6 +552,119 @@ class WxxcxController extends Controller
         }
     }
     /**
+     * 保存新的diary
+     */
+    /**
+     * 获取diary
+     */
+    public function getDiary(){
+        $diarys = DB::table('records')
+            ->leftJoin('users','users.id','=','records.user_id')
+            ->where('records.status','!=','delete')
+            ->select('users.user_name','records.*')
+            ->orderBy('records.created_at', 'desc')
+            ->take(5)
+            ->get();
+        if(isset($diarys) && $diarys){
+            return $diarys;
+        }else{
+            $diarys = '无内容！';
+            return $diarys;
+        }
+    }
+    /**
+     * 保存新的diary
+     */
+    public function saveDiary(){
+        $diary_id = request('diary_id','');
+        $user_id = request('user_id','');
+        $title = request('title','');
+        $content = request('content','');
+        $des = request('des','');
+        $address = request('address','');
+        $status = request('status','');
+        $more_info = request('more_info','');
+        $msg = [];
+        $id ='';
+        $diary['user_id'] = $user_id;
+        $diary['status'] = $status;
+        $diary['address'] = $address;
+        $diary['title'] = $title;
+        $diary['description'] = $des;
+        $diary['content'] = $content;
+        $diary['more_info'] = $more_info;
+        $diary['updated_at'] = date('Y-m-d H:i:s');
+        if($diary_id && $diary_id !==''){
+            DB::table('records')->where('id','=',$diary_id)->update($diary);
+            $id = 999;
+        }else {
+            $diary['created_at'] = date('Y-m-d H:i:s');
+            $id = DB::table('records')->insertGetId($diary);
+        }
+
+        if($id>0){
+            $msg['msg'] = 'success';
+            $msg['id'] = $id;
+        }else{
+            $msg['msg'] = 'fail';
+        }
+        return  compact('msg');
+    }
+    /**
+     * 获取diary的详细信息
+     */
+    public function getDiaryDetail(){
+//        $id = request('id','');
+        $diary_id = request('diary_id','');
+        $diary = DB::table('records')
+            ->leftJoin('users','users.id','=','records.user_id')
+            ->where('records.id','=',$diary_id)
+            ->select('users.user_name','records.*')
+            ->get();
+        if(isset($diary) && $diary){
+            return $diary;
+        }else{
+            $diary = null;
+            return $diary;
+        }
+    }
+    /**
+     * 删除某个diary
+     */
+    public function deleteDiary(){
+        $diary_id = request('diary_id','');
+        $msg = [];
+        if($diary_id && $diary_id !==''){
+            DB::table('records')
+                ->where('id','=',$diary_id)
+                ->update(array(
+                    'status'=>'delete',
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                ));
+            $msg['msg'] = 'success';
+        }
+        return  compact('msg');
+    }
+    /**
+     * 获取某个人的所有diary
+     */
+    public function getUserAllDiarys(){
+        $user_id = request('user_id','');
+        $diarys = DB::table('records')
+            ->where('records.user_id','=',$user_id)
+            ->where('records.status','!=','delete')
+            ->leftJoin('users','users.id','=','records.user_id')
+            ->select('users.user_name','records.*')
+            ->orderBy('created_at', 'asc')
+            ->get();
+        if(isset($diarys) && $diarys){
+            return $diarys;
+        }else{
+            $diarys = '无内容！';
+            return $diarys;
+        }
+    }
+    /**
      *  获取所有微信注册用户信息
      */
     public function getUsers(){

@@ -251,6 +251,14 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/get/user_pois','WxxcxController@getUserAllPois');
     Route::get('/get/poi_detail','WxxcxController@getPoiDetail');
     /*
+     * diary
+     */
+    Route::get('/save/diary','WxxcxController@saveDiary');
+    Route::get('/get/diarys','WxxcxController@getDiary');
+    Route::get('/get/diary_detail','WxxcxController@getDiaryDetail');
+    Route::get('/delete/diary','WxxcxController@deleteDiary');
+    Route::get('/get/user_diarys','WxxcxController@getUserAllDiarys');
+    /*
      * 管理员
      */
     Route::get('/get/users','WxxcxController@getUsers');
