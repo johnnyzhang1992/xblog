@@ -259,6 +259,12 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/delete/diary','WxxcxController@deleteDiary');
     Route::get('/get/user_diarys','WxxcxController@getUserAllDiarys');
     /*
+     * comment
+     */
+    Route::get('/get/comments','WxxcxController@getComments');
+    Route::get('/save/comment','WxxcxController@saveComment');
+    Route::get('/delete/comment','WxxcxController@deleteComment');
+    /*
      * 管理员
      */
     Route::get('/get/users','WxxcxController@getUsers');

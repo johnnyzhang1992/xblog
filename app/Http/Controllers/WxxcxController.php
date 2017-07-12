@@ -665,6 +665,77 @@ class WxxcxController extends Controller
         }
     }
     /**
+     * 获取某个页面的评论
+     */
+    public function getComments(){
+        $id = \request('id','');
+        $type = \request('type','');
+        $comment_type = null;
+        $user_id = \request('user_id','');
+        if($type == 'post'){
+            $comment_type = 'App/Post';
+        }elseif($type =='poi'){
+            $comment_type = 'App/Poi';
+        }elseif($type == 'book'){
+            $comment_type = 'App/Book';
+        }elseif($type == 'diary'){
+            $comment_type = 'App/Diary';
+        }
+        $comments = DB::table('comments')
+            ->where('commentable_type','=',$comment_type)
+            ->where('commentable_id','=',$id)
+            ->leftJoin('users','users.id','=','comments.user_id')
+            ->select('comments.*','users.user_name','users.avatar')
+            ->get();
+        return $comments;
+    }
+    /**
+     * 保存评论
+     */
+    public function saveComment(){
+        $id = \request('id','');
+        $type = \request('type','');
+        $user_id = \request('user_id','');
+        $content = \request('content','');
+        $comment_type = null;
+        if($type == 'post'){
+            $comment_type = 'App/Post';
+        }elseif($type =='poi'){
+            $comment_type = 'App/Poi';
+        }elseif($type == 'book'){
+            $comment_type = 'App/Book';
+        }elseif($type == 'diary'){
+            $comment_type = 'App/Diary';
+        }
+        $user = null;
+        if($user_id){
+            $user = DB::table('users')->where('id','=',$user_id)->get();
+        }
+        $comments['user_id'] = $user_id;
+        $comments['commentable_id'] = $id;
+        $comments['content'] = $content;
+        $comments['html_content'] = $content;
+        $comments['commentable_type'] = $comment_type;
+        $comments['username'] = $user[0]->user_name;
+        $comments['email'] = $user[0]->email;
+        $comments['created_at'] = date('Y-m-d H:i:s');
+        $comments['updated_at'] = date('Y-m-d H:i:s');
+        $_id = DB::table('comments')->insertGetId($comments);
+        if($id>0){
+            $msg['msg'] = 'success';
+            $msg['id'] = $id;
+        }else{
+            $msg['msg'] = 'fail';
+        }
+        return  compact('msg');
+    }
+    /**
+     * 删除评论
+     */
+    public function deleteComment(){
+
+    }
+    /**
      *  获取所有微信注册用户信息
      */
     public function getUsers(){
