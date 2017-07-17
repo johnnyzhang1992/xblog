@@ -673,13 +673,13 @@ class WxxcxController extends Controller
         $comment_type = null;
         $user_id = \request('user_id','');
         if($type == 'post'){
-            $comment_type = 'App/Post';
+            $comment_type = 'App\Post';
         }elseif($type =='poi'){
-            $comment_type = 'App/Poi';
+            $comment_type = 'App\Poi';
         }elseif($type == 'book'){
-            $comment_type = 'App/Book';
+            $comment_type = 'App\Book';
         }elseif($type == 'diary'){
-            $comment_type = 'App/Diary';
+            $comment_type = 'App\Diary';
         }
         $comments = DB::table('comments')
             ->where('commentable_type','=',$comment_type)
@@ -699,13 +699,13 @@ class WxxcxController extends Controller
         $content = \request('content','');
         $comment_type = null;
         if($type == 'post'){
-            $comment_type = 'App/Post';
+            $comment_type = 'App\Post';
         }elseif($type =='poi'){
-            $comment_type = 'App/Poi';
+            $comment_type = 'App\Poi';
         }elseif($type == 'book'){
-            $comment_type = 'App/Book';
+            $comment_type = 'App\Book';
         }elseif($type == 'diary'){
-            $comment_type = 'App/Diary';
+            $comment_type = 'App\Diary';
         }
         $user = null;
         if($user_id){
@@ -721,6 +721,13 @@ class WxxcxController extends Controller
         $comments['created_at'] = date('Y-m-d H:i:s');
         $comments['updated_at'] = date('Y-m-d H:i:s');
         $_id = DB::table('comments')->insertGetId($comments);
+        $configuration['config']['comment_type'] = 'default';
+        $configuration['config']['comment_info'] = 'default';
+        $config = json_encode($configuration['config']);
+        $conf['configurable_id'] = $id;
+        $conf['configurable_type'] =$comment_type;
+        $conf['config'] = $config;
+        DB::table('configurations')->insertGetId($conf);
         if($id>0){
             $msg['msg'] = 'success';
             $msg['id'] = $id;
