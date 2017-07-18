@@ -216,14 +216,24 @@ class WxxcxController extends Controller
      */
     public function userCount(){
         $user_id = request('user_id','');
-        $book_count = DB::table('books')->where('created_id','=',$user_id)->count();
+        $book_count = DB::table('books')
+            ->where('created_id','=',$user_id)
+            ->where('status','!=','delete')
+            ->count();
         $posts_count = DB::table('posts')
             ->where('user_id','=',$user_id)
             ->where('type','=','story')
             ->where('posts.deleted_at','=',null)
             ->count();
-        $pois_count = DB::table('pois')->where('user_id','=',$user_id)->count();
-        $record_count = DB::table('records')->where('user_id','=',$user_id)->count();
+        $pois_count = DB::table('pois')
+            ->where('user_id','=',$user_id)
+            ->where('status','!=','delete')
+            ->count();
+        $record_count = DB::table('records')
+            ->where('user_id','=',$user_id)
+            ->where('deleted_at','=',null)
+            ->where('status','!=','delete')
+            ->count();
         $count = [];
         $count['book'] = $book_count;
         $count['posts'] = $posts_count;
@@ -236,6 +246,7 @@ class WxxcxController extends Controller
      */
     public function getBook(){
         $books = DB::table('books')
+            ->where('books.status','!=','delete')
             ->leftJoin('users','users.id','=','books.created_id')
             ->select('books.*','users.user_name')
             ->orderBy('id', 'desc')
@@ -249,12 +260,30 @@ class WxxcxController extends Controller
         }
     }
     /**
+     * 删除book
+     */
+    public function deleteBook(){
+        $book_id = request('book_id','');
+        $msg = [];
+        if($book_id && $book_id !==''){
+            DB::table('books')
+                ->where('id','=',$book_id)
+                ->update(array(
+                    'status'=> 'delete',
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                ));
+            $msg['msg'] = 'success';
+        }
+        return  compact('msg');
+    }
+    /**
      * 获取指定用户的所有阅读数据
      */
     public function getUserAllBook(){
         $user_id = request('user_id','');
         $books = DB::table('books')
             ->where('books.created_id','=',$user_id)
+            ->where('books.status','!=','delete')
             ->leftJoin('users','users.id','=','books.created_id')
             ->select('books.*','users.user_name')
             ->orderBy('id', 'desc')
