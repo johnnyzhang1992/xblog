@@ -671,7 +671,6 @@ class WxxcxController extends Controller
         $id = \request('id','');
         $type = \request('type','');
         $comment_type = null;
-        $user_id = \request('user_id','');
         if($type == 'post'){
             $comment_type = 'App\Post';
         }elseif($type =='poi'){
@@ -684,6 +683,7 @@ class WxxcxController extends Controller
         $comments = DB::table('comments')
             ->where('commentable_type','=',$comment_type)
             ->where('commentable_id','=',$id)
+            ->where('comments.deleted_at','=',null)
             ->leftJoin('users','users.id','=','comments.user_id')
             ->select('comments.*','users.user_name','users.avatar')
             ->get();
@@ -740,7 +740,18 @@ class WxxcxController extends Controller
      * 删除评论
      */
     public function deleteComment(){
-
+        $comment_id = request('comment_id','');
+        $msg = [];
+        if($comment_id && $comment_id !==''){
+            DB::table('comments')
+                ->where('id','=',$comment_id)
+                ->update(array(
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                    'deleted_at'=>date('Y-m-d H:i:s'),
+                ));
+            $msg['msg'] = 'success';
+        }
+        return  compact('msg');
     }
     /**
      *  获取所有微信注册用户信息
