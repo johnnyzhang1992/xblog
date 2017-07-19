@@ -350,6 +350,7 @@ class WxxcxController extends Controller
         $posts = DB::table('posts')
             ->where('posts.type','=','story')
             ->where('posts.deleted_at','=',null)
+            ->where('posts.status','!=',1)
             ->leftJoin('categories','categories.id','=','posts.category_id')
             ->leftJoin('users','users.id','=','posts.user_id')
             ->select('categories.name','users.user_name','posts.*')
