@@ -19,7 +19,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/github/store',['uses' => 'Auth\AuthController@store', 'as' => 'github.store']);
 
 // Site route
-    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'index']);
+//    Route::get('/', ['uses' => 'HomeController@index', 'as' => 'index']);
+    Route::get('/', ['uses' => 'PostController@index', 'as' => 'index']);
     Route::get('/projects', ['uses' => 'HomeController@projects', 'as' => 'projects']);
     Route::get('/search', ['uses' => 'HomeController@search', 'as' => 'search']);
     Route::get('/achieve', ['uses' => 'HomeController@achieve', 'as' => 'achieve']);
@@ -220,6 +221,7 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::match(['GET', 'POST'],'/userinfo','WxxcxController@getWxUserInfo');
     Route::get('/rundata','WxxcxController@getWxUserRunData');
     Route::get('/run','WxxcxController@WxUserRunData');
+    Route::get('/userinfo/{id}','WxxcxController@getUserInfo');
     /*
      * 个人信息设置部分
      */
@@ -265,6 +267,13 @@ Route::group(['prefix' => 'wxxcx'],function (){
     Route::get('/get/comments','WxxcxController@getComments');
     Route::get('/save/comment','WxxcxController@saveComment');
     Route::get('/delete/comment','WxxcxController@deleteComment');
+
+    /*
+     * 上传图片
+     */
+//    Route::post('/poi/upload/cover_image', 'ImageController@uploadTravelCoverImage');
+    Route::post('/poi/upload/cover_image', 'ImageController@uploadImageByWx');
+    Route::get('/qiniu/uptoken','WxxcxController@getUploadToken');
     /*
      * 管理员
      */

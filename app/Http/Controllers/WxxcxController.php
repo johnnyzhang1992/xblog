@@ -9,8 +9,10 @@
 namespace App\Http\Controllers;
 use Iwanli\Wxxcx\Wxxcx;
 use Log;
+use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Qiniu\Auth as QiAuth;
 
 class WxxcxController extends Controller
 {
@@ -68,7 +70,18 @@ class WxxcxController extends Controller
         }
 
     }
-
+    /**
+     * 授权过期但是本地保存有userIfo，返回数据库用户基本信息
+     *
+     */
+    public function getUserInfo(Request $request,$id){
+        if($id && $id>0){
+            $_info = DB::table('users')->where('id',$id)->get();
+        }else{
+            $_info= [];
+        }
+        return $_info[0];
+    }
     /**
      * 小程序微信运动相关函数
      * @return array|string
@@ -481,6 +494,7 @@ class WxxcxController extends Controller
         $status = request('status','');
         $tag = request('tag','');
         $more_info = request('more_info','');
+        $cover_image = \request('cover_image');
         $msg = [];
         $id ='';
         $poi['user_id'] = $user_id;
@@ -492,6 +506,7 @@ class WxxcxController extends Controller
         $poi['poi_name'] = $title;
         $poi['description'] = $content;
         $poi['more_info'] = $more_info;
+        $poi['cover_image'] = $cover_image;
         $poi['updated_at'] = date('Y-m-d H:i:s');
         if($poi_id && $poi_id !==''){
             DB::table('pois')->where('id','=',$poi_id)->update($poi);
@@ -789,6 +804,21 @@ class WxxcxController extends Controller
     public function getUsers(){
         $users = DB::table('users')->where('register_from','=','weixin')->get();
         return $users;
+    }
+    /**
+     * 生成七牛upload_token
+     */
+    public function getUploadToken(){
+        $bucket = 'mengjia';
+        // 用于签名的公钥和私钥
+        $accessKey = 'ihfxNF_kra1lATHCCpqgyXtfFvd36X7mppimfnVR';
+        $secretKey = 'pRoJ2kyWxF949aFNj-1memLoy1r-P8blRvJrqBco';
+        //初始化签权对象
+        $auth = new QiAuth($accessKey, $secretKey);
+        // 生成上传Token
+        $upload_token = $auth->uploadToken($bucket);
+        $token['uptoken'] = $upload_token;
+        return $token;
     }
 //    public function getRunData($encryptedData, $iv){
 //        $pc = new WXBizDataCrypt($this->appId, $this->sessionKey);

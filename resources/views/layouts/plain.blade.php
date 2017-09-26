@@ -16,6 +16,7 @@
     {{--<link rel="shortcut icon" href="http://assets.johnnyzhang.cn/favicon.ico"/>--}}
     <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ elixir('css/home.min.css') }}" rel="stylesheet">
+    @yield('css')
     @include('widget.google_analytics')
     @include('widget.baidu_tongji')
 </head>
@@ -25,5 +26,6 @@
         @yield('content')
     </div>
 </div>
+@yield('script')
 </body>
 </html>

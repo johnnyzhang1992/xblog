@@ -43,7 +43,7 @@ class TagRepository extends Repository
     public function pagedPostsByTag(Tag $tag, $page = 7)
     {
         $posts = $this->remember('tag.posts.' . $tag->name . $page . request()->get('page', 1), function () use ($tag, $page) {
-            return $tag->posts()->select(Post::selectArrayWithOutContent)->with(['tags', 'category'])->withCount('comments')->orderBy('created_at', 'desc')->paginate($page);
+            return $tag->posts()->select(Post::selectArrayWithOutContent)->with(['tags', 'category'])->withCount('comments')->paginate($page);
         });
         return $posts;
     }

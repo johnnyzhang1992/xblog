@@ -124,5 +124,30 @@ class ImageController extends Controller
         $path = $file->store('/images/'.$poi_type.'/'.$poi_id.'/','public');
         return asset($path);
     }
+    public function uploadImageByWx(Request $request){
+        $file = $request->file('file');
+        $poi_id = $request->input('poi_id');
+        $poi_type = $request->input('poi_type');
+        $uid = $request->input('user_id');
+        // 获取文件相关信息
+        $originalName =  str_random(40); // 文件原名
+//        $ext = $file->getClientOriginalExtension();     // 扩展名
+//        $realPath = $file->getRealPath();   //临时文件的绝对路径
+//        $img_type = $file->getClientMimeType();     // image/jpeg
+        $path = $file->storeAs('/images/'.$poi_type.'/'.$poi_id.'/',$originalName,'public');
+        $img['uid'] = $uid;
+        $img['photo_name'] = $originalName;
+        $img['type_id'] = $poi_id;
+        $img['type'] = $poi_type;
+        $img['name'] = '用户名字';
+        $img['source'] = '小程序上传';
+        $img['source_url'] = $path;
+        $img['created_at'] =date('Y-m-d H:i:s');
+        $img['updated_at'] =date('Y-m-d H:i:s');
+        $_id = DB::table('photo')->insertGetId($img);
+        $res['id'] = $_id;
+        $res['path'] = asset($path);
+        return $res;
+    }
 
 }
