@@ -87,7 +87,7 @@ class WxxcxController extends Controller
      * @return array|string
      *
      */
-    public function getWxUserRunData()
+    public function oldGetWxUserRunData()
     {
         //code 在小程序端使用 wx.login 获取
         $code = request('code', '');
@@ -174,6 +174,51 @@ class WxxcxController extends Controller
         }
     }
 
+    public function getWxUserRunData()
+    {
+        //code 在小程序端使用 wx.login 获取
+        $code = request('code', '');
+        //encryptedData 和 iv 在小程序端使用 wx.getUserInfo 获取
+        $encryptedData = request('encryptedData', '');
+        $iv = request('iv', '');
+        $id = request('id','');
+        //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
+        $userInfo = $this->wxxcx->getLoginInfo($code);
+        //获取解密后的微信运动信息
+        $_runData = $this->wxxcx->getRunData($encryptedData, $iv);
+        // 先获取数据库里面的最后一条信息
+        // 然后再获取的最新信息对比
+        // 把找到的对应数据后面的数据
+        // 保存到数据库
+        $_old_step = null;
+        if($userInfo){
+            $data = DB::table('users')->where('id','=',$id)->first();
+//            log($_runData);
+            $steps = json_decode($_runData)->stepInfoList;
+            foreach ($steps as $step){
+                $item = array();
+                $item['user_name'] = $data->user_name;
+                $item['remember_token'] = $data->remember_token;
+                $item['step'] = $step->step;
+                $item['timestamp'] = $step->timestamp;
+                $item['created_at'] = date("Y-m-d H:i:s");
+                $item['updated_at'] = date("Y-m-d H:i:s");
+                $res = DB::table('weixin_sport')->where('timestamp',$step->timestamp)->first();
+                if($res){
+                    info('----------update---------');
+                    DB::table('weixin_sport')->where('timestamp',$step->timestamp)->update([
+                       'step'=>$step->step,
+                        'updated_at'=>date("Y-m-d H:i:s")
+                    ]);
+                }else{
+                    info('----------insert---------');
+                    DB::table('weixin_sport')->insertGetId($item);
+                }
+            }
+
+            return $_runData;
+        }
+    }
     /**
      * 更新用户昵称
      */
