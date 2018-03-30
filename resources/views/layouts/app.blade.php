@@ -20,7 +20,7 @@
     @if(isset($site_css) && $site_css)
         <link href="{{ $site_css }}" rel="stylesheet">
     @else
-        <link href="{{ elixir('css/app.min.css') }}" rel="stylesheet">
+        <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
     @endif
     @yield('css')
     <script>
