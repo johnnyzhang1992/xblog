@@ -14,7 +14,8 @@
     <meta property="og:description" content="{{ $site_description or '' }}">
     <meta name="theme-color" content="#52768e">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    {{--<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="{{asset('/css/font-awesome.css')}}">
     {{--<link rel="shortcut icon" href="http://assets.johnnyzhang.cn/favicon.ico"/>--}}
     <link rel="stylesheet" href="{{ asset('/css/common.css') }}">
     @if(isset($site_css) && $site_css)
