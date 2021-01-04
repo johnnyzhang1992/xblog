@@ -30,7 +30,7 @@
                 'github_username' => isset($github_username) ? $github_username :  '',
         ]); ?>
     </script>
-    @include('widget.google_analytics')
+    {{--@include('widget.google_analytics')--}}
     @include('widget.baidu_tongji')
 </head>
 <body id="body">

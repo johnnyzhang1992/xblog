@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <span>Copyright © <a href="{{ route('index') }}">{{ $site_title or '' }}</a></span> |
-                    <span> 鲁ICP备15006514号-3</span> |
+                    <a href="https://beian.miit.gov.cn" target="_blank">鲁ICP备15006514号-3</a> |
                     <span><a href="https://github.com/johnnyzhang1992/xblog"><i class="fa fa-github fa-fw"></i></a> </span>
                 </div>
             </div>
